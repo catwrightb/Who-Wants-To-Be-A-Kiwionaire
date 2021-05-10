@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class MainMenu extends JPanel {
+    String NAME = "mainMenu";
     JButton enterButton;
     private JLabel gameTitle;
 

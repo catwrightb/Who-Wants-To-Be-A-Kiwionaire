@@ -21,8 +21,8 @@ public class ScreenControl implements ActionListener{
     QuestionPanel questionPanel;
     int height, width = 400;
     GameApplication gameApplication;
-    CorrectAnswerPanel correctAnswerPanel;
-    InCorrectAnswerPanel inCorrectAnswerPanel;
+//    CorrectAnswerPanel correctAnswerPanel;
+//    InCorrectAnswerPanel inCorrectAnswerPanel;
 
     public ScreenControl() {
         frame.setSize(width, height);
@@ -32,89 +32,22 @@ public class ScreenControl implements ActionListener{
         mainMenu = new MainMenu();
         playerMenu = new PlayerMenu();
         newPlayerScreen = new NewPlayerScreen();
-        returnPlayerScreen = new ReturnPlayerScreen();
+        returnPlayerScreen = new ReturnPlayerScreen(this);
         questionPanel = new QuestionPanel(gameApplication);
 
-        panelCont.add(mainMenu, "1");
-        panelCont.add(playerMenu, "2");
-        panelCont.add(newPlayerScreen, "3");
-        panelCont.add(returnPlayerScreen, "4");
-        panelCont.add(questionPanel, "5");
+        panelCont.add(mainMenu, mainMenu.NAME);
+        panelCont.add(playerMenu, playerMenu.NAME);
+        panelCont.add(newPlayerScreen, newPlayerScreen.NAME);
+        panelCont.add(returnPlayerScreen, returnPlayerScreen.NAME);
+        panelCont.add(questionPanel, questionPanel.NAME);
+
 
         cl.show(panelCont, "1");
 
-        mainMenu.enterButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(panelCont, "2");
-            }
-
-        });
-
-        playerMenu.exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(panelCont, "1");
-            }
-        });
-
-        playerMenu.newPlayerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(panelCont, "3");
-            }
-
-        });
-
-        playerMenu.returnPlayerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(panelCont, "4");
-            }
-        });
-
-        //Returning player
-        returnPlayerScreen.submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == returnPlayerScreen.submitButton) {
-
-                    ReturnUser returnUser = new ReturnUser();
-                    String text = returnPlayerScreen.userNameInput.getText();
-                    returnUser.retrieveExistingUser(text);
-
-                    if (returnUser.getUserName() == null) {
-                        JOptionPane.showMessageDialog(null, "Your name couldn't be found please try another user name or create a new player.", "INFO",
-                                JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        gameApplication.setGameUser(returnUser);
-                        cl.show(panelCont, "5");
-
-                    }
-                }
-            }
-        });
-
-        //New Player
-        newPlayerScreen.submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == newPlayerScreen.submitButton) {
-
-                    NewUser newUser = new NewUser();
-                    String text = newPlayerScreen.userNameInput.getText();
-
-                    if (!newUser.checkUsernameAvailability(text)) {
-                        JOptionPane.showMessageDialog(null, "Name is already in user please choose another user name", "INFO",
-                                JOptionPane.ERROR_MESSAGE);
-                    } else if (newUser.checkUsernameAvailability(text)) {
-                        newUser.setUserName(text);
-                        gameApplication.setGameUser(newUser);
-                        cl.show(panelCont, "5");
-                    }
-                }
-            }
-        });
+        mainMenu.enterButton.addActionListener(e -> changeCard(playerMenu.NAME));
+        playerMenu.exitButton.addActionListener(e -> changeCard(mainMenu.NAME));
+        playerMenu.newPlayerButton.addActionListener(e -> changeCard(newPlayerScreen.NAME));
+        playerMenu.returnPlayerButton.addActionListener(e -> changeCard(returnPlayerScreen.NAME));
 
 
         frame.add(panelCont);
@@ -130,8 +63,8 @@ public class ScreenControl implements ActionListener{
         Component source = ((Component) e.getSource()).getParent();
 
         // Route the event to the correct handler
-        if (source instanceof QuestionPanel) {
-            questionViewEventHandler(e);
+        if (source instanceof ReturnPlayerScreen) {
+            playerSelection(e);
 //        } else if (source instanceof GetUsername) {
 //            usernameEventHandler();
 //        } else if (source instanceof PostQuestion) {
@@ -142,55 +75,104 @@ public class ScreenControl implements ActionListener{
     }
 
 
-    //handling the checking of game answer
-    private void questionViewEventHandler(ActionEvent e) {
-        boolean correctAnswer = false;
-        boolean questionAnswered = false;
-
-        if (e.getSource() == questionPanel.getButtonA()) {
-            correctAnswer = this.gameApplication.;
-            questionAnswered = true;
-        } else if (e.getSource() == questionPanel.getButtonB()) {
-            correctAnswer = this.currentGame.getCurrentRound().checkAnswer(Round.CHOICE_B);
-            questionAnswered = true;
-        } else if (e.getSource() == questionPanel.getButtonC()) {
-            correctAnswer = this.currentGame.getCurrentRound().checkAnswer(Round.CHOICE_C);
-            questionAnswered = true;
-        } else if (e.getSource() == questionPanel.getButtonD()) {
-            correctAnswer = this.currentGame.getCurrentRound().checkAnswer(Round.CHOICE_D);
-            questionAnswered = true;
-//        } else if (e.getSource() == this.currentQuestionView.getBtn5050()) {
-//            currentGame.useFiftyFifty();
-//            currentQuestionView = new QuestionView(currentGame, this);
-//            rootPanel.switchToCard(currentQuestionView);
-////            SoundView.playSound(SoundView.FIFTY_SOUND);
-//        } else if (e.getSource() == currentQuestionView.getBtnSwitch()) {
-//            currentGame.useSwitchQuestion();
-//            currentQuestionView = new QuestionView(currentGame, this);
-//            rootPanel.switchToCard(currentQuestionView);
-////            SoundView.playSound(SoundView.SWITCH_SOUND);
-//        }  else if (e.getSource() == currentQuestionView.getBtnAsk()) {
-//            AskTheAudience ask = currentGame.useAskTheAudience();
-//            currentQuestionView = new AskTheAudienceView(currentGame, ask, this);
-//            rootPanel.switchToCard(currentQuestionView);
-////            SoundView.playSound(SoundView.ASK_SOUND);
-        } else if (e.getSource() == questionPanel.getExitButton()) {
-
-//            currentGame.finishGame();
-//            currentPostQuestion = new PostQuestion(currentGame, this);
+//    //handling the checking of game answer
+//    private void questionViewEventHandler(ActionEvent e) {
+//        boolean correctAnswer = false;
+//        boolean questionAnswered = false;
+//
+//        if (e.getSource() == questionPanel.getButtonA()) {
+//            correctAnswer = this.gameApplication.;
+//            questionAnswered = true;
+//        } else if (e.getSource() == questionPanel.getButtonB()) {
+//            correctAnswer = this.currentGame.getCurrentRound().checkAnswer(Round.CHOICE_B);
+//            questionAnswered = true;
+//        } else if (e.getSource() == questionPanel.getButtonC()) {
+//            correctAnswer = this.currentGame.getCurrentRound().checkAnswer(Round.CHOICE_C);
+//            questionAnswered = true;
+//        } else if (e.getSource() == questionPanel.getButtonD()) {
+//            correctAnswer = this.currentGame.getCurrentRound().checkAnswer(Round.CHOICE_D);
+//            questionAnswered = true;
+////        } else if (e.getSource() == this.currentQuestionView.getBtn5050()) {
+////            currentGame.useFiftyFifty();
+////            currentQuestionView = new QuestionView(currentGame, this);
+////            rootPanel.switchToCard(currentQuestionView);
+//////            SoundView.playSound(SoundView.FIFTY_SOUND);
+////        } else if (e.getSource() == currentQuestionView.getBtnSwitch()) {
+////            currentGame.useSwitchQuestion();
+////            currentQuestionView = new QuestionView(currentGame, this);
+////            rootPanel.switchToCard(currentQuestionView);
+//////            SoundView.playSound(SoundView.SWITCH_SOUND);
+////        }  else if (e.getSource() == currentQuestionView.getBtnAsk()) {
+////            AskTheAudience ask = currentGame.useAskTheAudience();
+////            currentQuestionView = new AskTheAudienceView(currentGame, ask, this);
+////            rootPanel.switchToCard(currentQuestionView);
+//////            SoundView.playSound(SoundView.ASK_SOUND);
+//        } else if (e.getSource() == questionPanel.getExitButton()) {
+//
+////            currentGame.finishGame();
+////            currentPostQuestion = new PostQuestion(currentGame, this);
+////            rootPanel.switchToCard(currentPostQuestion);
+//        }
+//
+//        if (questionAnswered) {
+//            if (correctAnswer) {
+//                currentGame.correctAnswer();
+//            } else {
+//                currentGame.incorrectAnswer();
+//            }
+//
+//            //No matter the outcome generate a new PostQuestion view from the current game and show it
+//            this.currentPostQuestion = new PostQuestion(currentGame, this);
 //            rootPanel.switchToCard(currentPostQuestion);
+//        }
+//    }
+
+
+    /**
+    *   changes the cardLayout to display desired panels as game moves
+     *
+     * @param newCard
+    */
+    public void changeCard(String newCard){
+        cl.show(panelCont, newCard);
+    }
+
+
+    public void playerSelection(ActionEvent e){
+        boolean playerCreated = false;
+
+        if (e.getSource() == returnPlayerScreen.submitButton) {
+
+            ReturnUser returnUser = new ReturnUser();
+            String text = returnPlayerScreen.userNameInput.getText();
+            returnUser.retrieveExistingUser(text);
+
+            if (returnUser.getUserName() == null) {
+                JOptionPane.showMessageDialog(null, "Your name couldn't be found please try another user name or create a new player.", "INFO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                gameApplication.setGameUser(returnUser);
+                playerCreated = true;
+            }
+        }
+        else if (e.getSource() == newPlayerScreen.submitButton){
+            NewUser newUser = new NewUser();
+            String text = newPlayerScreen.userNameInput.getText();
+
+            if (!newUser.checkUsernameAvailability(text)) {
+                JOptionPane.showMessageDialog(null, "Name is already in user please choose another user name", "INFO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+           else if (newUser.checkUsernameAvailability(text)) {
+                newUser.setUserName(text);
+                gameApplication.setGameUser(newUser);
+                playerCreated = true;
+            }
         }
 
-        if (questionAnswered) {
-            if (correctAnswer) {
-                currentGame.correctAnswer();
-            } else {
-                currentGame.incorrectAnswer();
-            }
-
-            //No matter the outcome generate a new PostQuestion view from the current game and show it
-            this.currentPostQuestion = new PostQuestion(currentGame, this);
-            rootPanel.switchToCard(currentPostQuestion);
+        if (playerCreated){
+            changeCard(questionPanel.NAME);
         }
     }
 

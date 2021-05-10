@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 public class NewPlayerScreen extends JPanel {
+    String NAME = "newPlayerScreen";
      JPasswordField passwordInput;
      JLabel userNameLabel;
      JTextField userNameInput;

@@ -337,7 +337,10 @@ public class GameApplication {
 
     public void setGameUser(User user) {
             gameUser = user;
+    }
 
+    public User getGameUser() {
+        return gameUser;
     }
 
     public Question selectQuestion(){

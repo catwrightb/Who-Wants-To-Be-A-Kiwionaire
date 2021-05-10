@@ -7,7 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class ReturnPlayerScreen extends JPanel implements ActionListener {
+public class ReturnPlayerScreen extends JPanel {
+    String NAME = "returnPlayerScreen";
     ReturnUser returnUser;
      JPasswordField passwordInput;
      JLabel userNameLabel;
@@ -19,7 +20,7 @@ public class ReturnPlayerScreen extends JPanel implements ActionListener {
      JLabel instructionsText;
      JButton forgotPasswordButton;
 
-    public ReturnPlayerScreen() {
+    public ReturnPlayerScreen(ActionListener listener) {
         //construct components
         //passwordInput = new JPasswordField (5);
         userNameLabel = new JLabel ("User Name");
@@ -46,7 +47,7 @@ public class ReturnPlayerScreen extends JPanel implements ActionListener {
         add (instructionsText);
         //add (forgotPasswordButton);
 
-        submitButton.addActionListener(this);
+        submitButton.addActionListener(listener);
 
         //set component bounds (only needed by Absolute Positioning)
        // passwordInput.setBounds (160, 155, 160, 25);
@@ -60,18 +61,4 @@ public class ReturnPlayerScreen extends JPanel implements ActionListener {
         //forgotPasswordButton.setBounds (155, 245, 150, 25);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-//        if (e.getSource() == submitButton){
-//
-//            returnUser = new ReturnUser();
-//            String text = userNameInput.getText();
-//            returnUser.retrieveExistingUser(text);
-//
-//            if (returnUser.getUserName() == null){
-//                JOptionPane.showMessageDialog(this, "Your name couldn't be found please try another user name or create a new player.", "INFO",
-//                        JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
-    }
 }

@@ -8,13 +8,14 @@ import java.awt.*;
 import javax.swing.*;
 
 public class QuestionPanel extends JPanel{
+    String NAME = "questionPanel";
     private JButton exitButton;
     private JButton buttonA;
     private JButton buttonB;
     private JButton buttonC;
     private JButton buttonD;
     private JLabel question;
-    private JButton submitButton;
+    //private JButton submitButton;
     private JButton fiftyFifty;
     private JButton phoneFriend;
     private JButton askAudience;
@@ -29,7 +30,7 @@ public class QuestionPanel extends JPanel{
         buttonC = new JButton (q.getcChoice());
         buttonD = new JButton (q.getdChoice());
         question = new JLabel (q.getQuestion());
-        submitButton = new JButton ("Submit");
+        //submitButton = new JButton ("Submit");
         fiftyFifty = new JButton ("50/50");
         phoneFriend = new JButton ("");
         askAudience = new JButton ("");
@@ -45,7 +46,7 @@ public class QuestionPanel extends JPanel{
         add (buttonC);
         add (buttonD);
         add (question);
-        add (submitButton);
+        //add (submitButton);
         add (fiftyFifty);
         add (phoneFriend);
         add (askAudience);
@@ -58,7 +59,7 @@ public class QuestionPanel extends JPanel{
         buttonC.setBounds (65, 260, 140, 35);
         buttonD.setBounds (240, 260, 140, 35);
         question.setBounds (45, 55, 365, 85);
-        submitButton.setBounds (175, 320, 100, 25);
+        //submitButton.setBounds (175, 320, 100, 25);
         fiftyFifty.setBounds (70, 150, 60, 40);
         phoneFriend.setBounds (190, 150, 60, 40);
         askAudience.setBounds (315, 150, 60, 40);
