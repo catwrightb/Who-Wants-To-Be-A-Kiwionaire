@@ -1,5 +1,6 @@
 package PDC.GUI;
 
+import PDC.FiftyFifty;
 import PDC.GameApplication;
 import PDC.UserPackage.NewUser;
 import PDC.UserPackage.ReturnUser;
@@ -31,7 +32,7 @@ public class ScreenControl implements ActionListener{
         panelCont.setLayout(cl);
         mainMenu = new MainMenu();
         playerMenu = new PlayerMenu();
-        newPlayerScreen = new NewPlayerScreen();
+        newPlayerScreen = new NewPlayerScreen(this);
         returnPlayerScreen = new ReturnPlayerScreen(this);
         questionPanel = new QuestionPanel(gameApplication);
 
@@ -48,7 +49,10 @@ public class ScreenControl implements ActionListener{
         playerMenu.exitButton.addActionListener(e -> changeCard(mainMenu.NAME));
         playerMenu.newPlayerButton.addActionListener(e -> changeCard(newPlayerScreen.NAME));
         playerMenu.returnPlayerButton.addActionListener(e -> changeCard(returnPlayerScreen.NAME));
-
+        newPlayerScreen.backButton.addActionListener(e -> changeCard(playerMenu.NAME));
+        newPlayerScreen.exitButton.addActionListener(e -> changeCard(mainMenu.NAME));
+        returnPlayerScreen.backButton.addActionListener(e -> changeCard(playerMenu.NAME));
+        returnPlayerScreen.exitButton.addActionListener(e -> changeCard(mainMenu.NAME));
 
         frame.add(panelCont);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,8 +69,8 @@ public class ScreenControl implements ActionListener{
         // Route the event to the correct handler
         if (source instanceof ReturnPlayerScreen) {
             playerSelection(e);
-//        } else if (source instanceof GetUsername) {
-//            usernameEventHandler();
+        } else if (source instanceof QuestionPanel) {
+            questionEventHandler(e);
 //        } else if (source instanceof PostQuestion) {
 //            postQuestionEventHandler(e);
 //        } else if (source instanceof LeaderboardView) {
@@ -138,6 +142,7 @@ public class ScreenControl implements ActionListener{
     }
 
 
+
     public void playerSelection(ActionEvent e){
         boolean playerCreated = false;
 
@@ -174,6 +179,26 @@ public class ScreenControl implements ActionListener{
         if (playerCreated){
             changeCard(questionPanel.NAME);
         }
+    }
+
+    public void questionEventHandler(ActionEvent e){
+        if (e.getSource() == questionPanel.getFiftyFifty()){
+            int answer = JOptionPane.showInternalConfirmDialog(null, "Are you sure you want to use your Fifty Fifty lifeline?", "Confirmation",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (answer == JOptionPane.YES_OPTION){
+
+
+            }
+            else if (answer == JOptionPane.NO_OPTION){
+                //Close window
+            }
+            else if (answer == JOptionPane.CLOSED_OPTION){
+                //Close window
+            }
+
+        }
+
     }
 
 

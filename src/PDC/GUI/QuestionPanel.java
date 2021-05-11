@@ -4,6 +4,8 @@ import PDC.GameApplication;
 import PDC.QuestionPackage.Question;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -20,7 +22,7 @@ public class QuestionPanel extends JPanel{
     private JButton phoneFriend;
     private JButton askAudience;
 
-    public QuestionPanel(GameApplication game) {
+    public QuestionPanel(GameApplication game, ActionListener listener) {
 
         Question q = game.selectQuestion();
 
@@ -32,6 +34,7 @@ public class QuestionPanel extends JPanel{
         question = new JLabel (q.getQuestion());
         //submitButton = new JButton ("Submit");
         fiftyFifty = new JButton ("50/50");
+        fiftyFifty.addActionListener(listener);
         phoneFriend = new JButton ("");
         askAudience = new JButton ("");
 
@@ -84,5 +87,29 @@ public class QuestionPanel extends JPanel{
 
     public JButton getButtonD() {
         return buttonD;
+    }
+
+    public JButton getFiftyFifty() {
+        return fiftyFifty;
+    }
+
+    public void setFiftyFifty(JButton fiftyFifty) {
+        this.fiftyFifty = fiftyFifty;
+    }
+
+    public JButton getPhoneFriend() {
+        return phoneFriend;
+    }
+
+    public void setPhoneFriend(JButton phoneFriend) {
+        this.phoneFriend = phoneFriend;
+    }
+
+    public JButton getAskAudience() {
+        return askAudience;
+    }
+
+    public void setAskAudience(JButton askAudience) {
+        this.askAudience = askAudience;
     }
 }

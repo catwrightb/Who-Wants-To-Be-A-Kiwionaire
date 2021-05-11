@@ -119,6 +119,9 @@ public class NewUser extends User implements NewUserInterface{
      * @return true/false depending if that name already exists within the database
      */
     public boolean checkUsernameAvailability(String userName){
+
+        userName = removeSpacesInString(userName);
+
         File file = new File(userDatabase);
         try{
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -126,9 +129,6 @@ public class NewUser extends User implements NewUserInterface{
             while ((line = reader.readLine()) != null){
                 String[] data = line.split("\t");
                 if (data[0].equalsIgnoreCase(userName)){
-//                    System.out.println("\nSorry there is already a player called (" + data[0] + ").");
-//                    System.out.println("Please use a different username. :)\n");
-
                     return false;
                 }
             }
@@ -137,6 +137,14 @@ public class NewUser extends User implements NewUserInterface{
         }
 
         return true;
+    }
+
+
+    public String removeSpacesInString(String userName){
+        if (userName.contains(" ")||userName.contains("\t")){
+            userName = userName.replaceAll("\\s+","");
+        }
+        return userName;
     }
 
     /**

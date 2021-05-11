@@ -18,7 +18,7 @@ public class GameApplication {
     public int gameRounds;
 
     //will need to store lifelines
-    private boolean FiftyFifty;
+    private FiftyFifty hasFiftyFifty;
     private boolean AskTheAudience;
     private boolean phoneAFriend;
 
@@ -31,7 +31,6 @@ public class GameApplication {
         this.gameRounds = Money.LEVEL1.getPrizeLevel();
 
         //linelife
-        this.FiftyFifty = true;
         this.AskTheAudience = true;
         this.phoneAFriend = true;
 
@@ -40,10 +39,12 @@ public class GameApplication {
 
     }
 
+
     //gets the current game rounds
      public int getGameRounds(){
          return this.gameRounds;
      }
+
 
 
     /**
@@ -130,31 +131,6 @@ public class GameApplication {
         return questionCurrentLevelList.get(randomNum);
     }
 
-//    /**
-//     * takes user input for what type of user they are
-//     * then calls to methods in classes to instantiate users
-//     * if return userName not found then loop continues
-//     */
-//    private void playerSelectMethod() {
-//
-//        try {
-//            boolean loop = true;
-//            while (loop){
-//                gameUser = playerTypeScan();
-//                assert gameUser != null;
-//                if (gameUser.getUserName() == null){
-//                    System.err.println("Sorry we couldn't find a save file for that name.");
-//                    System.out.println("Please try again with a new username or enter (N) to create a new player.\n");
-//                }
-//                else {
-//                    loop = false;
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 
     /**
      * method checks if string contains any special chars or whitespaces
@@ -335,6 +311,31 @@ public class GameApplication {
 //
 //    }
 
+
+    public FiftyFifty getHasFiftyFifty() {
+        return hasFiftyFifty;
+    }
+
+    public void setHasFiftyFifty(FiftyFifty hasFiftyFifty) {
+        this.hasFiftyFifty = hasFiftyFifty;
+    }
+
+    public boolean isAskTheAudience() {
+        return AskTheAudience;
+    }
+
+    public void setAskTheAudience(boolean askTheAudience) {
+        AskTheAudience = askTheAudience;
+    }
+
+    public boolean isPhoneAFriend() {
+        return phoneAFriend;
+    }
+
+    public void setPhoneAFriend(boolean phoneAFriend) {
+        this.phoneAFriend = phoneAFriend;
+    }
+
     public void setGameUser(User user) {
             gameUser = user;
     }
@@ -342,6 +343,7 @@ public class GameApplication {
     public User getGameUser() {
         return gameUser;
     }
+
 
     public Question selectQuestion(){
         ArrayList<Question> questionCurrentLevelList = new ArrayList<>();

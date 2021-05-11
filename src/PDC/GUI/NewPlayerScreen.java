@@ -7,17 +7,17 @@ import javax.swing.event.*;
 
 public class NewPlayerScreen extends JPanel {
     String NAME = "newPlayerScreen";
-     JPasswordField passwordInput;
+     //JPasswordField passwordInput;
      JLabel userNameLabel;
      JTextField userNameInput;
-     JLabel passwordLabel;
+     //JLabel passwordLabel;
      JButton submitButton;
      JButton exitButton;
      JButton backButton;
      JLabel instructionsText;
      JLabel jcomp9;
 
-    public NewPlayerScreen() {
+    public NewPlayerScreen(ActionListener listener) {
         //construct components
        // passwordInput = new JPasswordField (5);
         userNameLabel = new JLabel ("User Name");
@@ -28,7 +28,9 @@ public class NewPlayerScreen extends JPanel {
         exitButton = new JButton ("Exit");
         backButton = new JButton ("Back");
         instructionsText = new JLabel ("Please enter a unique UserName");
-        jcomp9 = new JLabel ("You cannot use spaces in your UserName");
+        jcomp9 = new JLabel ("You cannot use spaces in your UserName :( ");
+
+        submitButton.addActionListener(listener);
 
         //adjust size and set layout
         setPreferredSize (new Dimension (450, 368));
@@ -53,8 +55,8 @@ public class NewPlayerScreen extends JPanel {
         submitButton.setBounds (180, 205, 100, 25);
         exitButton.setBounds (350, 15, 80, 30);
         backButton.setBounds (25, 15, 80, 30);
-        instructionsText.setBounds (90, 35, 320, 45);
-        jcomp9.setBounds (100, 70, 275, 20);
+        instructionsText.setBounds (130, 35, 320, 45);
+        jcomp9.setBounds (100, 70, 300, 20);
     }
 
 }
