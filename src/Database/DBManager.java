@@ -19,7 +19,7 @@ public class DBManager {
 
     private static final String USER_NAME = "questions"; //your DB username
     private static final String PASSWORD = "questions"; //your DB password
-    private static final String URL = "jdbc:derby://localhost:1527/QuestionsDB_Ebd; create=true";  //url of the DB host
+    private static final String URL = "jdbc:derby://localhost:1527/QuestionsDB_Ebd;create=true";  //url of the DB host
 
     Connection conn;
 
