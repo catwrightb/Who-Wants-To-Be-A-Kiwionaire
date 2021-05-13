@@ -2,6 +2,7 @@ package PDC.GUI;
 
 import PDC.FiftyFifty;
 import PDC.GameApplication;
+import PDC.QuestionPackage.Question;
 import PDC.UserPackage.NewUser;
 import PDC.UserPackage.ReturnUser;
 
@@ -189,6 +190,19 @@ public class ScreenControl implements ActionListener{
             if (answer == JOptionPane.YES_OPTION){
                 if (this.gameApplication.isHasFiftyFifty()){
 
+                    Question q = this.gameApplication.getQuestion();
+                    String answerCorrect = q.getCorrectAnswer();
+
+                    if (answerCorrect.equalsIgnoreCase("a") ||
+                            answerCorrect.equalsIgnoreCase("b")){
+
+
+                    }
+                    else if (answerCorrect.equalsIgnoreCase("c") ||
+                            answerCorrect.equalsIgnoreCase("d")){
+
+
+                    }
 
 
 

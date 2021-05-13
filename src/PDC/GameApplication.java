@@ -130,6 +130,7 @@ public class GameApplication {
         Random random = new Random();
         int size = questionCurrentLevelList.size();
         int randomNum = random.nextInt((size));
+        question = questionCurrentLevelList.get(randomNum);
         return questionCurrentLevelList.get(randomNum);
     }
 
@@ -338,6 +339,14 @@ public class GameApplication {
 
     public void setPhoneAFriend(boolean phoneAFriend) {
         this.phoneAFriend = phoneAFriend;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public void setGameUser(User user) {

@@ -25,8 +25,15 @@ public class QuestionPanel extends JPanel{
     public QuestionPanel(GameApplication game, ActionListener listener) {
 
         Question q = game.selectQuestion();
-
         exitButton = new JButton ("Exit");
+
+        if (!q.getaChoice().isEmpty() && !q.getbChoice().isEmpty()
+                && !q.getcChoice().isEmpty() && !q.getdChoice().isEmpty()
+                && game.isHasFiftyFifty() ) {
+
+        }
+
+
         buttonA = new JButton (q.getaChoice());
         buttonB = new JButton (q.getbChoice());
         buttonC = new JButton (q.getcChoice());
