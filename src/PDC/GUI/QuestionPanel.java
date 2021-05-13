@@ -69,6 +69,7 @@ public class QuestionPanel extends JPanel{
 
     }
 
+
     public JButton getExitButton() {
         return exitButton;
     }

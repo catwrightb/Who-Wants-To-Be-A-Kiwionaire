@@ -16,9 +16,10 @@ public class GameApplication {
     private boolean running;
     public ArrayList<Question> questionArrayList = new ArrayList<>();
     public int gameRounds;
+    public Question question;
 
     //will need to store lifelines
-    private FiftyFifty hasFiftyFifty;
+    private boolean hasFiftyFifty;
     private boolean AskTheAudience;
     private boolean phoneAFriend;
 
@@ -31,6 +32,7 @@ public class GameApplication {
         this.gameRounds = Money.LEVEL1.getPrizeLevel();
 
         //linelife
+        this.hasFiftyFifty = true;
         this.AskTheAudience = true;
         this.phoneAFriend = true;
 
@@ -312,11 +314,13 @@ public class GameApplication {
 //    }
 
 
-    public FiftyFifty getHasFiftyFifty() {
+
+
+    public boolean isHasFiftyFifty() {
         return hasFiftyFifty;
     }
 
-    public void setHasFiftyFifty(FiftyFifty hasFiftyFifty) {
+    public void setHasFiftyFifty(boolean hasFiftyFifty) {
         this.hasFiftyFifty = hasFiftyFifty;
     }
 

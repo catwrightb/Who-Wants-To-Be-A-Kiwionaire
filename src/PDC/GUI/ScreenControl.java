@@ -34,7 +34,7 @@ public class ScreenControl implements ActionListener{
         playerMenu = new PlayerMenu();
         newPlayerScreen = new NewPlayerScreen(this);
         returnPlayerScreen = new ReturnPlayerScreen(this);
-        questionPanel = new QuestionPanel(gameApplication);
+        questionPanel = new QuestionPanel(gameApplication, this);
 
         panelCont.add(mainMenu, mainMenu.NAME);
         panelCont.add(playerMenu, playerMenu.NAME);
@@ -187,9 +187,14 @@ public class ScreenControl implements ActionListener{
                     JOptionPane.YES_NO_OPTION);
 
             if (answer == JOptionPane.YES_OPTION){
+                if (this.gameApplication.isHasFiftyFifty()){
 
 
+
+
+                }
             }
+
             else if (answer == JOptionPane.NO_OPTION){
                 //Close window
             }
