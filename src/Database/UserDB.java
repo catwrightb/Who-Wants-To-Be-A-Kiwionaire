@@ -93,7 +93,7 @@ public class UserDB {
                 String user = rs.getString("USERNAME");
                 String score = rs.getString("SCORE");
 
-                System.out.println("==========================================");
+                System.out.println("===============");
                 System.out.println("USER " + user);
                 System.out.println("SCORE " + score);
                 System.out.println();
