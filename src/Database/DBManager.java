@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Database;
 
 import java.sql.Connection;
@@ -58,9 +53,8 @@ public class DBManager {
     }
 
     public ResultSet queryDB(String sql) {
-
         Connection connection = this.conn;
-        Statement statement = null;
+        Statement statement;
         ResultSet resultSet = null;
 
         try {
@@ -76,13 +70,11 @@ public class DBManager {
     public void updateDB(String sql) {
 
         Connection connection = this.conn;
-        Statement statement = null;
-        ResultSet resultSet = null;
+        Statement statement;
 
         try {
             statement = connection.createStatement();
             statement.executeUpdate(sql);
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
