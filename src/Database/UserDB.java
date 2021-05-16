@@ -4,33 +4,30 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-/**
- *
- * @author Jacob Tupe | 18018323
- */
-public class QuestionDB {
-    private static final String QUESTION_DATABASE = "./resources/Questions.csv";
-    private static final String TABLE_NAME = "QUESTIONS";
+public class UserDB {
+    private static final String USER_DATABASE = "./resources/userStats.csv";
+    private static final String TABLE_NAME = "USERS";
 
     private final DBManager dbManager;
     private final Connection conn;
 
-    public QuestionDB() {
+    public UserDB() {
         dbManager = new DBManager();
         conn = dbManager.getConnection();
-        QuestionDB db = new QuestionDB();
-        db.createQuestionsTable();
     }
 
     public static void main(String[] args) {
-        QuestionDB db = new QuestionDB();
-        db.createQuestionsTable();
-        db.printTableContents();
+        UserDB users = new UserDB();
+        users.createUserTable();
+        users.printTableContents();
     }
 
-    public void createQuestionsTable(){
+    public void createUserTable(){
         try{
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet res = dbmd.getTables(null, null, TABLE_NAME, null);
@@ -44,7 +41,7 @@ public class QuestionDB {
             }
 
             // Create Table
-            String newTable = "CREATE TABLE " + TABLE_NAME + " (QUESTION LONG VARCHAR, ANSWER CHAR, CHOICE_A VARCHAR(255), CHOICE_B VARCHAR(255), CHOICE_C VARCHAR(255), CHOICE_D VARCHAR(255), LEVEL INT)";
+            String newTable = "CREATE TABLE " + TABLE_NAME + " (USERNAME VARCHAR(255), SCORE INT)";
             dbManager.updateDB(newTable);
 
             // Print completion message
@@ -59,29 +56,19 @@ public class QuestionDB {
 
     public void populateTable(DBManager dbManager){
         try{
-            File file = new File(QUESTION_DATABASE);
+            File file = new File(USER_DATABASE);
             BufferedReader csvReader = new BufferedReader(new FileReader(file));
             String line;
 
             while((line = csvReader.readLine())!= null){
                 // Split CSV File that stores questions
-                String[] data = line.split(",");
+                String[] data = line.split("\t");
                 // Generate SQL INSERT Statement
                 String sb = "INSERT INTO " + TABLE_NAME + " VALUES ('";
-                // Question LONG VARCHAR
-                sb += data[0] + "', '";
-                // Answer CHAR
-                sb += data[2] + "', '";
-                // Choice_A VARCHAR
-                sb += data[3] + "', '";
-                // Choice_B VARCHAR
-                sb += data[4] + "', '";
-                // Choice_C VARCHAR
-                sb += data[5] + "', '";
-                // Choice_D VARCHAR
-                sb += data[6] + "', ";
-                // Level INT
-                sb += data[7];
+                // Username VARCHAR(255)
+                sb += data[0] + "', ";
+                // Score INT
+                sb += data[1];
                 sb += ")";
 
                 // Update Database with SQL INSERT Statement
@@ -103,20 +90,12 @@ public class QuestionDB {
             ResultSet rs = dbManager.queryDB("SELECT * FROM " + TABLE_NAME);
 
             while (rs.next()){
-                String question = rs.getString("QUESTION");
-                String answer = rs.getString("ANSWER");
-                String choiceA = rs.getString("CHOICE_A");
-                String choiceB = rs.getString("CHOICE_B");
-                String choiceC = rs.getString("CHOICE_C");
-                String choiceD = rs.getString("CHOICE_D");
+                String user = rs.getString("USERNAME");
+                String score = rs.getString("SCORE");
 
                 System.out.println("==========================================");
-                System.out.println("QUESTION " + question);
-                System.out.println("ANSWER " + answer);
-                System.out.print("A " + choiceA);
-                System.out.print(" | B " + choiceB);
-                System.out.print(" | C " + choiceC);
-                System.out.print(" | D " + choiceD);
+                System.out.println("USER " + user);
+                System.out.println("SCORE " + score);
                 System.out.println();
             }
         } catch (SQLException throwables) {
