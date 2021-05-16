@@ -1,17 +1,12 @@
 package Database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  *
  * @author Jacob Tupe | 18018323
  */
 public class DBManager {
-
     private static final String USER_NAME = "kiwionaire"; //your DB username
     private static final String PASSWORD = "millionaire"; //your DB password
     private static final String URL = "jdbc:derby:KiwionaireDB; create=true";  //url of the DB host

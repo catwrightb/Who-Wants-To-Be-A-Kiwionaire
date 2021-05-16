@@ -12,7 +12,7 @@ import java.sql.*;
  */
 public class QuestionDB {
     private static final String QUESTION_DATABASE = "./resources/Questions.csv";
-    private static final String TABLE_NAME = "QUESTIONS";
+    private static final String QUESTIONS_TABLE_NAME = "QUESTIONS";
 
     private final DBManager dbManager;
     private final Connection conn;
@@ -20,8 +20,6 @@ public class QuestionDB {
     public QuestionDB() {
         dbManager = new DBManager();
         conn = dbManager.getConnection();
-        QuestionDB db = new QuestionDB();
-        db.createQuestionsTable();
     }
 
     public static void main(String[] args) {
@@ -33,22 +31,23 @@ public class QuestionDB {
     public void createQuestionsTable(){
         try{
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet res = dbmd.getTables(null, null, TABLE_NAME, null);
+            ResultSet res = dbmd.getTables(null, null, QUESTIONS_TABLE_NAME, null);
 
             // Delete Table if Exists
             if(res.next()){
-                System.err.println(TABLE_NAME + " Table already exists.");
-                String dropTable = "DROP TABLE " + TABLE_NAME;
+                System.err.println(QUESTIONS_TABLE_NAME + " Table already exists.");
+                String dropTable = "DROP TABLE " + QUESTIONS_TABLE_NAME;
                 dbManager.updateDB(dropTable);
-                System.out.println(TABLE_NAME + " TABLE DROPPED");
+                System.out.println(QUESTIONS_TABLE_NAME + " TABLE DROPPED");
             }
 
             // Create Table
-            String newTable = "CREATE TABLE " + TABLE_NAME + " (QUESTION LONG VARCHAR, ANSWER CHAR, CHOICE_A VARCHAR(255), CHOICE_B VARCHAR(255), CHOICE_C VARCHAR(255), CHOICE_D VARCHAR(255), LEVEL INT)";
+            String newTable = "CREATE TABLE " + QUESTIONS_TABLE_NAME + " (QUESTION LONG VARCHAR, ANSWER CHAR, CHOICE_A VARCHAR(255), CHOICE_B VARCHAR(255), CHOICE_C VARCHAR(255), CHOICE_D VARCHAR(255), LEVEL INT)";
             dbManager.updateDB(newTable);
 
             // Print completion message
             System.out.println("TABLE CREATION COMPLETED Successfully");
+
 
             // Populate Database Table
             populateTable(dbManager);
@@ -67,7 +66,7 @@ public class QuestionDB {
                 // Split CSV File that stores questions
                 String[] data = line.split(",");
                 // Generate SQL INSERT Statement
-                String sb = "INSERT INTO " + TABLE_NAME + " VALUES ('";
+                String sb = "INSERT INTO " + QUESTIONS_TABLE_NAME + " VALUES ('";
                 // Question LONG VARCHAR
                 sb += data[0] + "', '";
                 // Answer CHAR
@@ -100,7 +99,7 @@ public class QuestionDB {
     // Method to check the DATABASE can be accessed & prints correctly when needing to be used
     public void printTableContents() {
         try{
-            ResultSet rs = dbManager.queryDB("SELECT * FROM " + TABLE_NAME);
+            ResultSet rs = dbManager.queryDB("SELECT * FROM " + QUESTIONS_TABLE_NAME);
 
             while (rs.next()){
                 String question = rs.getString("QUESTION");

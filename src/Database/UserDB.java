@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class UserDB {
     private static final String USER_DATABASE = "./resources/userStats.csv";
-    private static final String TABLE_NAME = "USERS";
+    private static final String USER_TABLE_NAME = "USERS";
 
     private final DBManager dbManager;
     private final Connection conn;
@@ -30,18 +30,18 @@ public class UserDB {
     public void createUserTable(){
         try{
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet res = dbmd.getTables(null, null, TABLE_NAME, null);
+            ResultSet res = dbmd.getTables(null, null, USER_TABLE_NAME, null);
 
             // Delete Table if Exists
             if(res.next()){
-                System.err.println(TABLE_NAME + " Table already exists.");
-                String dropTable = "DROP TABLE " + TABLE_NAME;
+                System.err.println(USER_TABLE_NAME + " Table already exists.");
+                String dropTable = "DROP TABLE " + USER_TABLE_NAME;
                 dbManager.updateDB(dropTable);
-                System.out.println(TABLE_NAME + " TABLE DROPPED");
+                System.out.println(USER_TABLE_NAME + " TABLE DROPPED");
             }
 
             // Create Table
-            String newTable = "CREATE TABLE " + TABLE_NAME + " (USERNAME VARCHAR(255), SCORE INT)";
+            String newTable = "CREATE TABLE " + USER_TABLE_NAME + " (USERNAME VARCHAR(255), SCORE INT)";
             dbManager.updateDB(newTable);
 
             // Print completion message
@@ -64,7 +64,7 @@ public class UserDB {
                 // Split CSV File that stores questions
                 String[] data = line.split("\t");
                 // Generate SQL INSERT Statement
-                String sb = "INSERT INTO " + TABLE_NAME + " VALUES ('";
+                String sb = "INSERT INTO " + USER_TABLE_NAME + " VALUES ('";
                 // Username VARCHAR(255)
                 sb += data[0] + "', ";
                 // Score INT
@@ -87,7 +87,7 @@ public class UserDB {
     // Method to check the DATABASE can be accessed & prints correctly when needing to be used
     public void printTableContents() {
         try{
-            ResultSet rs = dbManager.queryDB("SELECT * FROM " + TABLE_NAME);
+            ResultSet rs = dbManager.queryDB("SELECT * FROM " + USER_TABLE_NAME);
 
             while (rs.next()){
                 String user = rs.getString("USERNAME");
