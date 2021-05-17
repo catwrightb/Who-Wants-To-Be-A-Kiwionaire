@@ -25,27 +25,32 @@ public class QuestionPanel extends JPanel{
 
         Question q = game.selectQuestion();
         exitButton = new JButton ("Exit");
-        buttonA = new JButton (q.getaChoice());
-        buttonB = new JButton (q.getbChoice());
-        buttonC = new JButton (q.getcChoice());
-        buttonD = new JButton (q.getdChoice());
         question = new JLabel (q.getQuestion());
-        //submitButton = new JButton ("Submit");
 
-        if (!q.getaChoice().isEmpty() && !q.getbChoice().isEmpty()
-                && !q.getcChoice().isEmpty() && !q.getdChoice().isEmpty()
-                && game.isHasFiftyFifty() )
-        {
+        //buttons A & B
+        if (!q.getaChoice().isEmpty() && !q.getbChoice().isEmpty()){
+            buttonA = new JButton (q.getaChoice());
+            buttonA.addActionListener(listener);
+            add (buttonA);
+            buttonA.setBounds (65, 215, 140, 35);
 
+            buttonB = new JButton (q.getbChoice());
+            buttonB.addActionListener(listener);
+            add (buttonB);
+            buttonB.setBounds (240, 215, 140, 35);
         }
 
-        //remove option a and b
-        if (q.getaChoice().isEmpty() && q.getbChoice().isEmpty()){
-            buttonA.setVisible(false);
-            buttonB.setVisible(false);
-        }
-        else if (q.getcChoice().isEmpty() && q.getdChoice().isEmpty()){
+        //buttons C & D
+        if (!q.getcChoice().isEmpty() && !q.getdChoice().isEmpty()){
+            buttonC = new JButton (q.getcChoice());
+            buttonC.addActionListener(listener);
+            add (buttonC);
+            buttonC.setBounds (65, 260, 140, 35);
 
+            buttonD = new JButton (q.getdChoice());
+            buttonD.addActionListener(listener);
+            add (buttonD);
+            buttonD.setBounds (240, 260, 140, 35);
         }
 
 
@@ -78,23 +83,11 @@ public class QuestionPanel extends JPanel{
 
         //add components
         add (exitButton);
-        add (buttonA);
-        add (buttonB);
-        add (buttonC);
-        add (buttonD);
         add (question);
-
-
 
         //set component bounds (only needed by Absolute Positioning)
         exitButton.setBounds (350, 15, 80, 30);
-        buttonA.setBounds (65, 215, 140, 35);
-        buttonB.setBounds (240, 215, 140, 35);
-        buttonC.setBounds (65, 260, 140, 35);
-        buttonD.setBounds (240, 260, 140, 35);
         question.setBounds (45, 55, 365, 85);
-        //submitButton.setBounds (175, 320, 100, 25);
-
 
 
 

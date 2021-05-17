@@ -226,37 +226,6 @@ public class ScreenControl implements ActionListener{
 
     public void questionEventHandler(ActionEvent e){
         if (e.getSource() == questionPanel.getFiftyFifty() && currentGame.isHasFiftyFifty()){
-//            int answer = JOptionPane.showInternalConfirmDialog(null, "Are you sure you want to use your Fifty Fifty lifeline?", "Confirmation",
-//                    JOptionPane.YES_NO_OPTION);
-//
-//            if (answer == JOptionPane.YES_OPTION){
-//                if (this.gameApplication.isHasFiftyFifty()){
-//
-//                    Question q = this.gameApplication.getQuestion();
-//                    String answerCorrect = q.getCorrectAnswer();
-//
-//                    if (answerCorrect.equalsIgnoreCase("a") ||
-//                            answerCorrect.equalsIgnoreCase("b")){
-//
-//
-//                    }
-//                    else if (answerCorrect.equalsIgnoreCase("c") ||
-//                            answerCorrect.equalsIgnoreCase("d")){
-//
-//
-//                    }
-//
-//
-//
-//                }
-//            }
-//
-//            else if (answer == JOptionPane.NO_OPTION){
-//                //Close window
-//            }
-//            else if (answer == JOptionPane.CLOSED_OPTION){
-//                //Close window
-//            }
             confirmScreen = new ConfirmScreen(currentGame.getFiftyFiftyString(), this);
             panelCont.add(confirmScreen, confirmScreen.NAME);
             changeCard(confirmScreen.NAME);
@@ -270,6 +239,18 @@ public class ScreenControl implements ActionListener{
             confirmScreen = new ConfirmScreen(currentGame.getAskTheAudience(), this);
             panelCont.add(confirmScreen, confirmScreen.NAME);
             changeCard(confirmScreen.NAME);
+        }
+        else if (e.getSource() == questionPanel.getButtonA()){
+
+        }
+        else if (e.getSource() == questionPanel.getButtonB()){
+
+        }
+        else if (e.getSource() == questionPanel.getButtonB()){
+
+        }
+        else if (e.getSource() == questionPanel.getButtonD()){
+
         }
         else if (e.getSource() == questionPanel.getExitButton()){
             //exit game
