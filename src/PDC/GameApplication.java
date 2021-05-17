@@ -15,7 +15,7 @@ public class GameApplication {
     private boolean running;
     public ArrayList<Question> questionArrayList = new ArrayList<>();
     public int gameRounds;
-    public Question question;
+    public Question currentQuestion;
 
     //will need to store lifelines
     private boolean hasFiftyFifty;
@@ -23,6 +23,9 @@ public class GameApplication {
     private boolean phoneAFriend;
 
     private static User gameUser;
+    private final String FIFTY_FIFTY = "Fifty Fifty";
+    private final String ASK_THE_AUDIENCE = "Ask The Audience";
+    private final String PHONE_A_FRIEND = "Phone A Friend";
 
 
     public GameApplication(){
@@ -48,7 +51,7 @@ public class GameApplication {
 
 
      public void usefiftyFiftyLifeLine(){
-        Question currentQ = this.getQuestion();
+        Question currentQ = this.getCurrentQuestion();
 
         if (currentQ.correctAnswer.equals("A") || currentQ.correctAnswer.equals("B") ){
             currentQ.cChoice = "";
@@ -144,7 +147,7 @@ public class GameApplication {
         Random random = new Random();
         int size = questionCurrentLevelList.size();
         int randomNum = random.nextInt((size));
-        question = questionCurrentLevelList.get(randomNum);
+        currentQuestion = questionCurrentLevelList.get(randomNum);
         return questionCurrentLevelList.get(randomNum);
     }
 
@@ -328,62 +331,6 @@ public class GameApplication {
 //
 //    }
 
-
-
-
-    public boolean isHasFiftyFifty() {
-        return hasFiftyFifty;
-    }
-
-    public void setHasFiftyFifty(boolean hasFiftyFifty) {
-        this.hasFiftyFifty = hasFiftyFifty;
-    }
-
-    public String getFiftyFiftyString(){
-        return "Fifty Fifty";
-    }
-
-    public boolean isAskTheAudience() {
-        return AskTheAudience;
-    }
-
-    public void setAskTheAudience(boolean askTheAudience) {
-        AskTheAudience = askTheAudience;
-    }
-
-    public String getAskTheAudience(){
-        return "Ask The Audience";
-    }
-
-    public boolean isPhoneAFriend() {
-        return phoneAFriend;
-    }
-
-    public void setPhoneAFriend(boolean phoneAFriend) {
-        this.phoneAFriend = phoneAFriend;
-    }
-
-    public String getPhoneAFriend(){
-        return "Phone A Friend";
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
-
-    public void setGameUser(User user) {
-            gameUser = user;
-    }
-
-    public User getGameUser() {
-        return gameUser;
-    }
-
-
     public Question selectQuestion(){
         ArrayList<Question> questionCurrentLevelList = new ArrayList<>();
 
@@ -396,8 +343,64 @@ public class GameApplication {
         int size = questionCurrentLevelList.size();
         int randomNum = random.nextInt((size));
 
-        setQuestion(questionCurrentLevelList.get(randomNum));
+        setCurrentQuestion(questionCurrentLevelList.get(randomNum));
 
         return questionCurrentLevelList.get(randomNum);
     }
+
+
+    public boolean isHasFiftyFifty() {
+        return hasFiftyFifty;
+    }
+
+    public void setHasFiftyFifty(boolean hasFiftyFifty) {
+        this.hasFiftyFifty = hasFiftyFifty;
+    }
+
+    public String getFiftyFiftyString(){
+        return FIFTY_FIFTY;
+    }
+
+    public boolean isAskTheAudience() {
+        return AskTheAudience;
+    }
+
+    public void setAskTheAudience(boolean askTheAudience) {
+        AskTheAudience = askTheAudience;
+    }
+
+    public String getAskTheAudience(){
+        return ASK_THE_AUDIENCE;
+    }
+
+    public boolean isPhoneAFriend() {
+        return phoneAFriend;
+    }
+
+    public void setPhoneAFriend(boolean phoneAFriend) {
+        this.phoneAFriend = phoneAFriend;
+    }
+
+    public String getPhoneAFriend(){
+        return PHONE_A_FRIEND;
+    }
+
+    public Question getCurrentQuestion() {
+        return currentQuestion;
+    }
+
+    public void setCurrentQuestion(Question currentQuestion) {
+        this.currentQuestion = currentQuestion;
+    }
+
+    public void setGameUser(User user) {
+            gameUser = user;
+    }
+
+    public User getGameUser() {
+        return gameUser;
+    }
+
+
+
 }

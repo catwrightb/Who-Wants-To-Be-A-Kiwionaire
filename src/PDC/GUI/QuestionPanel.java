@@ -23,7 +23,7 @@ public class QuestionPanel extends JPanel{
 
     public QuestionPanel(GameApplication game, ActionListener listener) {
 
-        Question q = game.selectQuestion();
+        Question q = game.getCurrentQuestion();
         exitButton = new JButton ("Exit");
         question = new JLabel (q.getQuestion());
 

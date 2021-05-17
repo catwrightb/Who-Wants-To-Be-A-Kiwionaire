@@ -27,7 +27,6 @@ public class ScreenControl implements ActionListener{
 
     public ScreenControl() {
         frame.setSize(width, height);
-        currentGame = new GameApplication();
 
         panelCont.setLayout(cl);
         mainMenu = new MainMenu();
@@ -42,8 +41,6 @@ public class ScreenControl implements ActionListener{
         panelCont.add(newPlayerScreen, newPlayerScreen.NAME);
         panelCont.add(returnPlayerScreen, returnPlayerScreen.NAME);
         panelCont.add(questionPanel, questionPanel.NAME);
-
-
 
 
         cl.show(panelCont, "1");
@@ -64,6 +61,24 @@ public class ScreenControl implements ActionListener{
         frame.setVisible(true);
 
     }
+
+    /**
+     *   changes the cardLayout to display desired panels as game moves
+     *
+     * @param newCard
+     */
+    public void changeCard(String newCard){
+        cl.show(panelCont, newCard);
+    }
+
+    public void removeCard(JPanel panel){
+        panelCont.remove(panel);
+    }
+
+    public void addCard(JPanel panel, String name){
+        panelCont.add(panel, name);
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -136,24 +151,6 @@ public class ScreenControl implements ActionListener{
 //            rootPanel.switchToCard(currentPostQuestion);
 //        }
 //    }
-
-
-    /**
-    *   changes the cardLayout to display desired panels as game moves
-     *
-     * @param newCard
-    */
-    public void changeCard(String newCard){
-        cl.show(panelCont, newCard);
-    }
-
-    public void removeCard(JPanel panel){
-       panelCont.remove(panel);
-    }
-
-    public void addCard(JPanel panel, String name){
-        panelCont.add(panel, name);
-    }
 
 
     //this wont work for larger logic to track what life line is used
@@ -262,6 +259,11 @@ public class ScreenControl implements ActionListener{
 
     }
 
+    public void startGame(){
+        currentGame = new GameApplication();
+
+
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
