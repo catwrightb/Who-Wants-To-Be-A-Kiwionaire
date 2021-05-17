@@ -11,7 +11,6 @@ public class User {
     private static final String userDatabase = "./resources/userStats.csv";
     String userName;
     int score;
-    // everyUser gets 3 lifeline
 
     public User() {
 

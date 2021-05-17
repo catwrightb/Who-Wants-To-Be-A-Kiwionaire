@@ -15,10 +15,10 @@ public class Question {
     String bChoice;
     String cChoice;
     String dChoice;
-    //String[] answerChars;
     Integer level;
 
     public Question() {
+
     }
 
     public String getaChoice() {
@@ -69,14 +69,6 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-//    public String[] getAnswerChars() {
-//        return answerChars;
-//    }
-
-//   // public void setAnswerChars(String a, String b, String c, String d) {
-//        this.answerChars = new String[]{a, b, c, d};
-//    }
-
     public Integer getLevel() {
         return level;
     }
@@ -84,8 +76,6 @@ public class Question {
     public void setLevel(Integer level) {
         this.level = level;
     }
-
-
 
 
     /**
@@ -151,30 +141,5 @@ public class Question {
         }
     }
 
-//    /**
-//     * toString to print out question and possible answers with ABCD options
-//     *
-//     * @return string
-//     */
-//    @Override
-//    public String toString() {
-//        //using enum to print question chars
-//
-//            String ABCD = Letters.A.name() + Letters.B.name() + Letters.C.name() + Letters.D.name();
-//            StringBuilder string = new StringBuilder("Question: " + level +"\n");
-//            string.append(question);
-//            string.append("\n");
-//
-//            for (int i = 0; i < 4; i++) {
-//                string.append(ABCD.charAt(i));
-//                string.append(": ").append(answerChars[i]);
-//                string.append("\n");
-//            }
-//
-//            string.append("> ");
-//
-//            return string.toString();
-//
-//
-//    }
+
 }
