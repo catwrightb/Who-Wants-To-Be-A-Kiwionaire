@@ -16,7 +16,7 @@ public class QuestionPanel extends JPanel{
     private JButton buttonC;
     private JButton buttonD;
     private JLabel question;
-    //private JButton submitButton;
+
     private JButton fiftyFifty;
     private JButton phoneFriend;
     private JButton askAudience;
@@ -25,14 +25,6 @@ public class QuestionPanel extends JPanel{
 
         Question q = game.selectQuestion();
         exitButton = new JButton ("Exit");
-
-        if (!q.getaChoice().isEmpty() && !q.getbChoice().isEmpty()
-                && !q.getcChoice().isEmpty() && !q.getdChoice().isEmpty()
-                && game.isHasFiftyFifty() ) {
-
-        }
-
-
         buttonA = new JButton (q.getaChoice());
         buttonB = new JButton (q.getbChoice());
         buttonC = new JButton (q.getcChoice());
@@ -40,20 +32,45 @@ public class QuestionPanel extends JPanel{
         question = new JLabel (q.getQuestion());
         //submitButton = new JButton ("Submit");
 
-        //fifty logic
+        if (!q.getaChoice().isEmpty() && !q.getbChoice().isEmpty()
+                && !q.getcChoice().isEmpty() && !q.getdChoice().isEmpty()
+                && game.isHasFiftyFifty() )
+        {
+
+        }
+
+        //remove option a and b
+        if (q.getaChoice().isEmpty() && q.getbChoice().isEmpty()){
+            buttonA.setVisible(false);
+            buttonB.setVisible(false);
+        }
+        else if (q.getcChoice().isEmpty() && q.getdChoice().isEmpty()){
+
+        }
+
+
+        //lifeline buttons
         if (game.isHasFiftyFifty()){
             fiftyFifty = new JButton ("50/50");
             fiftyFifty.addActionListener(listener);
-        }
-        else if (!game.isHasFiftyFifty()){
-            fiftyFifty.setEnabled(false);
-            fiftyFifty.setOpaque(false);
-            fiftyFifty.setText("");
+            this.add(fiftyFifty);
+            fiftyFifty.setBounds (70, 150, 60, 40);
         }
 
+        if (game.isAskTheAudience()){
+            askAudience = new JButton ("");
+            askAudience.addActionListener(listener);
+            this.add(askAudience);
+            askAudience.setBounds (315, 150, 60, 40);
+        }
 
-        phoneFriend = new JButton ("");
-        askAudience = new JButton ("");
+        if (game.isPhoneAFriend()){
+            phoneFriend = new JButton ("");
+            phoneFriend.addActionListener(listener);
+            this.add(phoneFriend);
+            phoneFriend.setBounds (190, 150, 60, 40);
+        }
+
 
         //adjust size and set layout
         setPreferredSize (new Dimension (460, 362));
@@ -66,10 +83,7 @@ public class QuestionPanel extends JPanel{
         add (buttonC);
         add (buttonD);
         add (question);
-        //add (submitButton);
-        add (fiftyFifty);
-        add (phoneFriend);
-        add (askAudience);
+
 
 
         //set component bounds (only needed by Absolute Positioning)
@@ -80,9 +94,11 @@ public class QuestionPanel extends JPanel{
         buttonD.setBounds (240, 260, 140, 35);
         question.setBounds (45, 55, 365, 85);
         //submitButton.setBounds (175, 320, 100, 25);
-        fiftyFifty.setBounds (70, 150, 60, 40);
-        phoneFriend.setBounds (190, 150, 60, 40);
-        askAudience.setBounds (315, 150, 60, 40);
+
+
+
+
+        this.setVisible(true);
 
     }
 

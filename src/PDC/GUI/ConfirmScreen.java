@@ -9,21 +9,19 @@ public class ConfirmScreen extends JPanel {
     private JLabel infoText;
     private JButton yesButton;
     private JButton noButton;
-    private String currentLifeLine;
+    private String currentLifeLine = "";
 
-    public ConfirmScreen(String string, String lifeLine, ActionListener listener) {
+    public ConfirmScreen(String string, ActionListener listener) {
 
-        infoText = new JLabel ("");
+        infoText = new JLabel ("Do you want to use your "+ string +" lifeline?");
         yesButton = new JButton ("Yes");
         yesButton.addActionListener(listener);
         noButton = new JButton ("No");
         noButton.addActionListener(listener);
-        infoText.setText(string);
+        //infoText.setText(string);
         infoText.setHorizontalTextPosition(JLabel.CENTER);
 
-        currentLifeLine = lifeLine;
-
-
+        currentLifeLine = string;
 
         //adjust size and set layout
         setPreferredSize (new Dimension(460, 362));

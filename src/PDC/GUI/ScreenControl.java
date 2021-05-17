@@ -1,7 +1,6 @@
 package PDC.GUI;
 
 import PDC.GameApplication;
-import PDC.Question;
 import PDC.UserPackage.NewUser;
 import PDC.UserPackage.ReturnUser;
 
@@ -21,21 +20,21 @@ public class ScreenControl implements ActionListener{
     ReturnPlayerScreen returnPlayerScreen;
     QuestionPanel questionPanel;
     int height, width = 400;
-    GameApplication gameApplication;
+    GameApplication currentGame;
     ConfirmScreen confirmScreen;
 //    CorrectAnswerPanel correctAnswerPanel;
 //    InCorrectAnswerPanel inCorrectAnswerPanel;
 
     public ScreenControl() {
         frame.setSize(width, height);
-        gameApplication = new GameApplication();
+        currentGame = new GameApplication();
 
         panelCont.setLayout(cl);
         mainMenu = new MainMenu();
         playerMenu = new PlayerMenu();
         newPlayerScreen = new NewPlayerScreen(this);
         returnPlayerScreen = new ReturnPlayerScreen(this);
-        questionPanel = new QuestionPanel(gameApplication, this);
+        questionPanel = new QuestionPanel(currentGame, this);
 
 
         panelCont.add(mainMenu, mainMenu.NAME);
@@ -148,23 +147,37 @@ public class ScreenControl implements ActionListener{
         cl.show(panelCont, newCard);
     }
 
+    public void removeCard(JPanel panel){
+       panelCont.remove(panel);
+    }
+
+    public void addCard(JPanel panel, String name){
+        panelCont.add(panel, name);
+    }
+
 
     //this wont work for larger logic to track what life line is used
     public void confirmScreenLogic(ActionEvent e){
         if (e.getSource() == confirmScreen.getYesButton()){
-            changeCard(questionPanel.NAME);
+            removeCard(questionPanel);
 
             String string = confirmScreen.getCurrentLifeLine();
 
-            if (string.equals("FiftyFifty")){
-                gameApplication.setHasFiftyFifty(false);
+            if (string.equals("Fifty Fifty")){
+                currentGame.usefiftyFiftyLifeLine();
+                currentGame.setHasFiftyFifty(false);
             }
-            else if (string.equals("PhoneFriend")){
-                gameApplication.setPhoneAFriend(false);
+            else if (string.equals("Phone A Friend")){
+                currentGame.setPhoneAFriend(false);
             }
-            else if (string.equals("AskAudience")){
-                gameApplication.setAskTheAudience(false);
+            else if (string.equals("Ask The Audience")){
+                currentGame.setAskTheAudience(false);
             }
+
+            questionPanel = new QuestionPanel(currentGame, this);
+            addCard(questionPanel, questionPanel.NAME);
+            changeCard(questionPanel.NAME);
+            removeCard(confirmScreen);
 
         }
         else {
@@ -187,7 +200,7 @@ public class ScreenControl implements ActionListener{
                         JOptionPane.ERROR_MESSAGE);
             }
             else {
-                gameApplication.setGameUser(returnUser);
+                currentGame.setGameUser(returnUser);
                 playerCreated = true;
             }
         }
@@ -201,7 +214,7 @@ public class ScreenControl implements ActionListener{
             }
            else if (newUser.checkUsernameAvailability(text)) {
                 newUser.setUserName(text);
-                gameApplication.setGameUser(newUser);
+                currentGame.setGameUser(newUser);
                 playerCreated = true;
             }
         }
@@ -212,7 +225,7 @@ public class ScreenControl implements ActionListener{
     }
 
     public void questionEventHandler(ActionEvent e){
-        if (e.getSource() == questionPanel.getFiftyFifty() && gameApplication.isHasFiftyFifty()){
+        if (e.getSource() == questionPanel.getFiftyFifty() && currentGame.isHasFiftyFifty()){
 //            int answer = JOptionPane.showInternalConfirmDialog(null, "Are you sure you want to use your Fifty Fifty lifeline?", "Confirmation",
 //                    JOptionPane.YES_NO_OPTION);
 //
@@ -244,12 +257,23 @@ public class ScreenControl implements ActionListener{
 //            else if (answer == JOptionPane.CLOSED_OPTION){
 //                //Close window
 //            }
-            String string = "Do you want to use your fifty fifty lifeline?";
-            confirmScreen = new ConfirmScreen(string, gameApplication.getFiftyFiftyString(), this);
+            confirmScreen = new ConfirmScreen(currentGame.getFiftyFiftyString(), this);
             panelCont.add(confirmScreen, confirmScreen.NAME);
             changeCard(confirmScreen.NAME);
-
-
+        }
+        else if (e.getSource() == questionPanel.getPhoneFriend() && currentGame.isPhoneAFriend()){
+            confirmScreen = new ConfirmScreen(currentGame.getPhoneAFriend(), this);
+            panelCont.add(confirmScreen, confirmScreen.NAME);
+            changeCard(confirmScreen.NAME);
+        }
+        else if (e.getSource() == questionPanel.getAskAudience() && currentGame.isAskTheAudience()){
+            confirmScreen = new ConfirmScreen(currentGame.getAskTheAudience(), this);
+            panelCont.add(confirmScreen, confirmScreen.NAME);
+            changeCard(confirmScreen.NAME);
+        }
+        else if (e.getSource() == questionPanel.getExitButton()){
+            //exit game
+            //maybe have confirm Screen ask if they want to quit or not?
         }
 
 

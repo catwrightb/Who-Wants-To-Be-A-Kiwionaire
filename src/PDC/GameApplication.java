@@ -47,6 +47,21 @@ public class GameApplication {
      }
 
 
+     public void usefiftyFiftyLifeLine(){
+        Question currentQ = this.getQuestion();
+
+        if (currentQ.correctAnswer.equals("A") || currentQ.correctAnswer.equals("B") ){
+            currentQ.cChoice = "";
+            currentQ.dChoice = "";
+        }
+        else if (currentQ.correctAnswer.equals("C") || currentQ.correctAnswer.equals("D") ){
+            currentQ.aChoice = "";
+            currentQ.bChoice = "";
+        }
+
+     }
+
+
 
     /**
      *
@@ -325,8 +340,7 @@ public class GameApplication {
     }
 
     public String getFiftyFiftyString(){
-        String sting = "FiftyFifty";
-        return sting;
+        return "Fifty Fifty";
     }
 
     public boolean isAskTheAudience() {
@@ -337,12 +351,20 @@ public class GameApplication {
         AskTheAudience = askTheAudience;
     }
 
+    public String getAskTheAudience(){
+        return "Ask The Audience";
+    }
+
     public boolean isPhoneAFriend() {
         return phoneAFriend;
     }
 
     public void setPhoneAFriend(boolean phoneAFriend) {
         this.phoneAFriend = phoneAFriend;
+    }
+
+    public String getPhoneAFriend(){
+        return "Phone A Friend";
     }
 
     public Question getQuestion() {
@@ -373,6 +395,9 @@ public class GameApplication {
         Random random = new Random();
         int size = questionCurrentLevelList.size();
         int randomNum = random.nextInt((size));
+
+        setQuestion(questionCurrentLevelList.get(randomNum));
+
         return questionCurrentLevelList.get(randomNum);
     }
 }
