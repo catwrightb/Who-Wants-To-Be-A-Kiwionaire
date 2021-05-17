@@ -324,6 +324,11 @@ public class GameApplication {
         this.hasFiftyFifty = hasFiftyFifty;
     }
 
+    public String getFiftyFiftyString(){
+        String sting = "FiftyFifty";
+        return sting;
+    }
+
     public boolean isAskTheAudience() {
         return AskTheAudience;
     }

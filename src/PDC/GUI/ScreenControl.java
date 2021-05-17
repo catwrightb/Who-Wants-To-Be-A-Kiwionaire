@@ -149,9 +149,22 @@ public class ScreenControl implements ActionListener{
     }
 
 
+    //this wont work for larger logic to track what life line is used
     public void confirmScreenLogic(ActionEvent e){
         if (e.getSource() == confirmScreen.getYesButton()){
             changeCard(questionPanel.NAME);
+
+            String string = confirmScreen.getCurrentLifeLine();
+
+            if (string.equals("FiftyFifty")){
+                gameApplication.setHasFiftyFifty(false);
+            }
+            else if (string.equals("PhoneFriend")){
+                gameApplication.setPhoneAFriend(false);
+            }
+            else if (string.equals("AskAudience")){
+                gameApplication.setAskTheAudience(false);
+            }
 
         }
         else {
@@ -232,7 +245,7 @@ public class ScreenControl implements ActionListener{
 //                //Close window
 //            }
             String string = "Do you want to use your fifty fifty lifeline?";
-            confirmScreen = new ConfirmScreen(string);
+            confirmScreen = new ConfirmScreen(string, gameApplication.getFiftyFiftyString(), this);
             panelCont.add(confirmScreen, confirmScreen.NAME);
             changeCard(confirmScreen.NAME);
 

@@ -9,16 +9,20 @@ public class ConfirmScreen extends JPanel {
     private JLabel infoText;
     private JButton yesButton;
     private JButton noButton;
+    private String currentLifeLine;
 
-    public ConfirmScreen(String string) {
+    public ConfirmScreen(String string, String lifeLine, ActionListener listener) {
 
         infoText = new JLabel ("");
         yesButton = new JButton ("Yes");
-        //yesButton.addActionListener(listener);
+        yesButton.addActionListener(listener);
         noButton = new JButton ("No");
-       // noButton.addActionListener(listener);
+        noButton.addActionListener(listener);
         infoText.setText(string);
         infoText.setHorizontalTextPosition(JLabel.CENTER);
+
+        currentLifeLine = lifeLine;
+
 
 
         //adjust size and set layout
@@ -48,5 +52,13 @@ public class ConfirmScreen extends JPanel {
 
     public void setNoButton(JButton noButton) {
         this.noButton = noButton;
+    }
+
+    public String getCurrentLifeLine() {
+        return currentLifeLine;
+    }
+
+    public void setCurrentLifeLine(String currentLifeLine) {
+        this.currentLifeLine = currentLifeLine;
     }
 }

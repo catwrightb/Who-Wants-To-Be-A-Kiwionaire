@@ -46,8 +46,9 @@ public class QuestionPanel extends JPanel{
             fiftyFifty.addActionListener(listener);
         }
         else if (!game.isHasFiftyFifty()){
-            fiftyFifty.setOpaque(true);
             fiftyFifty.setEnabled(false);
+            fiftyFifty.setOpaque(false);
+            fiftyFifty.setText("");
         }
 
 
