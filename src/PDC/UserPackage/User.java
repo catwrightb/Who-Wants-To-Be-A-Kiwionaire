@@ -1,7 +1,7 @@
 package PDC.UserPackage;
 
 import PDC.Money;
-import PDC.QuestionPackage.Question;
+import PDC.Question;
 
 import java.io.*;
 import java.util.HashMap;

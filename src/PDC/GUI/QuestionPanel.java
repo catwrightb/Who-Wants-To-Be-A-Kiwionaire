@@ -1,10 +1,9 @@
 package PDC.GUI;
 
 import PDC.GameApplication;
-import PDC.QuestionPackage.Question;
+import PDC.Question;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
@@ -40,13 +39,23 @@ public class QuestionPanel extends JPanel{
         buttonD = new JButton (q.getdChoice());
         question = new JLabel (q.getQuestion());
         //submitButton = new JButton ("Submit");
-        fiftyFifty = new JButton ("50/50");
-        fiftyFifty.addActionListener(listener);
+
+        //fifty logic
+        if (game.isHasFiftyFifty()){
+            fiftyFifty = new JButton ("50/50");
+            fiftyFifty.addActionListener(listener);
+        }
+        else if (!game.isHasFiftyFifty()){
+            fiftyFifty.setOpaque(true);
+            fiftyFifty.setEnabled(false);
+        }
+
+
         phoneFriend = new JButton ("");
         askAudience = new JButton ("");
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (452, 362));
+        setPreferredSize (new Dimension (460, 362));
         setLayout (null);
 
         //add components

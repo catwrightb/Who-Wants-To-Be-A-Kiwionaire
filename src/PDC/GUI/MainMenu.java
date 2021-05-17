@@ -14,7 +14,7 @@ public class MainMenu extends JPanel {
         gameTitle = new JLabel ("Who wants to be a Kiwionaire?");
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (450, 368));
+        setPreferredSize (new Dimension (460, 400));
         setLayout (null);
 
         //add components

@@ -33,7 +33,7 @@ public class NewPlayerScreen extends JPanel {
         submitButton.addActionListener(listener);
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (450, 368));
+        setPreferredSize (new Dimension (460, 368));
         setLayout (null);
 
         //add components

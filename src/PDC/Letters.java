@@ -1,4 +1,4 @@
-package PDC.QuestionPackage;
+package PDC;
 
 public enum Letters {
 

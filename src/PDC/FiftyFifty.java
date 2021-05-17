@@ -1,7 +1,5 @@
 package PDC;
 
-import PDC.QuestionPackage.Question;
-
 public class FiftyFifty {
     boolean canUseFiftyFifty;
 

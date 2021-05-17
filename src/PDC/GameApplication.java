@@ -1,6 +1,5 @@
 package PDC;
 
-import PDC.QuestionPackage.Question;
 import PDC.UserPackage.User;
 
 import java.util.ArrayList;
@@ -8,7 +7,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static PDC.QuestionPackage.Question.readInQuestions;
+import static PDC.Question.readInQuestions;
 
 public class GameApplication {
 

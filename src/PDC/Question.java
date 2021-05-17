@@ -1,5 +1,4 @@
-package PDC.QuestionPackage;
-import PDC.GameApplication;
+package PDC;
 import PDC.UserPackage.User;
 
 import java.io.BufferedReader;

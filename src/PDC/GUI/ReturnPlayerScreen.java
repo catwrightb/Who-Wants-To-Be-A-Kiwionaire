@@ -33,7 +33,7 @@ public class ReturnPlayerScreen extends JPanel {
        // forgotPasswordButton = new JButton ("Forgot Password");
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (450, 368));
+        setPreferredSize (new Dimension (460, 368));
         setLayout (null);
 
         //add components

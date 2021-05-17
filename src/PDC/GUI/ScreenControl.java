@@ -1,8 +1,7 @@
 package PDC.GUI;
 
-import PDC.FiftyFifty;
 import PDC.GameApplication;
-import PDC.QuestionPackage.Question;
+import PDC.Question;
 import PDC.UserPackage.NewUser;
 import PDC.UserPackage.ReturnUser;
 
@@ -23,6 +22,7 @@ public class ScreenControl implements ActionListener{
     QuestionPanel questionPanel;
     int height, width = 400;
     GameApplication gameApplication;
+    ConfirmScreen confirmScreen;
 //    CorrectAnswerPanel correctAnswerPanel;
 //    InCorrectAnswerPanel inCorrectAnswerPanel;
 
@@ -37,11 +37,14 @@ public class ScreenControl implements ActionListener{
         returnPlayerScreen = new ReturnPlayerScreen(this);
         questionPanel = new QuestionPanel(gameApplication, this);
 
+
         panelCont.add(mainMenu, mainMenu.NAME);
         panelCont.add(playerMenu, playerMenu.NAME);
         panelCont.add(newPlayerScreen, newPlayerScreen.NAME);
         panelCont.add(returnPlayerScreen, returnPlayerScreen.NAME);
         panelCont.add(questionPanel, questionPanel.NAME);
+
+
 
 
         cl.show(panelCont, "1");
@@ -55,6 +58,7 @@ public class ScreenControl implements ActionListener{
         returnPlayerScreen.backButton.addActionListener(e -> changeCard(playerMenu.NAME));
         returnPlayerScreen.exitButton.addActionListener(e -> changeCard(mainMenu.NAME));
 
+
         frame.add(panelCont);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -66,16 +70,18 @@ public class ScreenControl implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         // Cast our event source into a Component, grab the components parent JPanel
         Component source = ((Component) e.getSource()).getParent();
+       // Component helper = ((Component) e.getSource());
 
         // Route the event to the correct handler
         if (source instanceof ReturnPlayerScreen) {
             playerSelection(e);
         } else if (source instanceof QuestionPanel) {
             questionEventHandler(e);
+        }
 //        } else if (source instanceof PostQuestion) {
 //            postQuestionEventHandler(e);
-//        } else if (source instanceof LeaderboardView) {
-//            leaderboardViewEventHandler();
+         else if (source instanceof ConfirmScreen) {
+            confirmScreenLogic(e);
         }
     }
 
@@ -143,6 +149,16 @@ public class ScreenControl implements ActionListener{
     }
 
 
+    public void confirmScreenLogic(ActionEvent e){
+        if (e.getSource() == confirmScreen.getYesButton()){
+            changeCard(questionPanel.NAME);
+
+        }
+        else {
+            changeCard(questionPanel.NAME);
+        }
+    }
+
 
     public void playerSelection(ActionEvent e){
         boolean playerCreated = false;
@@ -183,40 +199,48 @@ public class ScreenControl implements ActionListener{
     }
 
     public void questionEventHandler(ActionEvent e){
-        if (e.getSource() == questionPanel.getFiftyFifty()){
-            int answer = JOptionPane.showInternalConfirmDialog(null, "Are you sure you want to use your Fifty Fifty lifeline?", "Confirmation",
-                    JOptionPane.YES_NO_OPTION);
+        if (e.getSource() == questionPanel.getFiftyFifty() && gameApplication.isHasFiftyFifty()){
+//            int answer = JOptionPane.showInternalConfirmDialog(null, "Are you sure you want to use your Fifty Fifty lifeline?", "Confirmation",
+//                    JOptionPane.YES_NO_OPTION);
+//
+//            if (answer == JOptionPane.YES_OPTION){
+//                if (this.gameApplication.isHasFiftyFifty()){
+//
+//                    Question q = this.gameApplication.getQuestion();
+//                    String answerCorrect = q.getCorrectAnswer();
+//
+//                    if (answerCorrect.equalsIgnoreCase("a") ||
+//                            answerCorrect.equalsIgnoreCase("b")){
+//
+//
+//                    }
+//                    else if (answerCorrect.equalsIgnoreCase("c") ||
+//                            answerCorrect.equalsIgnoreCase("d")){
+//
+//
+//                    }
+//
+//
+//
+//                }
+//            }
+//
+//            else if (answer == JOptionPane.NO_OPTION){
+//                //Close window
+//            }
+//            else if (answer == JOptionPane.CLOSED_OPTION){
+//                //Close window
+//            }
+            String string = "Do you want to use your fifty fifty lifeline?";
+            confirmScreen = new ConfirmScreen(string);
+            panelCont.add(confirmScreen, confirmScreen.NAME);
+            changeCard(confirmScreen.NAME);
 
-            if (answer == JOptionPane.YES_OPTION){
-                if (this.gameApplication.isHasFiftyFifty()){
-
-                    Question q = this.gameApplication.getQuestion();
-                    String answerCorrect = q.getCorrectAnswer();
-
-                    if (answerCorrect.equalsIgnoreCase("a") ||
-                            answerCorrect.equalsIgnoreCase("b")){
-
-
-                    }
-                    else if (answerCorrect.equalsIgnoreCase("c") ||
-                            answerCorrect.equalsIgnoreCase("d")){
-
-
-                    }
-
-
-
-                }
-            }
-
-            else if (answer == JOptionPane.NO_OPTION){
-                //Close window
-            }
-            else if (answer == JOptionPane.CLOSED_OPTION){
-                //Close window
-            }
 
         }
+
+
+
 
     }
 

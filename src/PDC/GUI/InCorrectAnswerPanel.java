@@ -15,7 +15,7 @@ public class InCorrectAnswerPanel extends JPanel {
         continueButton = new JButton ("Continue");
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (452, 362));
+        setPreferredSize (new Dimension (460, 362));
         setLayout (null);
 
         //add components
