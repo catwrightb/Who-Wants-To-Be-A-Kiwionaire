@@ -256,6 +256,7 @@ public class ScreenControl implements ActionListener{
     }
 
     public void questionEventHandler(ActionEvent e){
+        boolean checkGameStatus = false;
 
         if (e.getSource() == questionPanel.getFiftyFifty() && currentGame.isHasFiftyFifty()){
             confirmScreen = new ConfirmScreen(currentGame.getFiftyFiftyString(), this);
@@ -274,15 +275,19 @@ public class ScreenControl implements ActionListener{
         }
         else if (e.getSource() == questionPanel.getButtonA()){
             currentGame.verifyAnswer(String.valueOf(Letters.A));
+            checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonB()){
             currentGame.verifyAnswer(String.valueOf(Letters.B));
+            checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonC()){
             currentGame.verifyAnswer(String.valueOf(Letters.C));
+            checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonD()){
             currentGame.verifyAnswer(String.valueOf(Letters.D));
+            checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getExitButton()){
             //TODO what happens when clicked exit during question
@@ -290,18 +295,20 @@ public class ScreenControl implements ActionListener{
             //maybe have confirm Screen ask if they want to quit or not?
         }
 
-        if (currentGame.isRunning()){
-            removeCard(questionPanel);
-            correctAnswerPanel = new CorrectAnswerPanel(this);
-            addCard(correctAnswerPanel, correctAnswerPanel.NAME);
-            changeCard(correctAnswerPanel.NAME);
+        if (checkGameStatus){
+            if (currentGame.isRunning()){
+                removeCard(questionPanel);
+                correctAnswerPanel = new CorrectAnswerPanel(this);
+                addCard(correctAnswerPanel, correctAnswerPanel.NAME);
+                changeCard(correctAnswerPanel.NAME);
 
-        }
-        else if (!currentGame.isRunning()){
-            removeCard(questionPanel);
-            inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), this);
-            addCard(inCorrectAnswerPanel, inCorrectAnswerPanel.NAME);
-            changeCard(inCorrectAnswerPanel.NAME);
+            }
+            else if (!currentGame.isRunning()){
+                removeCard(questionPanel);
+                inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), this);
+                addCard(inCorrectAnswerPanel, inCorrectAnswerPanel.NAME);
+                changeCard(inCorrectAnswerPanel.NAME);
+            }
         }
 
     }
