@@ -11,7 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//TODO still need to make some logic for when user wins the whoel game to end it
 
 public class ScreenControl implements ActionListener{
     JFrame frame = new JFrame();
@@ -120,9 +119,6 @@ public class ScreenControl implements ActionListener{
         }
     }
 
-
-
-    //TODO issue occurring with dying on first question and getting a nullpointer issue when click continue
     public void inCorrectAnswerPanelHandler(ActionEvent e){
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
 
@@ -156,7 +152,6 @@ public class ScreenControl implements ActionListener{
 
             startGame();
         }
-
     }
 
     public void playerMenuHandler(ActionEvent e){
@@ -172,15 +167,12 @@ public class ScreenControl implements ActionListener{
             addCard(returnPlayerScreen, returnPlayerScreen.NAME);
             changeCard(returnPlayerScreen.NAME);
             removeCard(playerMenu);
-
         }
 
         if (e.getSource() == playerMenu.exitButton){
             changeCard(mainMenu.NAME);
             removeCard(playerMenu);
-
         }
-
     }
 
 
@@ -226,7 +218,8 @@ public class ScreenControl implements ActionListener{
             returnUser.retrieveExistingUser(text);
 
             if (returnUser.getUserName() == null) {
-                JOptionPane.showMessageDialog(null, "Your name couldn't be found please try another user name or create a new player.", "INFO",
+                JOptionPane.showMessageDialog(null, "Your name couldn't be found" +
+                                " please try another user name or create a new player.", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
             else {
@@ -242,7 +235,8 @@ public class ScreenControl implements ActionListener{
             String text = newPlayerScreen.userNameInput.getText();
 
             if (!newUser.checkUsernameAvailability(text)) {
-                JOptionPane.showMessageDialog(null, "Name is already in user please choose another user name", "INFO",
+                JOptionPane.showMessageDialog(null, "Sorry that UserName is already in User" +
+                                " or you have entered a invalid UserName", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
            else if (newUser.checkUsernameAvailability(text)) {
@@ -332,10 +326,6 @@ public class ScreenControl implements ActionListener{
 
         }
 
-    }
-
-    public int getLEVELS_TO_WIN() {
-        return LEVELS_TO_WIN;
     }
 
     public void startGame(){

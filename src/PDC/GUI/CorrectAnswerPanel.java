@@ -10,7 +10,6 @@ public class CorrectAnswerPanel extends JPanel {
     private JLabel correctText;
     public JButton continueButton;
 
-    //TODO adjust placement of componets on JLabel
 
     public CorrectAnswerPanel(ActionListener listener) {
         //construct components

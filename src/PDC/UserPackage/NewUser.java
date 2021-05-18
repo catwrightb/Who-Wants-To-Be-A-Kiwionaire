@@ -120,6 +120,10 @@ public class NewUser extends User implements NewUserInterface{
      */
     public boolean checkUsernameAvailability(String userName){
 
+        if (userName.isEmpty()){
+            return false;
+        }
+
         userName = removeSpacesInString(userName);
 
         File file = new File(userDatabase);

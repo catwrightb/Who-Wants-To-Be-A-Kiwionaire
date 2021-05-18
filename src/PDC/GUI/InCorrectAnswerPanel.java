@@ -6,12 +6,11 @@ import javax.swing.*;
 
 public class InCorrectAnswerPanel extends JPanel {
     String NAME = "inCorrectAnswerPanel";
-    private JButton exitButton;
+    //private JButton exitButton;
     private JLabel incorrectText;
     private JButton continueButton;
     private JLabel info;
 
-    //TODO adjust placement of componets on JLabel
 
     public InCorrectAnswerPanel(int round, ActionListener listener) {
         //construct components
