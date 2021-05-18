@@ -82,28 +82,30 @@ public class ScreenControl implements ActionListener{
 
         // Route the event to the correct handler
         if (source instanceof ReturnPlayerScreen || source instanceof NewPlayerScreen) {
-            playerSelection(e);
+            playerSelectionHandler(e);
         } else if (source instanceof QuestionPanel) {
             questionEventHandler(e);
         }
         else if (source instanceof PlayerMenu) {
-            playerMenuAction(e);
+            playerMenuHandler(e);
         }
          else if (source instanceof ConfirmScreen) {
-            confirmScreenLogic(e);
+            confirmScreenHandler(e);
         }
         else if (source instanceof MainMenu) {
-            enterGame(e);
+            enterGameHandler(e);
         }
         else if (source instanceof InCorrectAnswerPanel || source instanceof CorrectAnswerPanel) {
-            answerPanel(e);
+            answerPanelHandler(e);
         }
     }
 
 
     //TODO issue occurring with dying on first question and getting a nullpointer issue when click continue
-    public void answerPanel(ActionEvent e){
+    public void answerPanelHandler(ActionEvent e){
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
+        //correctAnswerPanel = new CorrectAnswerPanel(this);
+        // above code fixes null issue but not good solution
 
         if (e.getSource() == correctAnswerPanel.getContinueButton()){
             questionPanel = new QuestionPanel(currentGame,this);
@@ -111,7 +113,8 @@ public class ScreenControl implements ActionListener{
             changeCard(questionPanel.NAME);
             removeCard(source);
         }
-        else if (e.getSource() == correctAnswerPanel.getExitButton() ||
+
+        if (e.getSource() == correctAnswerPanel.getExitButton() ||
                 e.getSource() == inCorrectAnswerPanel.getContinueButton()){
 
             endGamePanel = new EndGamePanel(currentGame,this);
@@ -129,7 +132,7 @@ public class ScreenControl implements ActionListener{
         }
     }
 
-    public void enterGame(ActionEvent e){
+    public void enterGameHandler(ActionEvent e){
         if (e.getSource() == mainMenu.enterButton){
             playerMenu = new PlayerMenu(this);
             addCard(playerMenu, playerMenu.NAME);
@@ -140,7 +143,7 @@ public class ScreenControl implements ActionListener{
 
     }
 
-    public void playerMenuAction(ActionEvent e){
+    public void playerMenuHandler(ActionEvent e){
         if (e.getSource() == playerMenu.newPlayerButton){
             newPlayerScreen = new NewPlayerScreen(this);
             addCard(newPlayerScreen, newPlayerScreen.NAME);
@@ -166,7 +169,7 @@ public class ScreenControl implements ActionListener{
 
 
     //this wont work for larger logic to track what life line is used
-    public void confirmScreenLogic(ActionEvent e){
+    public void confirmScreenHandler(ActionEvent e){
         if (e.getSource() == confirmScreen.getYesButton()){
             removeCard(questionPanel);
 
@@ -195,7 +198,7 @@ public class ScreenControl implements ActionListener{
     }
 
 
-    public void playerSelection(ActionEvent e){
+    public void playerSelectionHandler(ActionEvent e){
         removeCard(playerMenu);
         boolean playerCreated = false;
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
@@ -216,6 +219,7 @@ public class ScreenControl implements ActionListener{
             }
         }
 
+        //TODO will allow entry on nothing in text box
         if (e.getSource() == newPlayerScreen.submitButton){
 
             NewUser newUser = new NewUser();
