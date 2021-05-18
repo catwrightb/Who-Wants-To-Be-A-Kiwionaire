@@ -2,6 +2,7 @@ package PDC.GUI;
 
 import PDC.GameApplication;
 import PDC.Letters;
+import PDC.Money;
 import PDC.UserPackage.NewUser;
 import PDC.UserPackage.ReturnUser;
 
@@ -29,6 +30,7 @@ public class ScreenControl implements ActionListener{
     CorrectAnswerPanel correctAnswerPanel;
     InCorrectAnswerPanel inCorrectAnswerPanel;
     EndGamePanel endGamePanel;
+    private final int LEVELS_TO_WIN = Money.LEVEL15.getPrizeLevel();
 
     public ScreenControl() {
         frame.setSize(width, height);
@@ -65,10 +67,9 @@ public class ScreenControl implements ActionListener{
     }
 
     public void removeCard(JPanel panel){
-        if (!panel.equals(mainMenu)){
+        if (!panel.equals(mainMenu)){ // mainMenu panel should never be removed
             panelCont.remove(panel);
         }
-
     }
 
     public void addCard(JPanel panel, String name){
@@ -95,17 +96,16 @@ public class ScreenControl implements ActionListener{
         else if (source instanceof MainMenu) {
             enterGameHandler(e);
         }
-        else if (source instanceof InCorrectAnswerPanel || source instanceof CorrectAnswerPanel) {
-            answerPanelHandler(e);
+        else if (source instanceof InCorrectAnswerPanel) {
+            inCorrectAnswerPanelHandler(e);
+        }
+        else if (source instanceof CorrectAnswerPanel){
+            correctAnswerPanelHandler(e);
         }
     }
 
-
-    //TODO issue occurring with dying on first question and getting a nullpointer issue when click continue
-    public void answerPanelHandler(ActionEvent e){
+    public void correctAnswerPanelHandler(ActionEvent e){
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
-        //correctAnswerPanel = new CorrectAnswerPanel(this);
-        // above code fixes null issue but not good solution
 
         if (e.getSource() == correctAnswerPanel.getContinueButton()){
             questionPanel = new QuestionPanel(currentGame,this);
@@ -113,24 +113,40 @@ public class ScreenControl implements ActionListener{
             changeCard(questionPanel.NAME);
             removeCard(source);
         }
-
-        if (e.getSource() == correctAnswerPanel.getExitButton() ||
-                e.getSource() == inCorrectAnswerPanel.getContinueButton()){
-
-            endGamePanel = new EndGamePanel(currentGame,this);
-            addCard(endGamePanel, endGamePanel.NAME);
-            changeCard(endGamePanel.NAME);
-            removeCard(source);
-
-            endGamePanel.getContinueButton().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    changeCard(mainMenu.NAME);
-                    removeCard(endGamePanel);
-                }
-            });
+        else if (e.getSource() == correctAnswerPanel.getExitButton()
+                || (e.getSource() == correctAnswerPanel.continueButton
+                && currentGame.getGameRounds() >= LEVELS_TO_WIN)){
+            endGame(e,source);
         }
     }
+
+
+
+    //TODO issue occurring with dying on first question and getting a nullpointer issue when click continue
+    public void inCorrectAnswerPanelHandler(ActionEvent e){
+        JPanel source = (JPanel) ((Component) e.getSource()).getParent();
+
+        if (e.getSource() == inCorrectAnswerPanel.getContinueButton()){
+            endGame(e,source);
+        }
+    }
+
+    public void endGame(ActionEvent e,JPanel source){
+        endGamePanel = new EndGamePanel(currentGame,this);
+        addCard(endGamePanel, endGamePanel.NAME);
+        changeCard(endGamePanel.NAME);
+        removeCard(source);
+
+        endGamePanel.getContinueButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeCard(mainMenu.NAME);
+                removeCard(endGamePanel);
+            }
+        });
+    }
+
+
 
     public void enterGameHandler(ActionEvent e){
         if (e.getSource() == mainMenu.enterButton){
@@ -300,21 +316,26 @@ public class ScreenControl implements ActionListener{
         }
 
         if (checkGameStatus){
+            removeCard(questionPanel);
+
             if (currentGame.isRunning()){
-                removeCard(questionPanel);
                 correctAnswerPanel = new CorrectAnswerPanel(this);
                 addCard(correctAnswerPanel, correctAnswerPanel.NAME);
                 changeCard(correctAnswerPanel.NAME);
-
             }
-            else if (!currentGame.isRunning()){
-                removeCard(questionPanel);
+
+            if (!currentGame.isRunning()){
                 inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), this);
                 addCard(inCorrectAnswerPanel, inCorrectAnswerPanel.NAME);
                 changeCard(inCorrectAnswerPanel.NAME);
             }
+
         }
 
+    }
+
+    public int getLEVELS_TO_WIN() {
+        return LEVELS_TO_WIN;
     }
 
     public void startGame(){
