@@ -23,31 +23,31 @@ public class QuestionPanel extends JPanel{
 
     public QuestionPanel(GameApplication game, ActionListener listener) {
 
-        Question q = game.getCurrentQuestion();
+        Question currentQuestion = game.getCurrentQuestion();
         exitButton = new JButton ("Exit");
-        question = new JLabel (q.getQuestion());
+        question = new JLabel (currentQuestion.getQuestion());
 
         //buttons A & B
-        if (!q.getaChoice().isEmpty() && !q.getbChoice().isEmpty()){
-            buttonA = new JButton (q.getaChoice());
+        if (!currentQuestion.getaChoice().isEmpty() && !currentQuestion.getbChoice().isEmpty()){
+            buttonA = new JButton (currentQuestion.getaChoice());
             buttonA.addActionListener(listener);
             add (buttonA);
             buttonA.setBounds (65, 215, 140, 35);
 
-            buttonB = new JButton (q.getbChoice());
+            buttonB = new JButton (currentQuestion.getbChoice());
             buttonB.addActionListener(listener);
             add (buttonB);
             buttonB.setBounds (240, 215, 140, 35);
         }
 
         //buttons C & D
-        if (!q.getcChoice().isEmpty() && !q.getdChoice().isEmpty()){
-            buttonC = new JButton (q.getcChoice());
+        if (!currentQuestion.getcChoice().isEmpty() && !currentQuestion.getdChoice().isEmpty()){
+            buttonC = new JButton (currentQuestion.getcChoice());
             buttonC.addActionListener(listener);
             add (buttonC);
             buttonC.setBounds (65, 260, 140, 35);
 
-            buttonD = new JButton (q.getdChoice());
+            buttonD = new JButton (currentQuestion.getdChoice());
             buttonD.addActionListener(listener);
             add (buttonD);
             buttonD.setBounds (240, 260, 140, 35);

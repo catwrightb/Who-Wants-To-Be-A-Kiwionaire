@@ -23,8 +23,8 @@ public class ScreenControl implements ActionListener{
     int height, width = 400;
     GameApplication currentGame;
     ConfirmScreen confirmScreen;
-//    CorrectAnswerPanel correctAnswerPanel;
-//    InCorrectAnswerPanel inCorrectAnswerPanel;
+    CorrectAnswerPanel correctAnswerPanel;
+    InCorrectAnswerPanel inCorrectAnswerPanel;
 
     public ScreenControl() {
         frame.setSize(width, height);
@@ -36,14 +36,14 @@ public class ScreenControl implements ActionListener{
         playerMenu = new PlayerMenu(this);
         newPlayerScreen = new NewPlayerScreen(this);
         returnPlayerScreen = new ReturnPlayerScreen(this);
-        questionPanel = new QuestionPanel(currentGame, this);
+       // questionPanel = new QuestionPanel(currentGame, this);
 
 
         panelCont.add(mainMenu, mainMenu.NAME);
         panelCont.add(playerMenu, playerMenu.NAME);
         panelCont.add(newPlayerScreen, newPlayerScreen.NAME);
         panelCont.add(returnPlayerScreen, returnPlayerScreen.NAME);
-        panelCont.add(questionPanel, questionPanel.NAME);
+       // panelCont.add(questionPanel, questionPanel.NAME);
 
         changeCard(mainMenu.NAME);
         //cl.show(panelCont, mainMenu.NAME);
@@ -92,7 +92,6 @@ public class ScreenControl implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         // Cast our event source into a Component, grab the components parent JPanel
         Component source = ((Component) e.getSource()).getParent();
-       // Component helper = ((Component) e.getSource());
 
         // Route the event to the correct handler
         if (source instanceof ReturnPlayerScreen || source instanceof NewPlayerScreen) {
@@ -109,8 +108,29 @@ public class ScreenControl implements ActionListener{
         else if (source instanceof MainMenu) {
             enterGame(e);
         }
+        else if (source instanceof InCorrectAnswerPanel || source instanceof CorrectAnswerPanel) {
+            answerPanel(e);
+        }
     }
 
+    public void answerPanel(ActionEvent e){
+        JPanel source = (JPanel) ((Component) e.getSource()).getParent();
+
+        if (e.getSource() == correctAnswerPanel.getContinueButton()){
+            questionPanel = new QuestionPanel(currentGame,this);
+            addCard(questionPanel, questionPanel.NAME);
+            changeCard(questionPanel.NAME);
+            removeCard(source);
+        }
+        else if (e.getSource() == correctAnswerPanel.getExitButton()){
+
+        }
+        else if (e.getSource() == inCorrectAnswerPanel.getContinueButton()){
+            changeCard(mainMenu.NAME);
+            removeCard(source);
+        }
+
+    }
 
     public void enterGame(ActionEvent e){
         if (e.getSource() == mainMenu.enterButton){
@@ -230,6 +250,8 @@ public class ScreenControl implements ActionListener{
         }
 
         if (playerCreated){
+            questionPanel = new QuestionPanel(currentGame, this);
+            addCard(questionPanel, questionPanel.NAME);
             changeCard(questionPanel.NAME);
             removeCard(playerMenu);
             removeCard(source);
@@ -270,12 +292,24 @@ public class ScreenControl implements ActionListener{
             //maybe have confirm Screen ask if they want to quit or not?
         }
 
+        if (currentGame.isRunning()){
+            removeCard(questionPanel);
+            correctAnswerPanel = new CorrectAnswerPanel(this);
+            addCard(correctAnswerPanel, correctAnswerPanel.NAME);
+            changeCard(correctAnswerPanel.NAME);
+
+        }
+        else if (!currentGame.isRunning()){
+            removeCard(questionPanel);
+            inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), this);
+            addCard(inCorrectAnswerPanel, inCorrectAnswerPanel.NAME);
+            changeCard(inCorrectAnswerPanel.NAME);
+        }
+
     }
 
     public void startGame(){
         currentGame = new GameApplication();
-
-
 
     }
 

@@ -238,7 +238,13 @@ public class GameApplication {
         this.currentQuestion = selectQuestion();
     }
 
+    public boolean isRunning() {
+        return running;
+    }
 
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
 
     public void setGameUser(User user) {
             gameUser = user;
