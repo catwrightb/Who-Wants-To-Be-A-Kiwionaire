@@ -10,6 +10,8 @@ public class CorrectAnswerPanel extends JPanel {
     private JLabel correctText;
     public JButton continueButton;
 
+    //TODO adjust placement of componets on JLabel
+
     public CorrectAnswerPanel(ActionListener listener) {
         //construct components
         exitButton = new JButton ("Exit");
@@ -30,8 +32,8 @@ public class CorrectAnswerPanel extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
         exitButton.setBounds (545, 15, 80, 35);
-        correctText.setBounds (190, 125, 70, 55);
-        continueButton.setBounds (170, 270, 100, 25);
+        correctText.setBounds (170, 280, 325, 30);
+        continueButton.setBounds (270, 310, 100, 25);
     }
 
     public JButton getExitButton() {

@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//TODO still need to make some logic for when user wins the whoel game to end it
+
 public class ScreenControl implements ActionListener{
     JFrame frame = new JFrame();
     JPanel panelCont = new JPanel();
@@ -98,6 +100,8 @@ public class ScreenControl implements ActionListener{
         }
     }
 
+
+    //TODO issue occurring with dying on first question and getting a nullpointer issue when click continue
     public void answerPanel(ActionEvent e){
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
 
@@ -281,6 +285,7 @@ public class ScreenControl implements ActionListener{
             currentGame.verifyAnswer(String.valueOf(Letters.D));
         }
         else if (e.getSource() == questionPanel.getExitButton()){
+            //TODO what happens when clicked exit during question
             //exit game
             //maybe have confirm Screen ask if they want to quit or not?
         }
