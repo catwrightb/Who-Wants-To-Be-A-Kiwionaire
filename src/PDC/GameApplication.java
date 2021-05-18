@@ -14,7 +14,7 @@ public class GameApplication {
     private String userAnswer;
     private boolean running;
     public ArrayList<Question> questionArrayList = new ArrayList<>();
-    public int gameRounds;
+    private int gameRounds;
     public Question currentQuestion;
 
     //will need to store lifelines
@@ -40,7 +40,6 @@ public class GameApplication {
 
         //Game running
         this.running = true;
-
     }
 
 
@@ -65,65 +64,15 @@ public class GameApplication {
      }
 
 
+    public void verifyAnswer(String playerAnswer){
 
-    /**
-     *
-     * Main game method that features all functional code to run the game.
-     */
-    public void playGame(){
-
-        //reads in array of questions
-        questionArrayList = readInQuestions();
-
-        //main gameplay method within a do while loop till user loses or wins game
-        //prompting the loop to end
-        do {
-            gamePlayMethod(gameUser);
-        }while (running);
-
-        // Close game wide scanner
-        //scan.close();
-    }
-
-    /**
-     * method is used to control the gameplay of the game post instructions
-     * including selecting and print random correct level questions,
-     * verifying user keyboard input, checking if input is correct, and
-     * progressing game.
-     *
-     * @param gameUser used to pass user into other methods and update score
-     */
-    public void gamePlayMethod(User gameUser){
-
-        try{
-            if (gameRounds <= Money.LEVEL15.getPrizeLevel()){
-
-                Question p = askQuestion(questionArrayList);
-                System.out.print("\n"+p.toString());
-
-                //scanPlayerInput(scan);
-
-                if (running) {
-                    //boolean wasCorrect = p.verifyAnswer(p, userAnswer, gameUser);
-//                    if (wasCorrect){
-//                        gameRounds++;
-//                    }
-//                    else {
-//                        running = false;
-//                    }
-                }
-                if (!running){
-                    gameUser.updateScoreFile();
-                    //Goodbye(gameUser);
-                }
-            }
-            else {
-                running = false;
-                gameUser.updateScoreFile();
-                //Goodbye(gameUser);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (getCurrentQuestion().getCorrectAnswer().equalsIgnoreCase(playerAnswer)){
+            increaseGameRound();
+            gameUser.upDateScore(running, getGameRounds());
+            setCurrentQuestion();
+        }
+        else {
+            running = false;
         }
 
     }
@@ -238,6 +187,9 @@ public class GameApplication {
         return questionCurrentLevelList.get(randomNum);
     }
 
+    public void increaseGameRound(){
+        gameRounds++;
+    }
 
     public boolean isHasFiftyFifty() {
         return hasFiftyFifty;
@@ -285,6 +237,8 @@ public class GameApplication {
     public void setCurrentQuestion() {
         this.currentQuestion = selectQuestion();
     }
+
+
 
     public void setGameUser(User user) {
             gameUser = user;

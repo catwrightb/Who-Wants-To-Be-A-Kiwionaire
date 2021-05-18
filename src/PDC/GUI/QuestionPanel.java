@@ -89,8 +89,6 @@ public class QuestionPanel extends JPanel{
         exitButton.setBounds (350, 15, 80, 30);
         question.setBounds (45, 55, 365, 85);
 
-
-
         this.setVisible(true);
 
     }

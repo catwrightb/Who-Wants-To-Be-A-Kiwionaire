@@ -1,6 +1,7 @@
 package PDC.GUI;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MainMenu extends JPanel {
@@ -8,9 +9,10 @@ public class MainMenu extends JPanel {
     JButton enterButton;
     private JLabel gameTitle;
 
-    public MainMenu() {
+    public MainMenu(ActionListener listener) {
         //construct components
         enterButton = new JButton ("Enter Game");
+        enterButton.addActionListener(listener);
         gameTitle = new JLabel ("Who wants to be a Kiwionaire?");
 
         //adjust size and set layout

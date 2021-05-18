@@ -30,6 +30,8 @@ public class NewPlayerScreen extends JPanel {
         instructionsText = new JLabel ("Please enter a unique UserName");
         jcomp9 = new JLabel ("You cannot use spaces in your UserName :( ");
 
+        exitButton.addActionListener(listener);
+        backButton.addActionListener(listener);
         submitButton.addActionListener(listener);
 
         //adjust size and set layout

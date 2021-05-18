@@ -39,14 +39,13 @@ public class User {
      * @param correct boolean passed in to know if answer was true or false
      * @param question question to gather score to update player score
      */
-    public void upDateScore(boolean correct, Question question){
+    public void upDateScore(boolean correct, int gameRoundWon){
         if (correct){
-            int level = question.getLevel();
 
             Money[] money = Money.values();
 
             for (Money value : money) {
-                if (level == value.getPrizeLevel()) {
+                if (gameRoundWon == value.getPrizeLevel()) {
                     this.score = value.getPrizeMoney();
                 }
             }

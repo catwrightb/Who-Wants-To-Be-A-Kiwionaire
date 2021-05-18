@@ -1,6 +1,7 @@
 package PDC.GUI;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class PlayerMenu extends JPanel {
@@ -10,11 +11,15 @@ public class PlayerMenu extends JPanel {
      JButton newPlayerButton;
      JButton exitButton;
 
-    public PlayerMenu() {
+    public PlayerMenu(ActionListener listener) {
         //construct components
         returnPlayerButton = new JButton ("Returning Player");
         newPlayerButton = new JButton ("New Player");
         exitButton = new JButton ("Exit");
+
+        returnPlayerButton.addActionListener(listener);
+        newPlayerButton.addActionListener(listener);
+        exitButton.addActionListener(listener);
 
         //adjust size and set layout
         setPreferredSize (new Dimension (460, 368));

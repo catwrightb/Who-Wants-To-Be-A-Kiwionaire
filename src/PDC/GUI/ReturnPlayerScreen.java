@@ -47,6 +47,8 @@ public class ReturnPlayerScreen extends JPanel {
         add (instructionsText);
         //add (forgotPasswordButton);
 
+        exitButton.addActionListener(listener);
+        backButton.addActionListener(listener);
         submitButton.addActionListener(listener);
 
         //set component bounds (only needed by Absolute Positioning)

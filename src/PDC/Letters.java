@@ -12,12 +12,12 @@ public enum Letters {
     C,
     D;
 
-    @Override
-    public String toString() {
-        String letters = A.name();
-        letters += B.name();
-        letters+= C.name();
-        letters+= D.name();
-        return letters;
-    }
+//    @Override
+//    public String toString() {
+//        String letters = A.name();
+//        letters += B.name();
+//        letters+= C.name();
+//        letters+= D.name();
+//        return letters;
+//    }
 }
