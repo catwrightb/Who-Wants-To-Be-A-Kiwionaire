@@ -29,7 +29,7 @@ public class CorrectAnswerPanel extends JPanel {
         add (continueButton);
 
         //set component bounds (only needed by Absolute Positioning)
-        exitButton.setBounds (350, 15, 80, 30);
+        exitButton.setBounds (545, 15, 80, 35);
         correctText.setBounds (190, 125, 70, 55);
         continueButton.setBounds (170, 270, 100, 25);
     }

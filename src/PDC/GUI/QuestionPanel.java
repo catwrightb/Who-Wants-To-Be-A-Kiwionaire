@@ -16,6 +16,7 @@ public class QuestionPanel extends JPanel{
     private JButton buttonC;
     private JButton buttonD;
     private JLabel question;
+    private JLabel stats;
 
     private JButton fiftyFifty;
     private JButton phoneFriend;
@@ -26,18 +27,20 @@ public class QuestionPanel extends JPanel{
         Question currentQuestion = game.getCurrentQuestion();
         exitButton = new JButton ("Exit");
         question = new JLabel (currentQuestion.getQuestion());
+        stats = new JLabel("Score: " +game.getGameUser().getScore()
+                + " | Question: " +game.getGameRounds());
 
         //buttons A & B
         if (!currentQuestion.getaChoice().isEmpty() && !currentQuestion.getbChoice().isEmpty()){
             buttonA = new JButton (currentQuestion.getaChoice());
             buttonA.addActionListener(listener);
             add (buttonA);
-            buttonA.setBounds (65, 215, 140, 35);
+            buttonA.setBounds (130, 270, 165, 35);
 
             buttonB = new JButton (currentQuestion.getbChoice());
             buttonB.addActionListener(listener);
             add (buttonB);
-            buttonB.setBounds (240, 215, 140, 35);
+            buttonB.setBounds (365, 270, 165, 35);
         }
 
         //buttons C & D
@@ -45,12 +48,12 @@ public class QuestionPanel extends JPanel{
             buttonC = new JButton (currentQuestion.getcChoice());
             buttonC.addActionListener(listener);
             add (buttonC);
-            buttonC.setBounds (65, 260, 140, 35);
+            buttonC.setBounds (130, 335, 165, 35);
 
             buttonD = new JButton (currentQuestion.getdChoice());
             buttonD.addActionListener(listener);
             add (buttonD);
-            buttonD.setBounds (240, 260, 140, 35);
+            buttonD.setBounds (365, 335, 165, 35);
         }
 
 
@@ -59,21 +62,21 @@ public class QuestionPanel extends JPanel{
             fiftyFifty = new JButton ("50/50");
             fiftyFifty.addActionListener(listener);
             this.add(fiftyFifty);
-            fiftyFifty.setBounds (70, 150, 60, 40);
+            fiftyFifty.setBounds (130, 200, 60, 40);
         }
 
         if (game.isAskTheAudience()){
             askAudience = new JButton ("");
             askAudience.addActionListener(listener);
             this.add(askAudience);
-            askAudience.setBounds (315, 150, 60, 40);
+            askAudience.setBounds (290, 200, 60, 40);
         }
 
         if (game.isPhoneAFriend()){
             phoneFriend = new JButton ("");
             phoneFriend.addActionListener(listener);
             this.add(phoneFriend);
-            phoneFriend.setBounds (190, 150, 60, 40);
+            phoneFriend.setBounds (460, 200, 60, 40);
         }
 
 
@@ -84,10 +87,12 @@ public class QuestionPanel extends JPanel{
         //add components
         add (exitButton);
         add (question);
+        add(stats);
 
         //set component bounds (only needed by Absolute Positioning)
-        exitButton.setBounds (350, 15, 80, 30);
-        question.setBounds (45, 55, 365, 85);
+        exitButton.setBounds (545, 15, 80, 35);
+        question.setBounds (50, 90, 565, 80);
+        stats.setBounds(35, 15, 470, 35);
 
         this.setVisible(true);
 

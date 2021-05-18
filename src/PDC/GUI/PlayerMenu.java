@@ -31,9 +31,9 @@ public class PlayerMenu extends JPanel {
         add (exitButton);
 
         //set component bounds (only needed by Absolute Positioning)
-        returnPlayerButton.setBounds (235, 145, 165, 35);
-        newPlayerButton.setBounds (45, 145, 165, 35);
-        exitButton.setBounds (360, 5, 80, 35);
+        returnPlayerButton.setBounds (355, 160, 165, 35);
+        newPlayerButton.setBounds (125, 160, 165, 35);
+        exitButton.setBounds (545, 15, 80, 35);
     }
 
 }

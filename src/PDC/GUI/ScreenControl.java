@@ -20,15 +20,16 @@ public class ScreenControl implements ActionListener{
     NewPlayerScreen newPlayerScreen;
     ReturnPlayerScreen returnPlayerScreen;
     QuestionPanel questionPanel;
-    int height, width = 400;
+    int height = 450;
+    int width = 650;
     GameApplication currentGame;
     ConfirmScreen confirmScreen;
     CorrectAnswerPanel correctAnswerPanel;
     InCorrectAnswerPanel inCorrectAnswerPanel;
+    EndGamePanel endGamePanel;
 
     public ScreenControl() {
         frame.setSize(width, height);
-        //currentGame = new GameApplication();
 
         panelCont.setLayout(cl);
 
@@ -38,7 +39,6 @@ public class ScreenControl implements ActionListener{
         returnPlayerScreen = new ReturnPlayerScreen(this);
        // questionPanel = new QuestionPanel(currentGame, this);
 
-
         panelCont.add(mainMenu, mainMenu.NAME);
         panelCont.add(playerMenu, playerMenu.NAME);
         panelCont.add(newPlayerScreen, newPlayerScreen.NAME);
@@ -46,25 +46,11 @@ public class ScreenControl implements ActionListener{
        // panelCont.add(questionPanel, questionPanel.NAME);
 
         changeCard(mainMenu.NAME);
-        //cl.show(panelCont, mainMenu.NAME);
-
-       // mainMenu.enterButton.addActionListener(e -> changeCard(playerMenu.NAME));
-
-//        playerMenu.exitButton.addActionListener(e -> changeCard(mainMenu.NAME));
-//        playerMenu.newPlayerButton.addActionListener(e -> changeCard(newPlayerScreen.NAME));
-//        playerMenu.returnPlayerButton.addActionListener(e -> changeCard(returnPlayerScreen.NAME));
-//
-//        newPlayerScreen.backButton.addActionListener(e -> changeCard(playerMenu.NAME));
-//        newPlayerScreen.exitButton.addActionListener(e -> changeCard(mainMenu.NAME));
-//
-//        returnPlayerScreen.backButton.addActionListener(e -> changeCard(playerMenu.NAME));
-//        returnPlayerScreen.exitButton.addActionListener(e -> changeCard(mainMenu.NAME));
 
         frame.add(panelCont);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
     }
 
     /**
@@ -86,7 +72,6 @@ public class ScreenControl implements ActionListener{
     public void addCard(JPanel panel, String name){
         panelCont.add(panel, name);
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -122,14 +107,22 @@ public class ScreenControl implements ActionListener{
             changeCard(questionPanel.NAME);
             removeCard(source);
         }
-        else if (e.getSource() == correctAnswerPanel.getExitButton()){
+        else if (e.getSource() == correctAnswerPanel.getExitButton() ||
+                e.getSource() == inCorrectAnswerPanel.getContinueButton()){
 
-        }
-        else if (e.getSource() == inCorrectAnswerPanel.getContinueButton()){
-            changeCard(mainMenu.NAME);
+            endGamePanel = new EndGamePanel(currentGame,this);
+            addCard(endGamePanel, endGamePanel.NAME);
+            changeCard(endGamePanel.NAME);
             removeCard(source);
-        }
 
+            endGamePanel.getContinueButton().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    changeCard(mainMenu.NAME);
+                    removeCard(endGamePanel);
+                }
+            });
+        }
     }
 
     public void enterGame(ActionEvent e){

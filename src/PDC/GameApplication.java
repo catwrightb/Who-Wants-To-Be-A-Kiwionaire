@@ -152,7 +152,7 @@ public class GameApplication {
 //     * @param gameUser used to print the user name and score in message
 //     */
 //    public void Goodbye(User gameUser){
-//        if (gameRounds >= Money.LEVEL15.getPrizeLevel()){
+//        if (gameRounds ameRounds >= Money.LEVEL15.getPrizeLevel()){
 //            System.out.println("\n:~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:");
 //            System.out.println(" Congratulations! You Have Won \"Who Wants to be a Kiwionaire?\"!");
 //            System.out.println(" "+gameUser.getUserName() +" your final score is "+ gameUser.getScore()+ "!");

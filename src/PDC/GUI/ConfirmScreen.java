@@ -31,9 +31,9 @@ public class ConfirmScreen extends JPanel {
         add (yesButton);
         add (noButton);
 
-        infoText.setBounds (90, 65, 345, 85);
-        yesButton.setBounds (110, 165, 100, 25);
-        noButton.setBounds (260, 165, 100, 25);
+        infoText.setBounds (175, 160, 390, 25);
+        yesButton.setBounds (140, 230, 165, 35);
+        noButton.setBounds (365, 230, 165, 35);
     }
 
     public JButton getYesButton() {

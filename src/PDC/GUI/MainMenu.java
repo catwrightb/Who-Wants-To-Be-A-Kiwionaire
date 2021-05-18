@@ -16,7 +16,7 @@ public class MainMenu extends JPanel {
         gameTitle = new JLabel ("Who wants to be a Kiwionaire?");
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (460, 400));
+        setPreferredSize (new Dimension (650, 450));
         setLayout (null);
 
         //add components
@@ -24,8 +24,8 @@ public class MainMenu extends JPanel {
         add (gameTitle);
 
         //set component bounds (only needed by Absolute Positioning)
-        enterButton.setBounds (145, 315, 125, 30);
-        gameTitle.setBounds (130, 95, 275, 90);
+        enterButton.setBounds (260, 235, 100, 25);
+        gameTitle.setBounds (215, 135, 220, 30);
     }
 
 }

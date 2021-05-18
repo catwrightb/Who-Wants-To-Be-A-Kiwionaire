@@ -23,7 +23,7 @@ public class ReturnPlayerScreen extends JPanel {
     public ReturnPlayerScreen(ActionListener listener) {
         //construct components
         //passwordInput = new JPasswordField (5);
-        userNameLabel = new JLabel ("User Name");
+        userNameLabel = new JLabel ("UserName:");
         userNameInput = new JTextField (5);
         //passwordLabel = new JLabel ("Password");
         submitButton = new JButton ("Submit");
@@ -53,13 +53,13 @@ public class ReturnPlayerScreen extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
        // passwordInput.setBounds (160, 155, 160, 25);
-        userNameLabel.setBounds (85, 120, 100, 25);
-        userNameInput.setBounds (160, 125, 160, 20);
+        userNameLabel.setBounds (190, 185, 100, 25);
+        userNameInput.setBounds (270, 185, 180, 25);
         //passwordLabel.setBounds (85, 155, 100, 25);
-        submitButton.setBounds (180, 205, 100, 25);
-        exitButton.setBounds (350, 15, 80, 30);
-        backButton.setBounds (25, 15, 80, 30);
-        instructionsText.setBounds (70, 55, 320, 45);
+        submitButton.setBounds (260, 235, 100, 25);
+        exitButton.setBounds (545, 15, 80, 35);
+        backButton.setBounds (25, 15, 80, 35);
+        instructionsText.setBounds (210, 135, 390, 25);
         //forgotPasswordButton.setBounds (155, 245, 150, 25);
     }
 
