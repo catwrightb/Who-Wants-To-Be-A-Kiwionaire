@@ -63,6 +63,18 @@ public class GameApplication {
 
      }
 
+     //TODO complete askAudeince
+     public void useAskAudience(){
+         Question currentQ = this.getCurrentQuestion();
+
+     }
+
+    //TODO complete phoneAFriend
+    public void usePhoneAFriend(){
+        Question currentQ = this.getCurrentQuestion();
+
+    }
+
 
     public void verifyAnswer(String playerAnswer){
 
