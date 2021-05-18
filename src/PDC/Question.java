@@ -125,13 +125,13 @@ public class Question {
      * @param playerAnswer scanned user keyboard input
      * @return boolean returns if answer was correct or not
      */
-    public boolean verifyUserAnswer(Question question, String playerAnswer, User gameUser){
+    public boolean verifyAnswer(Question question, String buttonSelected){
         String correctAnswer = question.getCorrectAnswer();
 
-        if (correctAnswer.equalsIgnoreCase(playerAnswer)){
+        if (correctAnswer.equalsIgnoreCase(buttonSelected)){
             System.out.println("Correct Answer!");
-            gameUser.upDateScore(true, question);
-            System.out.println("~Your current score is $" + gameUser.getScore()+"~");
+           // gameUser.upDateScore(true, question);
+           // System.out.println("~Your current score is $" + gameUser.getScore()+"~");
             return true;
         }
         else{

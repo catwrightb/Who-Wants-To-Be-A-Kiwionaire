@@ -27,6 +27,7 @@ public class ScreenControl implements ActionListener{
 
     public ScreenControl() {
         frame.setSize(width, height);
+        currentGame = new GameApplication();
 
         panelCont.setLayout(cl);
         mainMenu = new MainMenu();
@@ -100,59 +101,6 @@ public class ScreenControl implements ActionListener{
     }
 
 
-//    //handling the checking of game answer
-//    private void questionViewEventHandler(ActionEvent e) {
-//        boolean correctAnswer = false;
-//        boolean questionAnswered = false;
-//
-//        if (e.getSource() == questionPanel.getButtonA()) {
-//            correctAnswer = this.gameApplication.;
-//            questionAnswered = true;
-//        } else if (e.getSource() == questionPanel.getButtonB()) {
-//            correctAnswer = this.currentGame.getCurrentRound().checkAnswer(Round.CHOICE_B);
-//            questionAnswered = true;
-//        } else if (e.getSource() == questionPanel.getButtonC()) {
-//            correctAnswer = this.currentGame.getCurrentRound().checkAnswer(Round.CHOICE_C);
-//            questionAnswered = true;
-//        } else if (e.getSource() == questionPanel.getButtonD()) {
-//            correctAnswer = this.currentGame.getCurrentRound().checkAnswer(Round.CHOICE_D);
-//            questionAnswered = true;
-////        } else if (e.getSource() == this.currentQuestionView.getBtn5050()) {
-////            currentGame.useFiftyFifty();
-////            currentQuestionView = new QuestionView(currentGame, this);
-////            rootPanel.switchToCard(currentQuestionView);
-//////            SoundView.playSound(SoundView.FIFTY_SOUND);
-////        } else if (e.getSource() == currentQuestionView.getBtnSwitch()) {
-////            currentGame.useSwitchQuestion();
-////            currentQuestionView = new QuestionView(currentGame, this);
-////            rootPanel.switchToCard(currentQuestionView);
-//////            SoundView.playSound(SoundView.SWITCH_SOUND);
-////        }  else if (e.getSource() == currentQuestionView.getBtnAsk()) {
-////            AskTheAudience ask = currentGame.useAskTheAudience();
-////            currentQuestionView = new AskTheAudienceView(currentGame, ask, this);
-////            rootPanel.switchToCard(currentQuestionView);
-//////            SoundView.playSound(SoundView.ASK_SOUND);
-//        } else if (e.getSource() == questionPanel.getExitButton()) {
-//
-////            currentGame.finishGame();
-////            currentPostQuestion = new PostQuestion(currentGame, this);
-////            rootPanel.switchToCard(currentPostQuestion);
-//        }
-//
-//        if (questionAnswered) {
-//            if (correctAnswer) {
-//                currentGame.correctAnswer();
-//            } else {
-//                currentGame.incorrectAnswer();
-//            }
-//
-//            //No matter the outcome generate a new PostQuestion view from the current game and show it
-//            this.currentPostQuestion = new PostQuestion(currentGame, this);
-//            rootPanel.switchToCard(currentPostQuestion);
-//        }
-//    }
-
-
     //this wont work for larger logic to track what life line is used
     public void confirmScreenLogic(ActionEvent e){
         if (e.getSource() == confirmScreen.getYesButton()){
@@ -222,6 +170,7 @@ public class ScreenControl implements ActionListener{
     }
 
     public void questionEventHandler(ActionEvent e){
+
         if (e.getSource() == questionPanel.getFiftyFifty() && currentGame.isHasFiftyFifty()){
             confirmScreen = new ConfirmScreen(currentGame.getFiftyFiftyString(), this);
             panelCont.add(confirmScreen, confirmScreen.NAME);
@@ -243,7 +192,7 @@ public class ScreenControl implements ActionListener{
         else if (e.getSource() == questionPanel.getButtonB()){
 
         }
-        else if (e.getSource() == questionPanel.getButtonB()){
+        else if (e.getSource() == questionPanel.getButtonC()){
 
         }
         else if (e.getSource() == questionPanel.getButtonD()){
@@ -254,13 +203,10 @@ public class ScreenControl implements ActionListener{
             //maybe have confirm Screen ask if they want to quit or not?
         }
 
-
-
-
     }
 
     public void startGame(){
-        currentGame = new GameApplication();
+
 
 
     }

@@ -104,13 +104,13 @@ public class GameApplication {
                 //scanPlayerInput(scan);
 
                 if (running) {
-                    boolean wasCorrect = p.verifyUserAnswer(p, userAnswer, gameUser);
-                    if (wasCorrect){
-                        gameRounds++;
-                    }
-                    else {
-                        running = false;
-                    }
+                    //boolean wasCorrect = p.verifyAnswer(p, userAnswer, gameUser);
+//                    if (wasCorrect){
+//                        gameRounds++;
+//                    }
+//                    else {
+//                        running = false;
+//                    }
                 }
                 if (!running){
                     gameUser.updateScoreFile();
@@ -174,116 +174,6 @@ public class GameApplication {
     }
 
 
-
-//    /**
-//     * Scans player keyboard input to to verify input is correctly responded to
-//     * or asked user to enter new input
-//     *
-//     * @param scan used to scan keyboard input
-//     */
-//    public void scanPlayerInput(Scanner scan){
-//        boolean stop = false;
-//
-//        do {
-//            try{
-//                String answer = scan.nextLine();
-//                answer = checkInputForSpecialChars(answer);
-//
-//                if (answer.equals("X") || answer.equals("x")){
-//                    stop = true;
-//                    run = false;
-//                    break;
-//                }
-//                else if (answer.equalsIgnoreCase("A") || answer.equalsIgnoreCase("B") ||
-//                        answer.equalsIgnoreCase("C") || answer.equalsIgnoreCase("D") ){
-//
-//                    userAnswer = answer;
-//                    stop = true;
-//                    break;
-//                }
-//                //Life lines commented out for now
-////                if (answer.equals("1") || answer.endsWith("2")){
-////                    //call to lifelineMethod
-////                    stop = true;
-////                    break;
-////                }
-//                else {
-//                    throw new NumberFormatException();
-//                }
-//
-//            } catch (InputMismatchException e) {
-//                e.printStackTrace();
-//            }
-//            catch (NumberFormatException e){
-//                System.out.println("Please enter a valid answer option 'A, B, C, D'," +
-//                        //"\nOr to use a lifeline enter (1 or 2), " +
-//                        "\nOr to quit the game enter 'X'.");
-//
-//            }
-//        }while (!stop);
-//
-//    }
-
-
-//    /**
-//     * playerTypeScan method asks the user if they are a new or returning user. Based on the
-//     * players response the application will then create a NewUser or will load data about
-//     * a returning user.
-//     *
-//     * @return ReturnUser - reload all the user's previous progress, NewUser - if the user does not currently exist within the saved file
-//     */
-//    public static User playerTypeScan(){
-//        boolean loop = true;
-//
-//        while (loop){
-//            Scanner scanner = new Scanner(System.in);
-//            System.out.println("Are you a new (N) or returning player (R)?");
-//            String user = scanner.nextLine();
-//            user = checkInputForSpecialChars(user);
-//
-//            if (user.equalsIgnoreCase("R")){
-//                return returnUserMethod();
-//            }
-//            if (user.equalsIgnoreCase("N")){
-//                return new NewUser();
-//            }
-//            else {
-//                System.out.println("\nSorry that's not a valid choice, try again.");
-//            }
-//        }
-//
-//        return null;
-//    }
-
-
-//    /**
-//     * returnUserMethod will create a new Return user & prompt the player for their username,
-//     * which will then retrieve the user's existing settings & return that to the game application.
-//     *
-//     * @return returnUser
-//     */
-//    public static User returnUserMethod(){
-//        ReturnUser returnUser = new ReturnUser();
-//        String name = returnUser.scanReturnUserName();
-//        returnUser.retrieveExistingUser(name);
-//
-//        if (returnUser.getUserName() != null){
-//            System.out.println("\nWelcome back "+ returnUser.getUserName() +", " +
-//                    "last time you played your final score was $"+returnUser.getScore()+".");
-//
-//            if (returnUser.getScore() >= Money.LEVEL15.getPrizeMoney()){
-//                System.out.println("Let's see if you can WIN it all again!");
-//            }
-//            else {
-//                System.out.println("Let's see if you can beat it this game!");
-//            }
-//
-//        }
-//
-//        return returnUser;
-//    }
-
-
 //    /**
 //     * welcomeMessage prints out the first message a user sees when running the application.
 //     */
@@ -343,7 +233,7 @@ public class GameApplication {
         int size = questionCurrentLevelList.size();
         int randomNum = random.nextInt((size));
 
-        setCurrentQuestion(questionCurrentLevelList.get(randomNum));
+       // setCurrentQuestion(questionCurrentLevelList.get(randomNum));
 
         return questionCurrentLevelList.get(randomNum);
     }
@@ -386,11 +276,14 @@ public class GameApplication {
     }
 
     public Question getCurrentQuestion() {
+        if (currentQuestion == null){
+            setCurrentQuestion();
+        }
         return currentQuestion;
     }
 
-    public void setCurrentQuestion(Question currentQuestion) {
-        this.currentQuestion = currentQuestion;
+    public void setCurrentQuestion() {
+        this.currentQuestion = selectQuestion();
     }
 
     public void setGameUser(User user) {
