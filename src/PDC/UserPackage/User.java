@@ -39,8 +39,7 @@ public class User {
      * @param correct boolean passed in to know if answer was true or false
      * @param question question to gather score to update player score
      */
-    public void upDateScore(boolean correct, int gameRoundWon){
-        if (correct){
+    public void upDateScore( int gameRoundWon){
 
             Money[] money = Money.values();
 
@@ -49,7 +48,7 @@ public class User {
                     this.score = value.getPrizeMoney();
                 }
             }
-        }
+
     }
 
     public void updateScoreFile(){

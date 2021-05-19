@@ -29,7 +29,7 @@ public class ScreenControl implements ActionListener{
     CorrectAnswerPanel correctAnswerPanel;
     InCorrectAnswerPanel inCorrectAnswerPanel;
     EndGamePanel endGamePanel;
-    private final int LEVELS_TO_WIN = Money.LEVEL15.getPrizeLevel();
+    private final int LEVELS_TO_WIN = Money.LEVEL15.getPrizeLevel()+1;
 
     public ScreenControl() {
         frame.setSize(width, height);
@@ -106,16 +106,17 @@ public class ScreenControl implements ActionListener{
     public void correctAnswerPanelHandler(ActionEvent e){
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
 
-        if (e.getSource() == correctAnswerPanel.getContinueButton()){
+        if (e.getSource() == correctAnswerPanel.getContinueButton() && !currentGame.isGameWon()){
             questionPanel = new QuestionPanel(currentGame,this);
             addCard(questionPanel, questionPanel.NAME);
             changeCard(questionPanel.NAME);
             removeCard(source);
         }
-        else if (e.getSource() == correctAnswerPanel.getExitButton()
-                || (e.getSource() == correctAnswerPanel.continueButton
-                && currentGame.getGameRounds() >= LEVELS_TO_WIN)){
-            endGame(e,source);
+
+        if (e.getSource() == correctAnswerPanel.getExitButton()
+                || (e.getSource() == correctAnswerPanel.getContinueButton()
+                && currentGame.isGameWon())){
+            endGame(source);
         }
     }
 
@@ -123,11 +124,11 @@ public class ScreenControl implements ActionListener{
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
 
         if (e.getSource() == inCorrectAnswerPanel.getContinueButton()){
-            endGame(e,source);
+            endGame(source);
         }
     }
 
-    public void endGame(ActionEvent e,JPanel source){
+    public void endGame( JPanel source){
         endGamePanel = new EndGamePanel(currentGame,this);
         addCard(endGamePanel, endGamePanel.NAME);
         changeCard(endGamePanel.NAME);
@@ -138,6 +139,9 @@ public class ScreenControl implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 changeCard(mainMenu.NAME);
                 removeCard(endGamePanel);
+
+                currentGame = null;
+                System.gc(); //garbage collect old game
             }
         });
     }
@@ -231,17 +235,16 @@ public class ScreenControl implements ActionListener{
         //TODO will allow entry on nothing in text box
         if (e.getSource() == newPlayerScreen.submitButton){
 
-            NewUser newUser = new NewUser();
             String text = newPlayerScreen.userNameInput.getText();
 
-            if (!newUser.checkUsernameAvailability(text)) {
+            if (!((NewUser)currentGame.getGameUser()).checkUsernameAvailability(text)) {
                 JOptionPane.showMessageDialog(null, "Sorry that UserName is already in User" +
                                 " or you have entered a invalid UserName", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
-           else if (newUser.checkUsernameAvailability(text)) {
-                newUser.setUserName(text);
-                currentGame.setGameUser(newUser);
+           else if (((NewUser)currentGame.getGameUser()).checkUsernameAvailability(text)) {
+                NewUser NewUser = new NewUser(text);
+                currentGame.setGameUser(NewUser);
                 playerCreated = true;
             }
         }
@@ -319,9 +322,17 @@ public class ScreenControl implements ActionListener{
             }
 
             if (!currentGame.isRunning()){
-                inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), this);
-                addCard(inCorrectAnswerPanel, inCorrectAnswerPanel.NAME);
-                changeCard(inCorrectAnswerPanel.NAME);
+                if (currentGame.isGameWon()){
+                    correctAnswerPanel = new CorrectAnswerPanel(this);
+                    addCard(correctAnswerPanel, correctAnswerPanel.NAME);
+                    changeCard(correctAnswerPanel.NAME);
+                }
+                else {
+                    inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), this);
+                    addCard(inCorrectAnswerPanel, inCorrectAnswerPanel.NAME);
+                    changeCard(inCorrectAnswerPanel.NAME);
+                }
+
             }
 
         }
