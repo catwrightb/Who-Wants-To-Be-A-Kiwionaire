@@ -235,16 +235,17 @@ public class ScreenControl implements ActionListener{
         //TODO will allow entry on nothing in text box
         if (e.getSource() == newPlayerScreen.submitButton){
 
+            NewUser newUser = new NewUser();
             String text = newPlayerScreen.userNameInput.getText();
 
-            if (!((NewUser)currentGame.getGameUser()).checkUsernameAvailability(text)) {
+            if (!(newUser.checkUsernameAvailability(text))) {
                 JOptionPane.showMessageDialog(null, "Sorry that UserName is already in User" +
                                 " or you have entered a invalid UserName", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
-           else if (((NewUser)currentGame.getGameUser()).checkUsernameAvailability(text)) {
-                NewUser NewUser = new NewUser(text);
-                currentGame.setGameUser(NewUser);
+           else if ((newUser.checkUsernameAvailability(text))) {
+                newUser.setUserName(text);
+                currentGame.setGameUser(newUser);
                 playerCreated = true;
             }
         }
