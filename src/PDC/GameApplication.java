@@ -8,8 +8,6 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static PDC.Question.readInQuestions;
-
 public class GameApplication {
 
     private String userAnswer;
@@ -56,11 +54,11 @@ public class GameApplication {
      public void usefiftyFiftyLifeLine(){
         Question currentQ = this.getCurrentQuestion();
 
-        if (currentQ.correctAnswer.equals("A") || currentQ.correctAnswer.equals("B") ){
+        if (currentQ.correctAnswerChar.equals("A") || currentQ.correctAnswerChar.equals("B") ){
             currentQ.cChoice = "";
             currentQ.dChoice = "";
         }
-        else if (currentQ.correctAnswer.equals("C") || currentQ.correctAnswer.equals("D") ){
+        else if (currentQ.correctAnswerChar.equals("C") || currentQ.correctAnswerChar.equals("D") ){
             currentQ.aChoice = "";
             currentQ.bChoice = "";
         }
@@ -82,7 +80,7 @@ public class GameApplication {
 
     public void verifyAnswer(String playerAnswer){
 
-        if (getCurrentQuestion().getCorrectAnswer().equalsIgnoreCase(playerAnswer)){
+        if (getCurrentQuestion().getCorrectAnswerChar().equalsIgnoreCase(playerAnswer)){
             increaseGameRound();
             gameUser.upDateScore(getGameRounds());
             if (!isGameWon()){

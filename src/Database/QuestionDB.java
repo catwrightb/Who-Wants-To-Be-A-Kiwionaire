@@ -32,7 +32,8 @@ public class QuestionDB {
                 // Create new question & populate with values
                 Question q = new Question();
                 q.setQuestion(rs.getString("QUESTION"));
-                q.setCorrectAnswer(rs.getString("ANSWER"));
+                q.setCorrectAnswerStr(rs.getString("ANSWER_STR"));
+                q.setCorrectAnswerChar(rs.getString("ANSWER_CHAR"));
                 q.setaChoice(rs.getString("CHOICE_A"));
                 q.setbChoice(rs.getString("CHOICE_B"));
                 q.setcChoice(rs.getString("CHOICE_C"));
@@ -57,11 +58,11 @@ public class QuestionDB {
             // Check if table exists
             if(res.next()){
                 System.out.println("Table Exists.");
-                deleteTable(dbManager);
+                deleteTable();
             }
 
             // Create Table
-            String newTable = "CREATE TABLE " + QUESTIONS_TABLE_NAME + " (QUESTION LONG VARCHAR, ANSWER CHAR, CHOICE_A VARCHAR(255), CHOICE_B VARCHAR(255), CHOICE_C VARCHAR(255), CHOICE_D VARCHAR(255), LEVEL INT)";
+            String newTable = "CREATE TABLE " + QUESTIONS_TABLE_NAME + " (QUESTION LONG VARCHAR, ANSWER_STR VARCHAR(255), ANSWER_CHAR CHAR, CHOICE_A VARCHAR(255), CHOICE_B VARCHAR(255), CHOICE_C VARCHAR(255), CHOICE_D VARCHAR(255), LEVEL INT)";
             dbManager.updateDB(newTable);
 
             // Print completion message
@@ -74,7 +75,7 @@ public class QuestionDB {
         }
     }
 
-    public void deleteTable(DBManager db){
+    public void deleteTable(){
         System.err.println(QUESTIONS_TABLE_NAME + " Table already exists.");
         String dropTable = "DROP TABLE " + QUESTIONS_TABLE_NAME;
         dbManager.updateDB(dropTable);
@@ -94,6 +95,8 @@ public class QuestionDB {
                 String sb = "INSERT INTO " + QUESTIONS_TABLE_NAME + " VALUES ('";
                 // Question LONG VARCHAR
                 sb += data[0] + "', '";
+                // Answer STR
+                sb += data[1] + "', '";
                 // Answer CHAR
                 sb += data[2] + "', '";
                 // Choice_A VARCHAR
@@ -128,7 +131,8 @@ public class QuestionDB {
 
             while (rs.next()){
                 String question = rs.getString("QUESTION");
-                String answer = rs.getString("ANSWER");
+                String answerStr = rs.getString("ANSWER_STR");
+                String answerChar = rs.getString("ANSWER_CHAR");
                 String choiceA = rs.getString("CHOICE_A");
                 String choiceB = rs.getString("CHOICE_B");
                 String choiceC = rs.getString("CHOICE_C");
@@ -136,7 +140,8 @@ public class QuestionDB {
 
                 System.out.println("==========================================");
                 System.out.println("QUESTION " + question);
-                System.out.println("ANSWER " + answer);
+                System.out.println("ANSWERSTR " + answerStr);
+                System.out.println("ANSWERCHAR " + answerChar);
                 System.out.print("A " + choiceA);
                 System.out.print(" | B " + choiceB);
                 System.out.print(" | C " + choiceC);

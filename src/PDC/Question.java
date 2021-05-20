@@ -1,5 +1,4 @@
 package PDC;
-import PDC.UserPackage.User;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,9 +7,10 @@ import java.io.IOException;
 import java.util.*;
 
 public class Question {
-    private static final String questionDatabase = "./resources/Questions.csv";
+    //private static final String questionDatabase = "./resources/Questions.csv";
     String question;
-    String correctAnswer;
+    String correctAnswerStr;
+    String correctAnswerChar;
     String aChoice;
     String bChoice;
     String cChoice;
@@ -19,6 +19,14 @@ public class Question {
 
     public Question() {
 
+    }
+
+    public String getCorrectAnswerStr() {
+        return correctAnswerStr;
+    }
+
+    public void setCorrectAnswerStr(String correctAnswerStr) {
+        this.correctAnswerStr = correctAnswerStr;
     }
 
     public String getaChoice() {
@@ -61,12 +69,12 @@ public class Question {
         this.question = question;
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public String getCorrectAnswerChar() {
+        return correctAnswerChar;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setCorrectAnswerChar(String correctAnswerChar) {
+        this.correctAnswerChar = correctAnswerChar;
     }
 
     public Integer getLevel() {
@@ -78,11 +86,19 @@ public class Question {
     }
 
 
-    /**
+
+
+
+
+/*
+
+    */
+/**
      * reads in questions from the csv file database instantiates each question and adds them to a ArrayList
      *
      * @return ArrayList made up of Questions
-     */
+     *//*
+
     public static ArrayList<Question> readInQuestions(){
         ArrayList<Question> questionArrayList = new ArrayList<>();
 
@@ -96,7 +112,7 @@ public class Question {
                 Question q = new Question();
 
                 q.setQuestion(data[0]);
-                q.setCorrectAnswer(data[2]);
+                q.setCorrectAnswerChar(data[2]);
                 q.setaChoice(data[3]);
                 q.setbChoice(data[4]);
                 q.setcChoice(data[5]);
@@ -116,7 +132,8 @@ public class Question {
 
 
 
-    /**
+    */
+/**
      * checks the scanned answer against the correct answer for the questions
      * then calls methods to update score
      *
@@ -124,9 +141,10 @@ public class Question {
      * @param gameUser game play user
      * @param playerAnswer scanned user keyboard input
      * @return boolean returns if answer was correct or not
-     */
+     *//*
+
     public boolean verifyAnswer(Question question, String buttonSelected){
-        String correctAnswer = question.getCorrectAnswer();
+        String correctAnswer = question.getCorrectAnswerChar();
 
         if (correctAnswer.equalsIgnoreCase(buttonSelected)){
             System.out.println("Correct Answer!");
@@ -141,5 +159,6 @@ public class Question {
         }
     }
 
+*/
 
 }
