@@ -13,8 +13,9 @@ public class GameApplication {
 
     private String userAnswer;
     private boolean running;
-    public ArrayList<Question> questionArrayList = new ArrayList<>();
+    public ArrayList<Question> questionArrayList;
     private int gameRounds;
+    private boolean gameWon;
     public Question currentQuestion;
 
     //will need to store lifelines
@@ -31,7 +32,7 @@ public class GameApplication {
     public GameApplication(){
         //questions and rounds
         this.questionArrayList = readInQuestions();
-        this.gameRounds = Money.LEVEL1.getPrizeLevel();
+        this.gameRounds = 1;
 
         //linelife
         this.hasFiftyFifty = true;
@@ -40,6 +41,7 @@ public class GameApplication {
 
         //Game running
         this.running = true;
+        this.gameWon = false;
     }
 
 
@@ -63,42 +65,56 @@ public class GameApplication {
 
      }
 
+     //TODO complete askAudeince
+     public void useAskAudience(){
+         Question currentQ = this.getCurrentQuestion();
+
+     }
+
+    //TODO complete phoneAFriend
+    public void usePhoneAFriend(){
+        Question currentQ = this.getCurrentQuestion();
+
+    }
+
 
     public void verifyAnswer(String playerAnswer){
 
         if (getCurrentQuestion().getCorrectAnswer().equalsIgnoreCase(playerAnswer)){
             increaseGameRound();
-            gameUser.upDateScore(running, getGameRounds());
-            setCurrentQuestion();
+            gameUser.upDateScore(getGameRounds());
+            if (!isGameWon()){
+                selectQuestion();
+            }
         }
         else {
             running = false;
         }
 
     }
-
-    /**
-     * method searches the param question array for all questions that equal the gameplay level
-     * then these questions are added to a array of questions of the current level
-     * then a random question is chosen from the array to be asked to the player
-     *
-     * @param questionArrayList passes in entire question database
-     * @return Question
-     */
-    public Question askQuestion(ArrayList<Question> questionArrayList){
-        ArrayList<Question> questionCurrentLevelList = new ArrayList<>();
-
-        for (Question value : questionArrayList) {
-            if (value.getLevel() == (this.gameRounds)) {
-                questionCurrentLevelList.add(value);
-            }
-        }
-        Random random = new Random();
-        int size = questionCurrentLevelList.size();
-        int randomNum = random.nextInt((size));
-        currentQuestion = questionCurrentLevelList.get(randomNum);
-        return questionCurrentLevelList.get(randomNum);
-    }
+//
+//    /**
+//     * method searches the param question array for all questions that equal the gameplay level
+//     * then these questions are added to a array of questions of the current level
+//     * then a random question is chosen from the array to be asked to the player
+//     *
+//     * @param questionArrayList passes in entire question database
+//     * @return Question
+//     */
+//    public Question askQuestion(ArrayList<Question> questionArrayList){
+//        ArrayList<Question> questionCurrentLevelList = new ArrayList<>();
+//
+//        for (Question value : questionArrayList) {
+//            if (value.getLevel() == (this.gameRounds)) {
+//                questionCurrentLevelList.add(value);
+//            }
+//        }
+//        Random random = new Random();
+//        int size = questionCurrentLevelList.size();
+//        int randomNum = random.nextInt((size));
+//        currentQuestion = questionCurrentLevelList.get(randomNum);
+//        return questionCurrentLevelList.get(randomNum);
+//    }
 
 
     /**
@@ -170,25 +186,36 @@ public class GameApplication {
 //
 //    }
 
-    public Question selectQuestion(){
-        ArrayList<Question> questionCurrentLevelList = new ArrayList<>();
+    public void selectQuestion(){
+        if (gameRounds <= 15){
+            ArrayList<Question> questionCurrentLevelList = new ArrayList<>();
 
-        for (Question value : this.questionArrayList) {
-            if (value.getLevel() == (this.gameRounds)) {
-                questionCurrentLevelList.add(value);
+            for (Question value : this.questionArrayList) {
+                if (value.getLevel() == (this.gameRounds)) {
+                    questionCurrentLevelList.add(value);
+                }
             }
+            Random random = new Random();
+            int size = questionCurrentLevelList.size();
+            int randomNum = random.nextInt((size));
+
+             setCurrentQuestion(questionCurrentLevelList.get(randomNum));
+
+           // return questionCurrentLevelList.get(randomNum);
         }
-        Random random = new Random();
-        int size = questionCurrentLevelList.size();
-        int randomNum = random.nextInt((size));
 
-       // setCurrentQuestion(questionCurrentLevelList.get(randomNum));
-
-        return questionCurrentLevelList.get(randomNum);
     }
 
     public void increaseGameRound(){
-        gameRounds++;
+        if (gameRounds >= 15){
+            setRunning(false);
+            setGameWon(true);
+        }
+        else {
+            gameRounds++;
+
+        }
+
     }
 
     public boolean isHasFiftyFifty() {
@@ -229,13 +256,21 @@ public class GameApplication {
 
     public Question getCurrentQuestion() {
         if (currentQuestion == null){
-            setCurrentQuestion();
+            selectQuestion();
         }
         return currentQuestion;
     }
 
-    public void setCurrentQuestion() {
-        this.currentQuestion = selectQuestion();
+    public boolean isGameWon() {
+        return gameWon;
+    }
+
+    public void setGameWon(boolean gameWon) {
+        this.gameWon = gameWon;
+    }
+
+    public void setCurrentQuestion(Question currentQuestion) {
+        this.currentQuestion = currentQuestion;
     }
 
     public boolean isRunning() {

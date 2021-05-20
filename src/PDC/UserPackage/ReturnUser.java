@@ -17,20 +17,6 @@ public class ReturnUser extends User implements ReturnedUserInterface{
     }
 
 
-    /**
-     * Is used as an accessory to this class to scan for the user's userName which can then be used
-     * within retrieveExistingUser method.
-     *
-     * @return userName
-     */
-    @Override
-    public String scanReturnUserName(){
-        Scanner scan =  new Scanner(System.in);
-        System.out.println("What is your saved user name?");
-        
-        return scan.next();
-    }
-
 
     /**
      * retrieveExistingUser method will read the userStats.csv file located in resources to find the
@@ -53,6 +39,7 @@ public class ReturnUser extends User implements ReturnedUserInterface{
 
                 // Check if the userName entered, already exists within the file
                 if (userName.equalsIgnoreCase(data[0])){
+                    //ReturnUser user = new ReturnUser(data[0], Integer.parseInt(data[1]));
                     setUserName(data[0]);
                     setScore(Integer.parseInt(data[1]));
                 }

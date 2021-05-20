@@ -38,80 +38,6 @@ public class NewUser extends User implements NewUserInterface{
 
 
     /**
-     * Scanning class to take keyboard input from a NewUser to use for their UserName in the game.
-     * Once a valid string is entered, they will be asked (Y/N) if they'd like to use the entered string or enter another
-     * string. If no they will start the process again, if yes the method checkUsernameAvailability is called,
-     * to make sure the string input is available to use. Once the user has entered a string available they'd like to
-     * use the string is returned to be set as the UserName.
-     *
-     * @return string to be used as a newUser UserName
-     */
-    @Override
-    public String scanNewUserName(){
-        boolean stop = false;
-
-        do{
-            Scanner scan =  new Scanner(System.in);
-            System.out.println("What should we call you? "
-                    + "\nPlease create a username without any whitespaces in it."
-                    + "\nFeel free to use special characters and number in your name.");
-            userName = scan.nextLine();
-            String answer;
-            if (userName.contains(" ")||userName.contains("\t")){
-                System.out.println("Sorry a username cannot contain whitespaces, please enter a name without any whitespaces.\n");
-            }
-            else if(!checkUsernameAvailability(userName)){
-            
-            }
-            else {
-
-               stop = happyWithName(userName, scan);
-            }
-        }while (!stop);
-
-        return userName;
-    }
-
-    /**
-     * Gets input from user if user is happy with name they entered or wants to
-     * enter a new name. will deliver a boolean response back to method which called
-     *
-     * @param scan scanner from called method
-     * @param userName entered username string
-     * @return boolean tells while loop to continue in called method
-     */
-    public boolean happyWithName(String userName, Scanner scan){
-        boolean stop = false;
-
-        System.out.println("Nice to meet you " + userName + ". " +
-                "Are you happy with this name? (Y/N)");
-
-        do {
-            String answer = scan.nextLine();
-
-            switch (answer) {
-                case "Y"://fall through
-                case "y":
-                    addUserToFile(userName);
-                    stop = true;
-                    break;
-                case "N"://fall through
-                case "n":
-                    System.out.println("No worries mate.\n");
-                    stop = true;
-                    return false;
-                default:
-                    System.out.println("\nSorry that's not a valid response.\n" +
-                            "Are you happy to use the username ("+ userName+ "), please choose (Y or N).");
-                    stop = false;
-                    break;
-            }
-        }while(!stop);
-
-       return true;
-    }
-
-    /**
      * Checks if the username is available within the database, otherwise
      * prompts the user to enter a different name.
      *
@@ -120,7 +46,11 @@ public class NewUser extends User implements NewUserInterface{
      */
     public boolean checkUsernameAvailability(String userName){
 
-        userName = removeSpacesInString(userName);
+        if (userName.isEmpty() || userName.contains(" ") || userName.contains("\t")){
+            return false;
+        }
+
+        //userName = removeSpacesInString(userName);
 
         File file = new File(userDatabase);
         try{

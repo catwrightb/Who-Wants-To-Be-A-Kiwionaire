@@ -20,20 +20,19 @@ public class EndGamePanel extends JPanel {
         //construct components
 
         if (game.getGameRounds() >= Money.LEVEL15.getPrizeLevel()){
-            secondLabel = new JLabel("Congratulations!");
+            secondLabel = new JLabel("Congratulations "+game.getGameUser()+"!");
             thirdLabel = new JLabel ("You Have Won \"Who Wants to be a Kiwionaire?\"!");
-            fourthLabel = new JLabel (game.getGameUser().getUserName()+" your final score is"
-                    +game.getGameUser().getScore()+ "!");
+            fourthLabel = new JLabel ("You have won $" +game.getGameUser().getScore()+ "!");
 
             secondLabel.setBounds(275, 80, 130, 30);
             thirdLabel.setBounds (185, 105, 360, 65);
-            fourthLabel.setBounds (270, 135, 320, 95);
+            fourthLabel.setBounds (260, 135, 320, 95);
 
         }
         else {
             firstLable = new JLabel ("Thanks for playing \"Who Wants to be a Kiwionaire?\"");
             secondLabel = new JLabel ("Your final score was $" +game.getGameUser().getScore() +", " +
-                    "and your game ended on question "+game.getGameRounds());
+                    "and your game ended on question "+game.getGameRounds()+".");
             thirdLabel = new JLabel ("We will automatically save your last game score and username for you.");
             fourthLabel = new JLabel ("Make sure to play again soon to improve your score and maybe even WIN!");
 
@@ -65,7 +64,7 @@ public class EndGamePanel extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
 
-        infoLabel.setBounds (170, 280, 325, 30);
+        infoLabel.setBounds (170, 270, 325, 30);
         continueButton.setBounds (270, 310, 100, 25);
     }
 

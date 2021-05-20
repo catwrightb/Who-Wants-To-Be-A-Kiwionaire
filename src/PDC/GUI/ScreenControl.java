@@ -2,6 +2,7 @@ package PDC.GUI;
 
 import PDC.GameApplication;
 import PDC.Letters;
+import PDC.Money;
 import PDC.UserPackage.NewUser;
 import PDC.UserPackage.ReturnUser;
 
@@ -10,7 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//TODO still need to make some logic for when user wins the whoel game to end it
 
 public class ScreenControl implements ActionListener{
     JFrame frame = new JFrame();
@@ -29,6 +29,7 @@ public class ScreenControl implements ActionListener{
     CorrectAnswerPanel correctAnswerPanel;
     InCorrectAnswerPanel inCorrectAnswerPanel;
     EndGamePanel endGamePanel;
+    private final int LEVELS_TO_WIN = Money.LEVEL15.getPrizeLevel()+1;
 
     public ScreenControl() {
         frame.setSize(width, height);
@@ -65,10 +66,9 @@ public class ScreenControl implements ActionListener{
     }
 
     public void removeCard(JPanel panel){
-        if (!panel.equals(mainMenu)){
+        if (!panel.equals(mainMenu)){ // mainMenu panel should never be removed
             panelCont.remove(panel);
         }
-
     }
 
     public void addCard(JPanel panel, String name){
@@ -82,54 +82,73 @@ public class ScreenControl implements ActionListener{
 
         // Route the event to the correct handler
         if (source instanceof ReturnPlayerScreen || source instanceof NewPlayerScreen) {
-            playerSelection(e);
+            playerSelectionHandler(e);
         } else if (source instanceof QuestionPanel) {
             questionEventHandler(e);
         }
         else if (source instanceof PlayerMenu) {
-            playerMenuAction(e);
+            playerMenuHandler(e);
         }
          else if (source instanceof ConfirmScreen) {
-            confirmScreenLogic(e);
+            confirmScreenHandler(e);
         }
         else if (source instanceof MainMenu) {
-            enterGame(e);
+            enterGameHandler(e);
         }
-        else if (source instanceof InCorrectAnswerPanel || source instanceof CorrectAnswerPanel) {
-            answerPanel(e);
+        else if (source instanceof InCorrectAnswerPanel) {
+            inCorrectAnswerPanelHandler(e);
+        }
+        else if (source instanceof CorrectAnswerPanel){
+            correctAnswerPanelHandler(e);
         }
     }
 
-
-    //TODO issue occurring with dying on first question and getting a nullpointer issue when click continue
-    public void answerPanel(ActionEvent e){
+    public void correctAnswerPanelHandler(ActionEvent e){
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
 
-        if (e.getSource() == correctAnswerPanel.getContinueButton()){
+        if (e.getSource() == correctAnswerPanel.getContinueButton() && !currentGame.isGameWon()){
             questionPanel = new QuestionPanel(currentGame,this);
             addCard(questionPanel, questionPanel.NAME);
             changeCard(questionPanel.NAME);
             removeCard(source);
         }
-        else if (e.getSource() == correctAnswerPanel.getExitButton() ||
-                e.getSource() == inCorrectAnswerPanel.getContinueButton()){
 
-            endGamePanel = new EndGamePanel(currentGame,this);
-            addCard(endGamePanel, endGamePanel.NAME);
-            changeCard(endGamePanel.NAME);
-            removeCard(source);
-
-            endGamePanel.getContinueButton().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    changeCard(mainMenu.NAME);
-                    removeCard(endGamePanel);
-                }
-            });
+        if (e.getSource() == correctAnswerPanel.getExitButton()
+                || (e.getSource() == correctAnswerPanel.getContinueButton()
+                && currentGame.isGameWon())){
+            endGame(source);
         }
     }
 
-    public void enterGame(ActionEvent e){
+    public void inCorrectAnswerPanelHandler(ActionEvent e){
+        JPanel source = (JPanel) ((Component) e.getSource()).getParent();
+
+        if (e.getSource() == inCorrectAnswerPanel.getContinueButton()){
+            endGame(source);
+        }
+    }
+
+    public void endGame( JPanel source){
+        endGamePanel = new EndGamePanel(currentGame,this);
+        addCard(endGamePanel, endGamePanel.NAME);
+        changeCard(endGamePanel.NAME);
+        removeCard(source);
+
+        endGamePanel.getContinueButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeCard(mainMenu.NAME);
+                removeCard(endGamePanel);
+
+                currentGame = null;
+                System.gc(); //garbage collect old game
+            }
+        });
+    }
+
+
+
+    public void enterGameHandler(ActionEvent e){
         if (e.getSource() == mainMenu.enterButton){
             playerMenu = new PlayerMenu(this);
             addCard(playerMenu, playerMenu.NAME);
@@ -137,10 +156,9 @@ public class ScreenControl implements ActionListener{
 
             startGame();
         }
-
     }
 
-    public void playerMenuAction(ActionEvent e){
+    public void playerMenuHandler(ActionEvent e){
         if (e.getSource() == playerMenu.newPlayerButton){
             newPlayerScreen = new NewPlayerScreen(this);
             addCard(newPlayerScreen, newPlayerScreen.NAME);
@@ -153,20 +171,17 @@ public class ScreenControl implements ActionListener{
             addCard(returnPlayerScreen, returnPlayerScreen.NAME);
             changeCard(returnPlayerScreen.NAME);
             removeCard(playerMenu);
-
         }
 
         if (e.getSource() == playerMenu.exitButton){
             changeCard(mainMenu.NAME);
             removeCard(playerMenu);
-
         }
-
     }
 
 
     //this wont work for larger logic to track what life line is used
-    public void confirmScreenLogic(ActionEvent e){
+    public void confirmScreenHandler(ActionEvent e){
         if (e.getSource() == confirmScreen.getYesButton()){
             removeCard(questionPanel);
 
@@ -195,7 +210,7 @@ public class ScreenControl implements ActionListener{
     }
 
 
-    public void playerSelection(ActionEvent e){
+    public void playerSelectionHandler(ActionEvent e){
         removeCard(playerMenu);
         boolean playerCreated = false;
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
@@ -207,7 +222,8 @@ public class ScreenControl implements ActionListener{
             returnUser.retrieveExistingUser(text);
 
             if (returnUser.getUserName() == null) {
-                JOptionPane.showMessageDialog(null, "Your name couldn't be found please try another user name or create a new player.", "INFO",
+                JOptionPane.showMessageDialog(null, "Your name couldn't be found" +
+                                " please try another user name or create a new player.", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
             else {
@@ -216,18 +232,19 @@ public class ScreenControl implements ActionListener{
             }
         }
 
+        //TODO will allow entry on nothing in text box
         if (e.getSource() == newPlayerScreen.submitButton){
 
-            NewUser newUser = new NewUser();
             String text = newPlayerScreen.userNameInput.getText();
 
-            if (!newUser.checkUsernameAvailability(text)) {
-                JOptionPane.showMessageDialog(null, "Name is already in user please choose another user name", "INFO",
+            if (!((NewUser)currentGame.getGameUser()).checkUsernameAvailability(text)) {
+                JOptionPane.showMessageDialog(null, "Sorry that UserName is already in User" +
+                                " or you have entered a invalid UserName", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
-           else if (newUser.checkUsernameAvailability(text)) {
-                newUser.setUserName(text);
-                currentGame.setGameUser(newUser);
+           else if (((NewUser)currentGame.getGameUser()).checkUsernameAvailability(text)) {
+                NewUser NewUser = new NewUser(text);
+                currentGame.setGameUser(NewUser);
                 playerCreated = true;
             }
         }
@@ -256,6 +273,7 @@ public class ScreenControl implements ActionListener{
     }
 
     public void questionEventHandler(ActionEvent e){
+        boolean checkGameStatus = false;
 
         if (e.getSource() == questionPanel.getFiftyFifty() && currentGame.isHasFiftyFifty()){
             confirmScreen = new ConfirmScreen(currentGame.getFiftyFiftyString(), this);
@@ -274,15 +292,19 @@ public class ScreenControl implements ActionListener{
         }
         else if (e.getSource() == questionPanel.getButtonA()){
             currentGame.verifyAnswer(String.valueOf(Letters.A));
+            checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonB()){
             currentGame.verifyAnswer(String.valueOf(Letters.B));
+            checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonC()){
             currentGame.verifyAnswer(String.valueOf(Letters.C));
+            checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonD()){
             currentGame.verifyAnswer(String.valueOf(Letters.D));
+            checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getExitButton()){
             //TODO what happens when clicked exit during question
@@ -290,18 +312,29 @@ public class ScreenControl implements ActionListener{
             //maybe have confirm Screen ask if they want to quit or not?
         }
 
-        if (currentGame.isRunning()){
+        if (checkGameStatus){
             removeCard(questionPanel);
-            correctAnswerPanel = new CorrectAnswerPanel(this);
-            addCard(correctAnswerPanel, correctAnswerPanel.NAME);
-            changeCard(correctAnswerPanel.NAME);
 
-        }
-        else if (!currentGame.isRunning()){
-            removeCard(questionPanel);
-            inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), this);
-            addCard(inCorrectAnswerPanel, inCorrectAnswerPanel.NAME);
-            changeCard(inCorrectAnswerPanel.NAME);
+            if (currentGame.isRunning()){
+                correctAnswerPanel = new CorrectAnswerPanel(this);
+                addCard(correctAnswerPanel, correctAnswerPanel.NAME);
+                changeCard(correctAnswerPanel.NAME);
+            }
+
+            if (!currentGame.isRunning()){
+                if (currentGame.isGameWon()){
+                    correctAnswerPanel = new CorrectAnswerPanel(this);
+                    addCard(correctAnswerPanel, correctAnswerPanel.NAME);
+                    changeCard(correctAnswerPanel.NAME);
+                }
+                else {
+                    inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), this);
+                    addCard(inCorrectAnswerPanel, inCorrectAnswerPanel.NAME);
+                    changeCard(inCorrectAnswerPanel.NAME);
+                }
+
+            }
+
         }
 
     }
