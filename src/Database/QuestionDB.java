@@ -1,10 +1,12 @@
 package Database;
 
+import PDC.Question;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,10 +24,29 @@ public class QuestionDB {
         conn = dbManager.getConnection();
     }
 
-    public static void main(String[] args) {
-        QuestionDB db = new QuestionDB();
-        db.createQuestionsTable();
-        db.printTableContents();
+    public ArrayList<Question> questionListCreator(){
+        ResultSet rs = dbManager.queryDB("SELECT * FROM " + QUESTIONS_TABLE_NAME);
+        ArrayList<Question> questionsList = new ArrayList<>();
+        try{
+            while(rs.next()){
+                // Create new question & populate with values
+                Question q = new Question();
+                q.setQuestion(rs.getString("QUESTION"));
+                q.setCorrectAnswer(rs.getString("ANSWER"));
+                q.setaChoice(rs.getString("CHOICE_A"));
+                q.setbChoice(rs.getString("CHOICE_B"));
+                q.setcChoice(rs.getString("CHOICE_C"));
+                q.setdChoice(rs.getString("CHOICE_D"));
+                q.setLevel(rs.getInt("LEVEL"));
+
+                // Add question to the list
+                questionsList.add(q);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        return questionsList;
     }
 
     public void createQuestionsTable(){
@@ -33,12 +54,10 @@ public class QuestionDB {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet res = dbmd.getTables(null, null, QUESTIONS_TABLE_NAME, null);
 
-            // Delete Table if Exists
+            // Check if table exists
             if(res.next()){
-                System.err.println(QUESTIONS_TABLE_NAME + " Table already exists.");
-                String dropTable = "DROP TABLE " + QUESTIONS_TABLE_NAME;
-                dbManager.updateDB(dropTable);
-                System.out.println(QUESTIONS_TABLE_NAME + " TABLE DROPPED");
+                System.out.println("Table Exists.");
+                deleteTable(dbManager);
             }
 
             // Create Table
@@ -48,12 +67,18 @@ public class QuestionDB {
             // Print completion message
             System.out.println("TABLE CREATION COMPLETED Successfully");
 
-
             // Populate Database Table
             populateTable(dbManager);
         }catch (SQLException e){
             System.err.println("SQLException: " + e.getMessage());
         }
+    }
+
+    public void deleteTable(DBManager db){
+        System.err.println(QUESTIONS_TABLE_NAME + " Table already exists.");
+        String dropTable = "DROP TABLE " + QUESTIONS_TABLE_NAME;
+        dbManager.updateDB(dropTable);
+        System.out.println(QUESTIONS_TABLE_NAME + " TABLE DROPPED");
     }
 
     public void populateTable(DBManager dbManager){

@@ -1,13 +1,13 @@
 package Database;
 
+import PDC.UserPackage.User;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDB {
     private static final String USER_DATABASE = "./resources/userStats.csv";
@@ -19,12 +19,18 @@ public class UserDB {
     public UserDB() {
         dbManager = new DBManager();
         conn = dbManager.getConnection();
+        createUserTable();
     }
 
     public static void main(String[] args) {
         UserDB users = new UserDB();
-        users.createUserTable();
         users.printTableContents();
+    }
+
+    public ArrayList<User> returningUserList() {
+        ArrayList<User> users = new ArrayList<>();
+
+        return users;
     }
 
     public void createUserTable(){

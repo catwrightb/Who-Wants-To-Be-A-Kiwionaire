@@ -1,5 +1,6 @@
 package PDC;
 
+import Database.QuestionDB;
 import PDC.UserPackage.User;
 
 import java.util.ArrayList;
@@ -31,7 +32,8 @@ public class GameApplication {
 
     public GameApplication(){
         //questions and rounds
-        this.questionArrayList = readInQuestions();
+        //this.questionArrayList = readInQuestions();
+        this.questionArrayList = new QuestionDB().questionListCreator();
         this.gameRounds = 1;
 
         //linelife
@@ -203,7 +205,6 @@ public class GameApplication {
 
            // return questionCurrentLevelList.get(randomNum);
         }
-
     }
 
     public void increaseGameRound(){
