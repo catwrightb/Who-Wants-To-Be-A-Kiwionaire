@@ -31,7 +31,7 @@ public class DBManager {
         //Establish a connection to Database
         try {
             conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-            System.out.println(URL + " connected");
+            //System.out.println(URL + " connected");
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
