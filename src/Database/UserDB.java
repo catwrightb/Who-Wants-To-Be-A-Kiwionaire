@@ -1,6 +1,5 @@
 package Database;
 
-import PDC.UserPackage.GameUser;
 import PDC.UserPackage.User;
 
 import java.io.BufferedReader;
@@ -43,7 +42,6 @@ public class UserDB {
             throwables.printStackTrace();
         }
 
-
         return users;
     }
 
@@ -74,21 +72,16 @@ public class UserDB {
      * @return true/false depending if that name already exists within the database
      */
     public boolean checkUsernameAvailability(String userName){
-
         if (userName.isEmpty() || userName.contains(" ") || userName.contains("\t")){
             return false;
         }
 
-        ResultSet rs = dbManager.queryDB("SELECT * FROM " + USER_TABLE_NAME);
+        ArrayList<User> users = returningUserList();
 
-        try{
-            while(rs.next()){
-                if (userName.equalsIgnoreCase(rs.getString("USERNAME"))){
-                    return false;
-                }
+        for (User name: users) {
+            if (name.getUserName().equalsIgnoreCase(userName)){
+                return false;
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         return true;

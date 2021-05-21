@@ -4,8 +4,6 @@ import Database.UserDB;
 import PDC.GameApplication;
 import PDC.Letters;
 import PDC.Money;
-import PDC.UserPackage.GameUser;
-import PDC.UserPackage.NewUser;
 import PDC.UserPackage.ReturnUser;
 import PDC.UserPackage.User;
 
@@ -218,7 +216,7 @@ public class ScreenControl implements ActionListener{
         boolean playerCreated = false;
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
 
-        // USERDB
+        // USER Database
         UserDB userDB = new UserDB();
         // USER OBJECT
         User gm = new User();
