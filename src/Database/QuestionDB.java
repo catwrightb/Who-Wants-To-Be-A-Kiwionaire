@@ -57,7 +57,6 @@ public class QuestionDB {
 
             // Check if table exists
             if(res.next()){
-                System.out.println("Table Exists.");
                 deleteTable();
             }
 

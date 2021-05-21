@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class PlayerMenu extends JPanel {
 
-    String NAME = "playerMenu";
+     String NAME = "playerMenu";
      JButton returnPlayerButton;
      JButton newPlayerButton;
      JButton exitButton;

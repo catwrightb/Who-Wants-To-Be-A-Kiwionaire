@@ -2,6 +2,11 @@ package PDC.UserPackage;
 
 import PDC.Money;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class GameUser extends AbUser {
     private String userName;
     private int score;

@@ -1,5 +1,6 @@
 package Database;
 
+import PDC.UserPackage.GameUser;
 import PDC.UserPackage.User;
 
 import java.io.BufferedReader;
@@ -19,7 +20,6 @@ public class UserDB {
     public UserDB() {
         dbManager = new DBManager();
         conn = dbManager.getConnection();
-        createUserTable();
     }
 
     public static void main(String[] args) {
@@ -28,9 +28,78 @@ public class UserDB {
     }
 
     public ArrayList<User> returningUserList() {
+        ResultSet rs = dbManager.queryDB("SELECT * FROM " + USER_TABLE_NAME);
         ArrayList<User> users = new ArrayList<>();
 
+        try{
+            while (rs.next()){
+                User gameUser = new User();
+                gameUser.setUserName(rs.getString("USERNAME"));
+                gameUser.setScore(rs.getInt("SCORE"));
+
+                users.add(gameUser);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
         return users;
+    }
+
+    public void addUserToDB(User user){
+        String sqlAdd = "INSERT INTO " + USER_TABLE_NAME + " VALUES ('";
+        sqlAdd += user.getUserName() + "', ";
+        sqlAdd += user.getScore() + ")";
+        // Update Database
+        dbManager.updateDB(sqlAdd);
+
+        try{
+            ResultSet rs = dbManager.queryDB("SELECT * FROM " + USER_TABLE_NAME);
+            while(rs.next()){
+                System.out.println("Username: " + rs.getString("USERNAME"));
+                System.out.println("Score: " + rs.getInt("SCORE"));
+                System.out.println("=============================");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
+     * Checks if the username is available within the database, otherwise
+     * prompts the user to enter a different name.
+     *
+     * @param userName - the name the user want's to use to play
+     * @return true/false depending if that name already exists within the database
+     */
+    public boolean checkUsernameAvailability(String userName){
+
+        if (userName.isEmpty() || userName.contains(" ") || userName.contains("\t")){
+            return false;
+        }
+
+        ResultSet rs = dbManager.queryDB("SELECT * FROM " + USER_TABLE_NAME);
+
+        try{
+            while(rs.next()){
+                if (userName.equalsIgnoreCase(rs.getString("USERNAME"))){
+                    return false;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return true;
+    }
+
+    public void addUserToDatabase(User user){
+        String sql = "INSERT INTO " + USER_TABLE_NAME + " VALUES ('";
+        sql += user.getUserName() + "', ";
+        sql += user.getScore() + ")";
+
+        dbManager.updateDB(sql);
     }
 
     public void createUserTable(){
@@ -40,10 +109,7 @@ public class UserDB {
 
             // Delete Table if Exists
             if(res.next()){
-                System.err.println(USER_TABLE_NAME + " Table already exists.");
-                String dropTable = "DROP TABLE " + USER_TABLE_NAME;
-                dbManager.updateDB(dropTable);
-                System.out.println(USER_TABLE_NAME + " TABLE DROPPED");
+                deleteTable();
             }
 
             // Create Table
@@ -58,6 +124,13 @@ public class UserDB {
         }catch (SQLException e){
             System.err.println("SQLException: " + e.getMessage());
         }
+    }
+
+    public void deleteTable(){
+        System.err.println(USER_TABLE_NAME + " Table already exists.");
+        String dropTable = "DROP TABLE " + USER_TABLE_NAME;
+        dbManager.updateDB(dropTable);
+        System.out.println(USER_TABLE_NAME + " TABLE DROPPED");
     }
 
     public void populateTable(DBManager dbManager){

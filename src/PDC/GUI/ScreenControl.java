@@ -1,10 +1,13 @@
 package PDC.GUI;
 
+import Database.UserDB;
 import PDC.GameApplication;
 import PDC.Letters;
 import PDC.Money;
+import PDC.UserPackage.GameUser;
 import PDC.UserPackage.NewUser;
 import PDC.UserPackage.ReturnUser;
+import PDC.UserPackage.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -215,6 +218,11 @@ public class ScreenControl implements ActionListener{
         boolean playerCreated = false;
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
 
+        // USERDB
+        UserDB userDB = new UserDB();
+        // USER OBJECT
+        User gm = new User();
+
         if (e.getSource() == returnPlayerScreen.submitButton) {
 
             ReturnUser returnUser = new ReturnUser();
@@ -235,17 +243,18 @@ public class ScreenControl implements ActionListener{
         //TODO will allow entry on nothing in text box
         if (e.getSource() == newPlayerScreen.submitButton){
 
-            NewUser newUser = new NewUser();
+            //NewUser newUser = new NewUser();
             String text = newPlayerScreen.userNameInput.getText();
 
-            if (!(newUser.checkUsernameAvailability(text))) {
+            if (!(userDB.checkUsernameAvailability(text))) {
                 JOptionPane.showMessageDialog(null, "Sorry that UserName is already in User" +
                                 " or you have entered a invalid UserName", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
-           else if ((newUser.checkUsernameAvailability(text))) {
-                newUser.setUserName(text);
-                currentGame.setGameUser(newUser);
+           else if ((userDB.checkUsernameAvailability(text))) {
+                gm.setUserName(text);
+                userDB.addUserToDatabase(gm);
+                currentGame.setGameUser(gm);
                 playerCreated = true;
             }
         }
