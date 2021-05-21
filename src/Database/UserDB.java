@@ -64,6 +64,17 @@ public class UserDB {
         }
     }
 
+    public User retrieveUser(String username){
+        ArrayList<User> users = returningUserList();
+
+        for (User user: users){
+            if (user.getUserName().equalsIgnoreCase(username)){
+                return user;
+            }
+        }
+        return null;
+    }
+
     /**
      * Checks if the username is available within the database, otherwise
      * prompts the user to enter a different name.

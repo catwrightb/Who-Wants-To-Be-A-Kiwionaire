@@ -4,7 +4,6 @@ import Database.UserDB;
 import PDC.GameApplication;
 import PDC.Letters;
 import PDC.Money;
-import PDC.UserPackage.ReturnUser;
 import PDC.UserPackage.User;
 
 import javax.swing.*;
@@ -219,21 +218,24 @@ public class ScreenControl implements ActionListener{
         // USER Database
         UserDB userDB = new UserDB();
         // USER OBJECT
-        User gm = new User();
+        User gameUser = new User();
 
         if (e.getSource() == returnPlayerScreen.submitButton) {
 
-            ReturnUser returnUser = new ReturnUser();
+            // Grab the text the user has entered
             String text = returnPlayerScreen.userNameInput.getText();
-            returnUser.retrieveExistingUser(text);
+            // Retrieve the user's details
+            gameUser = userDB.retrieveUser(text);
 
-            if (returnUser.getUserName() == null) {
+            // If the user's details can't be retrieved
+            // Show an error and prompt them to try again
+            if (gameUser == null){
                 JOptionPane.showMessageDialog(null, "Your name couldn't be found" +
                                 " please try another user name or create a new player.", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
-            else {
-                currentGame.setGameUser(returnUser);
+            else { // Setup the user's game
+                currentGame.setGameUser(gameUser);
                 playerCreated = true;
             }
         }
@@ -241,18 +243,26 @@ public class ScreenControl implements ActionListener{
         //TODO will allow entry on nothing in text box
         if (e.getSource() == newPlayerScreen.submitButton){
 
-            //NewUser newUser = new NewUser();
+            // Grab the text the user has entered
             String text = newPlayerScreen.userNameInput.getText();
 
+            // Check if the username is available
+            // Otherwise show an error
             if (!(userDB.checkUsernameAvailability(text))) {
                 JOptionPane.showMessageDialog(null, "Sorry that UserName is already in User" +
                                 " or you have entered a invalid UserName", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
            else if ((userDB.checkUsernameAvailability(text))) {
-                gm.setUserName(text);
-                userDB.addUserToDatabase(gm);
-                currentGame.setGameUser(gm);
+               // Make sure that gameUser isn't null
+                assert gameUser != null;
+                // Set username
+                gameUser.setUserName(text);
+                // Add to the database
+                userDB.addUserToDatabase(gameUser);
+                // Set the current gameUser
+                currentGame.setGameUser(gameUser);
+                // Update boolean
                 playerCreated = true;
             }
         }
