@@ -199,11 +199,11 @@ public class ScreenControl implements ActionListener{
 
             if (string.equals("Fifty Fifty")){
                 currentGame.useFiftyFiftyLifeLine();
-                //currentGame.setHasFiftyFifty(false);
+                currentGame.setHasFiftyFifty(false);
             }
             else if (string.equals("Ask The Audience")){
                 currentGame.useAskAudience();
-                //currentGame.setAskTheAudience(false);
+                currentGame.setAskTheAudience(false);
             }
             else if (string.equals("Phone A Friend")){
                 currentGame.setPhoneAFriend(false);
