@@ -201,11 +201,12 @@ public class ScreenControl implements ActionListener{
                 currentGame.usefiftyFiftyLifeLine();
                 currentGame.setHasFiftyFifty(false);
             }
+            else if (string.equals("Ask The Audience")){
+                currentGame.useAskAudience();
+                currentGame.setAskTheAudience(false);
+            }
             else if (string.equals("Phone A Friend")){
                 currentGame.setPhoneAFriend(false);
-            }
-            else if (string.equals("Ask The Audience")){
-                currentGame.setAskTheAudience(false);
             }
 
             questionPanel = new QuestionPanel(currentGame, this);

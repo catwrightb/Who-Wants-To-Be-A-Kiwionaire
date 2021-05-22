@@ -3,6 +3,7 @@ package PDC;
 import Database.QuestionDB;
 import PDC.UserPackage.User;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -65,10 +66,40 @@ public class GameApplication {
 
      }
 
-     //TODO complete askAudeince
+     //TODO complete askAudience
+     // Temporary solution for ask audience
      public void useAskAudience(){
          Question currentQ = this.getCurrentQuestion();
+         String audienceDecision = "The audience think the answer is:\n";
 
+         Random rand = new Random();
+         int chance = rand.nextInt(100);
+
+         if (chance >= 33) {
+             audienceDecision += currentQ.getCorrectAnswerStr();
+             JOptionPane.showMessageDialog(null, audienceDecision, "AUDIENCE",
+                     JOptionPane.QUESTION_MESSAGE);
+         } else {
+             int randomAnswer = rand.nextInt(4);
+             switch (randomAnswer){
+                 case 0:
+                     audienceDecision += currentQ.getaChoice();
+                     break;
+                 case 1:
+                     audienceDecision += currentQ.getbChoice();
+                     break;
+                 case 2:
+                     audienceDecision += currentQ.getcChoice();
+                     break;
+                 case 3:
+                     audienceDecision += currentQ.getdChoice();
+                     break;
+                 default:
+                     throw new IllegalStateException("Unexpected value: " + randomAnswer);
+             }
+             JOptionPane.showMessageDialog(null, audienceDecision, "AUDIENCE",
+                     JOptionPane.QUESTION_MESSAGE);
+         }
      }
 
     //TODO complete phoneAFriend
