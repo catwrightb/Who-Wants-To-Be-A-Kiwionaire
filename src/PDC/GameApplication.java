@@ -70,34 +70,54 @@ public class GameApplication {
      // Temporary solution for ask audience
      public void useAskAudience(){
          Question currentQ = this.getCurrentQuestion();
-         String audienceDecision = "The audience think the answer is:\n";
+         StringBuilder audienceDecision = new StringBuilder("The audience think the answer is:\n");
 
          Random rand = new Random();
          int chance = rand.nextInt(100);
 
          if (chance >= 33) {
-             audienceDecision += currentQ.getCorrectAnswerStr();
-             JOptionPane.showMessageDialog(null, audienceDecision, "AUDIENCE",
+             audienceDecision.append(currentQ.getCorrectAnswerStr());
+             JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
                      JOptionPane.QUESTION_MESSAGE);
          } else {
              int randomAnswer = rand.nextInt(4);
-             switch (randomAnswer){
-                 case 0:
-                     audienceDecision += currentQ.getaChoice();
-                     break;
-                 case 1:
-                     audienceDecision += currentQ.getbChoice();
-                     break;
-                 case 2:
-                     audienceDecision += currentQ.getcChoice();
-                     break;
-                 case 3:
-                     audienceDecision += currentQ.getdChoice();
-                     break;
-                 default:
-                     throw new IllegalStateException("Unexpected value: " + randomAnswer);
+
+             // Check if no fifty fifty was used before this lifeline
+             if (!currentQ.getaChoice().isEmpty() && !currentQ.getbChoice().isEmpty()
+                     && !currentQ.getcChoice().isEmpty() && !currentQ.getdChoice().isEmpty()){
+                 if (randomAnswer == 0) {
+                     audienceDecision.append(currentQ.getaChoice());
+                 }
+                 else if (randomAnswer == 1) {
+                     audienceDecision.append(currentQ.getbChoice());
+                 }
+                 else if (randomAnswer == 2) {
+                     audienceDecision.append(currentQ.getcChoice());
+                 }
+                 else {
+                     audienceDecision.append(currentQ.getdChoice());
+                 }
              }
-             JOptionPane.showMessageDialog(null, audienceDecision, "AUDIENCE",
+             // Check if choice A & B are available
+             else if (!currentQ.getaChoice().isEmpty() && !currentQ.getbChoice().isEmpty()) {
+                 randomAnswer = rand.nextInt(2);
+                 if (randomAnswer == 1){
+                     audienceDecision.append(currentQ.getaChoice());
+                 }else {
+                     audienceDecision.append(currentQ.getbChoice());
+                 }
+             }
+             // Otherwise pick between choice C & D randomly
+             else {
+                 randomAnswer = rand.nextInt(2);
+                 if (randomAnswer == 1){
+                     audienceDecision.append(currentQ.getcChoice());
+                 }else {
+                     audienceDecision.append(currentQ.getdChoice());
+                 }
+             }
+
+             JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
                      JOptionPane.QUESTION_MESSAGE);
          }
      }
