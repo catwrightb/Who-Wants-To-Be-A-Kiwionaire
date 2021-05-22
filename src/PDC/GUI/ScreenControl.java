@@ -32,16 +32,26 @@ public class ScreenControl implements ActionListener{
     private final int LEVELS_TO_WIN = Money.LEVEL15.getPrizeLevel()+1;
 
     public ScreenControl() {
+        // Make UI look nice
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); // Make program follow system's theme.
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
+
         frame.setSize(width, height);
 
         panelCont.setLayout(cl);
 
+        // Create each panel
         mainMenu = new MainMenu(this);
         playerMenu = new PlayerMenu(this);
         newPlayerScreen = new NewPlayerScreen(this);
         returnPlayerScreen = new ReturnPlayerScreen(this);
        // questionPanel = new QuestionPanel(currentGame, this);
 
+        // Add each panel to main JPanel
         panelCont.add(mainMenu, mainMenu.NAME);
         panelCont.add(playerMenu, playerMenu.NAME);
         panelCont.add(newPlayerScreen, newPlayerScreen.NAME);
