@@ -27,8 +27,11 @@ public class QuestionPanel extends JPanel{
         Question currentQuestion = game.getCurrentQuestion();
         exitButton = new JButton ("Exit");
         question = new JLabel (currentQuestion.getQuestion());
+        Font questionFont = new Font("Arial", Font.BOLD, 13);
+        question.setFont(questionFont);
         stats = new JLabel("Score: " +game.getGameUser().getScore()
                 + " | Question: " +game.getGameRounds());
+        stats.setFont(questionFont);
 
         //buttons A & B
         if (!currentQuestion.getaChoice().isEmpty() && !currentQuestion.getbChoice().isEmpty()){
@@ -62,21 +65,24 @@ public class QuestionPanel extends JPanel{
             fiftyFifty = new JButton ("50/50");
             fiftyFifty.addActionListener(listener);
             this.add(fiftyFifty);
-            fiftyFifty.setBounds (130, 200, 60, 40);
+            fiftyFifty.setBounds (130, 200, 100, 40);
+            //fiftyFifty.setBounds (130, 200, 120, 40);
         }
 
         if (game.isAskTheAudience()){
-            askAudience = new JButton ("");
+            askAudience = new JButton ("Audience");
             askAudience.addActionListener(listener);
             this.add(askAudience);
-            askAudience.setBounds (290, 200, 60, 40);
+            askAudience.setBounds (280, 200, 100, 40);
+            //askAudience.setBounds (290, 200, 120, 40);
         }
 
         if (game.isPhoneAFriend()){
-            phoneFriend = new JButton ("");
+            phoneFriend = new JButton ("Phone");
             phoneFriend.addActionListener(listener);
             this.add(phoneFriend);
-            phoneFriend.setBounds (460, 200, 60, 40);
+            phoneFriend.setBounds (430, 200, 100, 40);
+            //phoneFriend.setBounds (460, 200, 120, 40);
         }
 
 

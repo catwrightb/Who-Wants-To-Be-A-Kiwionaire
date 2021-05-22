@@ -20,11 +20,11 @@ public class EndGamePanel extends JPanel {
         //construct components
 
         if (game.getGameRounds() >= Money.LEVEL15.getPrizeLevel()){
-            secondLabel = new JLabel("Congratulations "+game.getGameUser()+"!");
+            secondLabel = new JLabel("Congratulations "+game.getGameUser().getUserName()+"!");
             thirdLabel = new JLabel ("You Have Won \"Who Wants to be a Kiwionaire?\"!");
             fourthLabel = new JLabel ("You have won $" +game.getGameUser().getScore()+ "!");
 
-            secondLabel.setBounds(275, 80, 130, 30);
+            secondLabel.setBounds(275, 80, 160, 30);
             thirdLabel.setBounds (185, 105, 360, 65);
             fourthLabel.setBounds (260, 135, 320, 95);
 

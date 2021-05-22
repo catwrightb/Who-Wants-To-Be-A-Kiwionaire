@@ -15,7 +15,9 @@ public class InCorrectAnswerPanel extends JPanel {
     public InCorrectAnswerPanel(int round, ActionListener listener) {
         //construct components
         //exitButton = new JButton ("Exit");
+        Font incorrectFont = new Font("Arial", Font.BOLD, 14);
         incorrectText = new JLabel ("Incorrect :(");
+        incorrectText.setFont(incorrectFont);
         info = new JLabel ("Please press the continue button to move on.");
         continueButton = new JButton ("Continue");
 

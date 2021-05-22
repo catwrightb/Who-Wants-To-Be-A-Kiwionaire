@@ -14,7 +14,9 @@ public class CorrectAnswerPanel extends JPanel {
     public CorrectAnswerPanel(ActionListener listener) {
         //construct components
         exitButton = new JButton ("Exit");
+        Font correctFont = new Font("Arial", Font.BOLD, 14);
         correctText = new JLabel ("Correct!!");
+        correctText.setFont(correctFont);
         continueButton = new JButton ("Continue");
 
         exitButton.addActionListener(listener);
@@ -32,7 +34,7 @@ public class CorrectAnswerPanel extends JPanel {
         //set component bounds (only needed by Absolute Positioning)
         exitButton.setBounds (545, 15, 80, 35);
         correctText.setBounds (290, 180, 100, 30);
-        continueButton.setBounds (270, 240, 100, 25);
+        continueButton.setBounds (270, 240, 120, 30);
     }
 
     public JButton getExitButton() {
