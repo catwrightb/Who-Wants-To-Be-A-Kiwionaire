@@ -52,7 +52,7 @@ public class GameApplication {
      }
 
 
-     public void usefiftyFiftyLifeLine(){
+     public void useFiftyFiftyLifeLine(){
         Question currentQ = this.getCurrentQuestion();
 
         if (currentQ.correctAnswerChar.equals("A") || currentQ.correctAnswerChar.equals("B") ){
@@ -77,8 +77,6 @@ public class GameApplication {
 
          if (chance >= 33) {
              audienceDecision.append(currentQ.getCorrectAnswerStr());
-             JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
-                     JOptionPane.QUESTION_MESSAGE);
          } else {
              int randomAnswer = rand.nextInt(4);
 
@@ -116,10 +114,9 @@ public class GameApplication {
                      audienceDecision.append(currentQ.getdChoice());
                  }
              }
-
-             JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
-                     JOptionPane.QUESTION_MESSAGE);
          }
+         JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
+                 JOptionPane.QUESTION_MESSAGE);
      }
 
     //TODO complete phoneAFriend

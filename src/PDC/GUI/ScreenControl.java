@@ -198,7 +198,7 @@ public class ScreenControl implements ActionListener{
             String string = confirmScreen.getCurrentLifeLine();
 
             if (string.equals("Fifty Fifty")){
-                currentGame.usefiftyFiftyLifeLine();
+                currentGame.useFiftyFiftyLifeLine();
                 //currentGame.setHasFiftyFifty(false);
             }
             else if (string.equals("Ask The Audience")){
