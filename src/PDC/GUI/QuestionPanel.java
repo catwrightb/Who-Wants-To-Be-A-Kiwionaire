@@ -26,6 +26,7 @@ public class QuestionPanel extends JPanel{
 
         Question currentQuestion = game.getCurrentQuestion();
         exitButton = new JButton ("Exit");
+        exitButton.addActionListener(listener);
         question = new JLabel (currentQuestion.getQuestion());
         Font questionFont = new Font("Arial", Font.BOLD, 13);
         question.setFont(questionFont);

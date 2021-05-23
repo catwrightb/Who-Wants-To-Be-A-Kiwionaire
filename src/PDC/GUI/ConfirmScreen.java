@@ -7,13 +7,25 @@ import java.awt.event.ActionListener;
 public class ConfirmScreen extends JPanel {
     String NAME = "confirmScreen";
     private JLabel infoText;
+    private JLabel infoText2;
+
     private JButton yesButton;
     private JButton noButton;
     private String currentLifeLine = "";
 
     public ConfirmScreen(String string, ActionListener listener) {
 
-        infoText = new JLabel ("Do you want to use your "+ string +" lifeline?");
+        if (string.equals("exit")){
+            infoText = new JLabel ("Do you want to "+ string +" your current game?");
+            infoText2 = new JLabel("This will end your game and you will not be able to go back to finish later.");
+            add(infoText2);
+            infoText2.setBounds (90, 190, 500, 25);
+        }
+        else {
+            infoText = new JLabel ("Do you want to use your "+ string +" lifeline?");
+        }
+
+
         yesButton = new JButton ("Yes");
         yesButton.addActionListener(listener);
         noButton = new JButton ("No");
@@ -31,7 +43,7 @@ public class ConfirmScreen extends JPanel {
         add (yesButton);
         add (noButton);
 
-        infoText.setBounds (175, 160, 390, 25);
+        infoText.setBounds (190, 160, 390, 25);
         yesButton.setBounds (140, 230, 165, 35);
         noButton.setBounds (365, 230, 165, 35);
     }

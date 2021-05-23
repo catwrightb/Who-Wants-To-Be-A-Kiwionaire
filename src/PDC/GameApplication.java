@@ -66,8 +66,7 @@ public class GameApplication {
 
      }
 
-     //TODO complete askAudience
-     // Temporary solution for ask audience
+
      public void useAskAudience(){
          Question currentQ = this.getCurrentQuestion();
          StringBuilder audienceDecision = new StringBuilder("The audience think the answer is:\n");
@@ -120,7 +119,7 @@ public class GameApplication {
                  JOptionPane.QUESTION_MESSAGE);
      }
 
-    //TODO complete phoneAFriend
+
     public void usePhoneAFriend(){
         Question currentQ = this.getCurrentQuestion();
         StringBuilder friendString = new StringBuilder();

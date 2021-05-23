@@ -138,7 +138,7 @@ public class ScreenControl implements ActionListener{
         }
     }
 
-    public void endGame( JPanel source){
+    public void endGame(JPanel source){
         endGamePanel = new EndGamePanel(currentGame,this);
         addCard(endGamePanel, endGamePanel.NAME);
         changeCard(endGamePanel.NAME);
@@ -190,30 +190,36 @@ public class ScreenControl implements ActionListener{
     }
 
 
-    //this wont work for larger logic to track what life line is used
+
     public void confirmScreenHandler(ActionEvent e){
         if (e.getSource() == confirmScreen.getYesButton()){
             removeCard(questionPanel);
 
             String string = confirmScreen.getCurrentLifeLine();
 
-            if (string.equals("Fifty Fifty")){
-                currentGame.useFiftyFiftyLifeLine();
-                currentGame.setHasFiftyFifty(false);
+            if (string.equals("exit")){
+                JPanel source = (JPanel) ((Component) e.getSource()).getParent();
+                endGame(source);
             }
-            else if (string.equals("Ask The Audience")){
-                currentGame.useAskAudience();
-                currentGame.setAskTheAudience(false);
-            }
-            else if (string.equals("Phone A Friend")){
-                currentGame.usePhoneAFriend();
-                currentGame.setPhoneAFriend(false);
-            }
+            else {
+                if (string.equals("Fifty Fifty")){
+                    currentGame.useFiftyFiftyLifeLine();
+                    currentGame.setHasFiftyFifty(false);
+                }
+                else if (string.equals("Ask The Audience")){
+                    currentGame.useAskAudience();
+                    currentGame.setAskTheAudience(false);
+                }
+                else if (string.equals("Phone A Friend")){
+                    currentGame.usePhoneAFriend();
+                    currentGame.setPhoneAFriend(false);
+                }
 
-            questionPanel = new QuestionPanel(currentGame, this);
-            addCard(questionPanel, questionPanel.NAME);
-            changeCard(questionPanel.NAME);
-            removeCard(confirmScreen);
+                questionPanel = new QuestionPanel(currentGame, this);
+                addCard(questionPanel, questionPanel.NAME);
+                changeCard(questionPanel.NAME);
+                removeCard(confirmScreen);
+            }
 
         }
         else {
@@ -340,6 +346,11 @@ public class ScreenControl implements ActionListener{
             //TODO what happens when clicked exit during question
             //exit game
             //maybe have confirm Screen ask if they want to quit or not?
+
+            confirmScreen = new ConfirmScreen("exit", this);
+            panelCont.add(confirmScreen, confirmScreen.NAME);
+            changeCard(confirmScreen.NAME);
+
         }
 
         if (checkGameStatus){
