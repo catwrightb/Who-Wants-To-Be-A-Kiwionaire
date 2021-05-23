@@ -83,6 +83,7 @@ public class GameApplication {
              // Check if no fifty fifty was used before this lifeline
              if (!currentQ.getaChoice().isEmpty() && !currentQ.getbChoice().isEmpty()
                      && !currentQ.getcChoice().isEmpty() && !currentQ.getdChoice().isEmpty()){
+
                  if (randomAnswer == 0) {
                      audienceDecision.append(currentQ.getaChoice());
                  }
@@ -122,6 +123,84 @@ public class GameApplication {
     //TODO complete phoneAFriend
     public void usePhoneAFriend(){
         Question currentQ = this.getCurrentQuestion();
+        StringBuilder friendString = new StringBuilder();
+
+        Random rand = new Random();
+        int textRandom = rand.nextInt(4);
+
+        switch (textRandom){
+            case 0:
+                friendString.append("Dude, it's great to hear from you! " +
+                        "I'm not entirely sure but I think the answer is ");
+                break;
+            case 1:
+                friendString.append("Oh my glob, I totally know this answer. " +
+                        "The answer is for sure ");
+                break;
+            case 2:
+                friendString.append("I'm not sure why you called me you know I failed Maths class. " +
+                        "I guess if I have to pick I'd say the answer is ");
+                break;
+            case 3:
+                friendString.append("Pizza Palace how can I help you . . . Oh umm I think you have the wrong number. " +
+                        "I guess I could pick a answer though, maybe it's ");
+                break;
+        }
+
+
+        int chance = rand.nextInt(100);
+
+        if (chance >= 45){
+
+            friendString.append(currentQ.getCorrectAnswerStr());
+        }
+        else {
+            int randomAnswer = rand.nextInt(4);
+
+            // Check if no fifty fifty was used before this lifeline
+            if (!currentQ.getaChoice().isEmpty() && !currentQ.getbChoice().isEmpty()
+                    && !currentQ.getcChoice().isEmpty() && !currentQ.getdChoice().isEmpty()){
+
+
+                if (randomAnswer == 0) {
+                    friendString.append(currentQ.getaChoice());
+                }
+                else if (randomAnswer == 1) {
+                    friendString.append(currentQ.getbChoice());
+                }
+                else if (randomAnswer == 2) {
+                    friendString.append(currentQ.getcChoice());
+                }
+                else {
+                    friendString.append(currentQ.getdChoice());
+                }
+            }
+            // Check if choice A & B are available
+            else if (!currentQ.getaChoice().isEmpty() && !currentQ.getbChoice().isEmpty()) {
+
+                randomAnswer = rand.nextInt(2);
+                if (randomAnswer == 1){
+                    friendString.append(currentQ.getaChoice());
+                }else {
+                    friendString.append(currentQ.getbChoice());
+                }
+            }
+            // Otherwise pick between choice C & D randomly
+            else {
+                randomAnswer = rand.nextInt(2);
+                if (randomAnswer == 1){
+                    friendString.append(currentQ.getcChoice());
+                }else {
+                    friendString.append(currentQ.getdChoice());
+                }
+            }
+        }
+        friendString.append(".");
+
+        JOptionPane.showMessageDialog(null, friendString.toString(), "PHONE A FRIEND",
+                JOptionPane.QUESTION_MESSAGE);
+
+
 
     }
 

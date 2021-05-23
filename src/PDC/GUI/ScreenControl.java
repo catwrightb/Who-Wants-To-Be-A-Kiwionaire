@@ -206,6 +206,7 @@ public class ScreenControl implements ActionListener{
                 currentGame.setAskTheAudience(false);
             }
             else if (string.equals("Phone A Friend")){
+                currentGame.usePhoneAFriend();
                 currentGame.setPhoneAFriend(false);
             }
 
