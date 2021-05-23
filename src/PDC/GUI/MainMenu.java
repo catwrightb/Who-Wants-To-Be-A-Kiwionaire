@@ -23,9 +23,11 @@ public class MainMenu extends JPanel {
         add (enterButton);
         add (gameTitle);
 
-        //set component bounds (only needed by Absolute Positioning)
+        //set component bounds
         enterButton.setBounds (260, 235, 100, 25);
         gameTitle.setBounds (215, 135, 220, 30);
+
+
     }
 
 }

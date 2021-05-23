@@ -18,6 +18,7 @@ public class QuestionPanel extends JPanel{
     private JLabel question;
     private JLabel stats;
 
+
     private JButton fiftyFifty;
     private JButton phoneFriend;
     private JButton askAudience;
@@ -100,6 +101,8 @@ public class QuestionPanel extends JPanel{
         exitButton.setBounds (545, 15, 80, 35);
         question.setBounds (50, 90, 565, 80);
         stats.setBounds(35, 15, 470, 35);
+
+
 
         this.setVisible(true);
 
