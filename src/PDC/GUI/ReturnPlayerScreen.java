@@ -18,18 +18,20 @@ public class ReturnPlayerScreen extends JPanel {
      JButton exitButton;
      JButton backButton;
      JLabel instructionsText;
-     JButton forgotPasswordButton;
+
 
     public ReturnPlayerScreen(ActionListener listener) {
         //construct components
         //passwordInput = new JPasswordField (5);
         userNameLabel = new JLabel ("UserName:");
+        userNameLabel.setForeground(Color.WHITE);
         userNameInput = new JTextField (5);
         //passwordLabel = new JLabel ("Password");
         submitButton = new JButton ("Submit");
         exitButton = new JButton ("Exit");
         backButton = new JButton ("Back");
         instructionsText = new JLabel ("Please enter your saved UserName");
+        instructionsText.setForeground(Color.WHITE);
        // forgotPasswordButton = new JButton ("Forgot Password");
 
         //adjust size and set layout
@@ -61,6 +63,10 @@ public class ReturnPlayerScreen extends JPanel {
         backButton.setBounds (25, 15, 80, 35);
         instructionsText.setBounds (210, 135, 390, 25);
         //forgotPasswordButton.setBounds (155, 245, 150, 25);
+
+        ImagePanel panel = new ImagePanel(new ImageIcon("images/Lake_Taupo.jpeg").getImage());
+        panel.setSize(650,450);
+        add(panel);
     }
 
 }

@@ -14,8 +14,9 @@ public class CorrectAnswerPanel extends JPanel {
     public CorrectAnswerPanel(ActionListener listener) {
         //construct components
         exitButton = new JButton ("Exit");
-        Font correctFont = new Font("Arial", Font.BOLD, 14);
+        Font correctFont = new Font("Serif", Font.BOLD, 14);
         correctText = new JLabel ("Correct!!");
+        correctText.setForeground(Color.WHITE);
         correctText.setFont(correctFont);
         continueButton = new JButton ("Continue");
 
@@ -35,6 +36,10 @@ public class CorrectAnswerPanel extends JPanel {
         exitButton.setBounds (545, 15, 80, 35);
         correctText.setBounds (290, 180, 100, 30);
         continueButton.setBounds (270, 240, 120, 30);
+
+        ImagePanel panel = new ImagePanel(new ImageIcon("images/Sheep.jpeg").getImage());
+        panel.setSize(650,450);
+        add(panel);
     }
 
     public JButton getExitButton() {

@@ -21,6 +21,7 @@ public class NewPlayerScreen extends JPanel {
         //construct components
        // passwordInput = new JPasswordField (5);
         userNameLabel = new JLabel ("UserName: ");
+        userNameLabel.setForeground(Color.WHITE);
         userNameInput = new JTextField (5);
 
         //passwordLabel = new JLabel ("Password");
@@ -28,9 +29,11 @@ public class NewPlayerScreen extends JPanel {
         exitButton = new JButton ("Exit");
         backButton = new JButton ("Back");
         instructionsText = new JLabel ("Please enter a unique UserName");
+        instructionsText.setForeground(Color.WHITE);
         label2 = new JLabel ("You cannot use spaces in your UserName :(");
+        label2.setForeground(Color.WHITE);
         label3 = new JLabel ("But feel free to use special character, letters and numbers.");
-        //jcomp9 = new JLabel ("You cannot use spaces in your UserName :( ");
+        label3.setForeground(Color.WHITE);
 
         exitButton.addActionListener(listener);
         backButton.addActionListener(listener);
@@ -65,6 +68,11 @@ public class NewPlayerScreen extends JPanel {
         label2.setBounds (175, 100, 340, 35);
         label3.setBounds (140, 135, 390, 25);
         //jcomp9.setBounds (100, 70, 300, 20);
+
+        ImagePanel panel = new ImagePanel(new ImageIcon("images/Lake_Taupo.jpeg").getImage());
+
+        panel.setSize(650,450);
+        add(panel);
     }
 
 }

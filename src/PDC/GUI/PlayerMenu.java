@@ -34,6 +34,12 @@ public class PlayerMenu extends JPanel {
         returnPlayerButton.setBounds (355, 160, 165, 35);
         newPlayerButton.setBounds (125, 160, 165, 35);
         exitButton.setBounds (545, 15, 80, 35);
+
+
+        ImagePanel panel = new ImagePanel(new ImageIcon("images/Lake_Taupo.jpeg").getImage());
+
+        panel.setSize(650,450);
+        add(panel);
     }
 
 }

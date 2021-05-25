@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class ReturnUser extends User implements ReturnedUserInterface{
     private static final String userDatabase = "./resources/userStats.csv";
 
-    public ReturnUser(String un, int sc) {
-        this.score = sc;
+    public ReturnUser(String un) {
+        this.score = 0;
         this.userName = un;
     }
 

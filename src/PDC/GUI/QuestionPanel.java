@@ -29,12 +29,15 @@ public class QuestionPanel extends JPanel{
         exitButton = new JButton ("Exit");
         exitButton.addActionListener(listener);
         question = new JLabel (currentQuestion.getQuestion());
-        Font questionFont = new Font("Arial", Font.BOLD, 13);
+        Font questionFont = new Font("Serif", Font.BOLD, 13);
         question.setFont(questionFont);
+        question.setForeground(Color.WHITE);
         stats = new JLabel("Score: " +game.getGameUser().getScore()
                 + " | Question: " +game.getGameRounds());
         stats.setFont(questionFont);
+        stats.setForeground(Color.WHITE);
 
+        //TODO make sure buttons are large enough
         //buttons A & B
         if (!currentQuestion.getaChoice().isEmpty() && !currentQuestion.getbChoice().isEmpty()){
             buttonA = new JButton (currentQuestion.getaChoice());
@@ -105,6 +108,13 @@ public class QuestionPanel extends JPanel{
 
 
         this.setVisible(true);
+
+        ImagePanel panel = new ImagePanel(new ImageIcon("images/Milford.jpeg").getImage());
+
+        panel.setSize(650,450);
+        add(panel);
+
+
 
     }
 

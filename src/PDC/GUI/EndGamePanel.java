@@ -41,11 +41,18 @@ public class EndGamePanel extends JPanel {
             thirdLabel.setBounds (110, 110, 465, 70);
             fourthLabel.setBounds (105, 140, 475, 90);
 
+            firstLable.setForeground(Color.WHITE);
             add (firstLable);
 
         }
 
+        secondLabel.setForeground(Color.WHITE);
+        thirdLabel.setForeground(Color.WHITE);
+        fourthLabel.setForeground(Color.WHITE);
+
+
         infoLabel = new JLabel ("Please press continue to return to the main menu.");
+        infoLabel.setForeground(Color.WHITE);
         continueButton = new JButton ("Continue");
 
         continueButton.addActionListener(listener);
@@ -66,6 +73,10 @@ public class EndGamePanel extends JPanel {
 
         infoLabel.setBounds (170, 270, 325, 30);
         continueButton.setBounds (270, 310, 100, 25);
+
+        ImagePanel panel = new ImagePanel(new ImageIcon("images/Kea.jpeg").getImage());
+        panel.setSize(650,450);
+        add(panel);
     }
 
     public JButton getContinueButton() {

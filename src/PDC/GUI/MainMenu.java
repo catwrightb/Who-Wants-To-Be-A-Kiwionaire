@@ -14,6 +14,8 @@ public class MainMenu extends JPanel {
         enterButton = new JButton ("Enter Game");
         enterButton.addActionListener(listener);
         gameTitle = new JLabel ("Who wants to be a Kiwionaire?");
+        gameTitle.setFont(new Font("Serif", Font.BOLD, 24));
+        gameTitle.setForeground(Color.white);
 
         //adjust size and set layout
         setPreferredSize (new Dimension (650, 450));
@@ -24,9 +26,14 @@ public class MainMenu extends JPanel {
         add (gameTitle);
 
         //set component bounds
-        enterButton.setBounds (260, 235, 100, 25);
-        gameTitle.setBounds (215, 135, 220, 30);
+        enterButton.setBounds (260, 200, 100, 25);
+        gameTitle.setBounds (150, 100, 400, 100);
 
+
+        ImagePanel panel = new ImagePanel(new ImageIcon("images/Auckland.jpeg").getImage());
+
+        panel.setSize(650,450);
+        add(panel);
 
     }
 

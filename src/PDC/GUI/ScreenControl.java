@@ -64,6 +64,7 @@ public class ScreenControl implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        frame.setResizable(false);
     }
 
     /**
