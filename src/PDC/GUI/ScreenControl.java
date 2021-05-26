@@ -29,6 +29,8 @@ public class ScreenControl implements ActionListener{
     CorrectAnswerPanel correctAnswerPanel;
     InCorrectAnswerPanel inCorrectAnswerPanel;
     EndGamePanel endGamePanel;
+    InstructionPanel instructionPanel;
+    CreditPanel creditPanel;
     private final int LEVELS_TO_WIN = Money.LEVEL15.getPrizeLevel()+1;
 
     public ScreenControl() {
@@ -166,6 +168,34 @@ public class ScreenControl implements ActionListener{
             changeCard(playerMenu.NAME);
 
             startGame();
+        }
+        else if (e.getSource() == mainMenu.getInstructionButton()){
+            instructionPanel = new InstructionPanel();
+            addCard(instructionPanel, instructionPanel.NAME);
+            changeCard(instructionPanel.NAME);
+
+            instructionPanel.getBackButton().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    changeCard(mainMenu.NAME);
+                    removeCard(instructionPanel);
+                }
+            });
+
+        }
+        else if (e.getSource() == mainMenu.getCreditButton()){
+            creditPanel = new CreditPanel();
+            addCard(creditPanel, creditPanel.NAME);
+            changeCard(creditPanel.NAME);
+
+            creditPanel.getBackButton().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    changeCard(mainMenu.NAME);
+                    removeCard(creditPanel);
+                }
+            });
+
         }
     }
 
@@ -344,10 +374,6 @@ public class ScreenControl implements ActionListener{
             checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getExitButton()){
-            //TODO what happens when clicked exit during question
-            //exit game
-            //maybe have confirm Screen ask if they want to quit or not?
-
             confirmScreen = new ConfirmScreen("exit", this);
             panelCont.add(confirmScreen, confirmScreen.NAME);
             changeCard(confirmScreen.NAME);

@@ -286,31 +286,6 @@ public class GameApplication {
 //        System.out.println(":~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:");
 //    }
 
-//    /**
-//     * Prints out game ending message
-//     * there are two ending types one winning ending and one losing ending
-//     * the winning ending is only used if gameRounds is greater or equal to LEVEL15
-//     *
-//     * @param gameUser used to print the user name and score in message
-//     */
-//    public void Goodbye(User gameUser){
-//        if (gameRounds ameRounds >= Money.LEVEL15.getPrizeLevel()){
-//            System.out.println("\n:~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:");
-//            System.out.println(" Congratulations! You Have Won \"Who Wants to be a Kiwionaire?\"!");
-//            System.out.println(" "+gameUser.getUserName() +" your final score is "+ gameUser.getScore()+ "!");
-//            System.out.println(":~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:");
-//        }
-//        else {
-//            System.out.println("\n:~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:");
-//            System.out.println(" Thanks for playing \"Who Wants to be a Kiwionaire?\"");
-//            System.out.println(" Your final score was $" + gameUser.getScore()+ ", and your game ended on question " +gameRounds +".");
-//            System.out.println(" We will automatically save your last game score and username for you.");
-//            System.out.println(" Make sure to play again soon to improve your score and maybe even WIN! ");
-//            System.out.println(":~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:");
-//
-//        }
-//
-//    }
 
     public void selectQuestion(){
         if (gameRounds <= 15){
