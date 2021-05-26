@@ -1,14 +1,14 @@
-package PDC.GUI;
+package Views;
 
-import PDC.GameApplication;
-import PDC.Money;
+import Models.GameApplication;
+import Models.Money;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class EndGamePanel extends JPanel {
-    String NAME ="endGamePanel";
+    public String NAME ="endGamePanel";
     private JLabel firstLable;
     private JLabel secondLabel;
     private JLabel thirdLabel;

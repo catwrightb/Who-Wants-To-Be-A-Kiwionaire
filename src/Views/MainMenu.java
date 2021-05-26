@@ -1,11 +1,11 @@
-package PDC.GUI;
+package Views;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MainMenu extends JPanel {
-    String NAME = "mainMenu";
+    public String NAME = "mainMenu";
     JButton enterButton;
     private JLabel gameTitle;
     private JButton instructionButton;
@@ -54,5 +54,9 @@ public class MainMenu extends JPanel {
 
     public JButton getInstructionButton() {
         return instructionButton;
+    }
+
+    public JButton getEnterButton() {
+        return enterButton;
     }
 }

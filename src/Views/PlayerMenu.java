@@ -1,4 +1,4 @@
-package PDC.GUI;
+package Views;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class PlayerMenu extends JPanel {
 
-     String NAME = "playerMenu";
+     public String NAME = "playerMenu";
      JButton returnPlayerButton;
      JButton newPlayerButton;
      JButton exitButton;
@@ -42,4 +42,15 @@ public class PlayerMenu extends JPanel {
         add(panel);
     }
 
+    public JButton getReturnPlayerButton() {
+        return returnPlayerButton;
+    }
+
+    public JButton getNewPlayerButton() {
+        return newPlayerButton;
+    }
+
+    public JButton getExitButton() {
+        return exitButton;
+    }
 }

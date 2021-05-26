@@ -1,10 +1,10 @@
-package PDC.GUI;
+package Views;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class InstructionPanel extends JPanel {
-    String NAME = "InstructionPanel";
+    public String NAME = "InstructionPanel";
     private JLabel MenuPanel;
     private JLabel text3;
     private JLabel text4;

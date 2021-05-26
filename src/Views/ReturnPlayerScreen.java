@@ -1,23 +1,22 @@
-package PDC.GUI;
+package Views;
 
-import PDC.UserPackage.ReturnUser;
+import Models.UserPackage.*;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ReturnPlayerScreen extends JPanel {
-    String NAME = "returnPlayerScreen";
-    ReturnUser returnUser;
-     JPasswordField passwordInput;
-     JLabel userNameLabel;
-     JTextField userNameInput;
-     JLabel passwordLabel;
-     JButton submitButton;
-     JButton exitButton;
-     JButton backButton;
-     JLabel instructionsText;
+    public String NAME = "returnPlayerScreen";
+    //private ReturnUser returnUser;
+     private JPasswordField passwordInput;
+    private JLabel userNameLabel;
+    private JTextField userNameInput;
+    private JLabel passwordLabel;
+    private JButton submitButton;
+    private JButton exitButton;
+     private JButton backButton;
+     private JLabel instructionsText;
 
 
     public ReturnPlayerScreen(ActionListener listener) {
@@ -69,4 +68,19 @@ public class ReturnPlayerScreen extends JPanel {
         add(panel);
     }
 
+    public JButton getExitButton() {
+        return exitButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
+
+    public JTextField getUserNameInput() {
+        return userNameInput;
+    }
 }

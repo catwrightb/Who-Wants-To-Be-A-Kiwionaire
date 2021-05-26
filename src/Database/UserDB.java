@@ -1,6 +1,6 @@
 package Database;
 
-import PDC.UserPackage.User;
+import Models.User;
 
 import java.io.BufferedReader;
 import java.io.File;

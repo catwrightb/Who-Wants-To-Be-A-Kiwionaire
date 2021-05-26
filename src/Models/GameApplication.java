@@ -1,7 +1,6 @@
-package PDC;
+package Models;
 
 import Database.QuestionDB;
-import PDC.UserPackage.User;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -218,29 +217,6 @@ public class GameApplication {
         }
 
     }
-//
-//    /**
-//     * method searches the param question array for all questions that equal the gameplay level
-//     * then these questions are added to a array of questions of the current level
-//     * then a random question is chosen from the array to be asked to the player
-//     *
-//     * @param questionArrayList passes in entire question database
-//     * @return Question
-//     */
-//    public Question askQuestion(ArrayList<Question> questionArrayList){
-//        ArrayList<Question> questionCurrentLevelList = new ArrayList<>();
-//
-//        for (Question value : questionArrayList) {
-//            if (value.getLevel() == (this.gameRounds)) {
-//                questionCurrentLevelList.add(value);
-//            }
-//        }
-//        Random random = new Random();
-//        int size = questionCurrentLevelList.size();
-//        int randomNum = random.nextInt((size));
-//        currentQuestion = questionCurrentLevelList.get(randomNum);
-//        return questionCurrentLevelList.get(randomNum);
-//    }
 
 
     /**
@@ -263,28 +239,6 @@ public class GameApplication {
         }
 
     }
-
-
-//    /**
-//     * welcomeMessage prints out the first message a user sees when running the application.
-//     */
-//    public static void welcomeMessage(){
-//        System.out.println(":~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:");
-//        System.out.println(" Who Wants to be a Kiwionaire? ");
-//        System.out.println(":~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:\n");
-//    }
-
-//    /**
-//     * prints out game instructions with keyboard keys to use
-//     */
-//    public static void instructionMessage(){
-//        System.out.println("\n:~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:");
-//        System.out.println(" How to play \"Who Wants to be a Kiwionaire?\"");
-//        System.out.println(" To play simply enter the letter (A, B, C, D) which you believe is correct to a asked question.");
-//        System.out.println(" After each question round your current score will display so you can see how you are doing.");
-//        System.out.println(" Remember you can quit anytime by inputting (X or x).");
-//        System.out.println(":~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~:");
-//    }
 
 
     public void selectQuestion(){

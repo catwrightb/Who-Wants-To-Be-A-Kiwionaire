@@ -1,10 +1,10 @@
-package PDC.GUI;
+package Views;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class CreditPanel extends JPanel {
-    String NAME = "CreditPanel";
+    public String NAME = "CreditPanel";
     private JLabel jcomp1;
     private JLabel jcomp2;
     private JButton backButton;

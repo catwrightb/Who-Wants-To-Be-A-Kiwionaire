@@ -1,7 +1,7 @@
-package PDC.GUI;
+package Views;
 
-import PDC.GameApplication;
-import PDC.Question;
+import Models.GameApplication;
+import Models.Question;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class QuestionPanel extends JPanel{
-    String NAME = "questionPanel";
+    public String NAME = "questionPanel";
     private JButton exitButton;
     private JButton buttonA;
     private JButton buttonB;

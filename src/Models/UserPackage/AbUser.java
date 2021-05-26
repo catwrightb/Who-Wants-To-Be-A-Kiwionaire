@@ -1,4 +1,4 @@
-package PDC.UserPackage;
+package Models.UserPackage;
 
 public abstract class AbUser {
 
