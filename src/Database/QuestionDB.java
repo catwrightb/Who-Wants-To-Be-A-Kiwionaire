@@ -1,6 +1,6 @@
 package Database;
 
-import PDC.Question;
+import Models.Question;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

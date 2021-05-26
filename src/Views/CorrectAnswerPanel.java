@@ -1,11 +1,11 @@
-package PDC.GUI;
+package Views;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class CorrectAnswerPanel extends JPanel {
-    String NAME = "correctAnswerPanel";
+    public String NAME = "correctAnswerPanel";
     private JButton exitButton;
     private JLabel correctText;
     public JButton continueButton;

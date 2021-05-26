@@ -1,10 +1,11 @@
-package PDC.GUI;
+package Controller;
 
 import Database.UserDB;
-import PDC.GameApplication;
-import PDC.Letters;
-import PDC.Money;
-import PDC.UserPackage.User;
+import Models.GameApplication;
+import Models.Letters;
+import Models.Money;
+import Models.User;
+import Views.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -162,7 +163,7 @@ public class ScreenControl implements ActionListener{
 
 
     public void enterGameHandler(ActionEvent e){
-        if (e.getSource() == mainMenu.enterButton){
+        if (e.getSource() == mainMenu.getEnterButton()){
             playerMenu = new PlayerMenu(this);
             addCard(playerMenu, playerMenu.NAME);
             changeCard(playerMenu.NAME);
@@ -200,21 +201,21 @@ public class ScreenControl implements ActionListener{
     }
 
     public void playerMenuHandler(ActionEvent e){
-        if (e.getSource() == playerMenu.newPlayerButton){
+        if (e.getSource() == playerMenu.getNewPlayerButton()){
             newPlayerScreen = new NewPlayerScreen(this);
             addCard(newPlayerScreen, newPlayerScreen.NAME);
             changeCard(newPlayerScreen.NAME);
             removeCard(playerMenu);
         }
 
-        if (e.getSource() == playerMenu.returnPlayerButton){
+        if (e.getSource() == playerMenu.getReturnPlayerButton()){
             returnPlayerScreen = new ReturnPlayerScreen(this);
             addCard(returnPlayerScreen, returnPlayerScreen.NAME);
             changeCard(returnPlayerScreen.NAME);
             removeCard(playerMenu);
         }
 
-        if (e.getSource() == playerMenu.exitButton){
+        if (e.getSource() == playerMenu.getExitButton()){
             changeCard(mainMenu.NAME);
             removeCard(playerMenu);
         }
@@ -269,7 +270,7 @@ public class ScreenControl implements ActionListener{
         // USER OBJECT
         User gameUser = new User();
 
-        if (e.getSource() == returnPlayerScreen.submitButton) {
+        if (e.getSource() == returnPlayerScreen.getSubmitButton()) {
 
             // Grab the text the user has entered
             String text = returnPlayerScreen.userNameInput.getText();
@@ -290,7 +291,7 @@ public class ScreenControl implements ActionListener{
         }
 
         //TODO will allow entry on nothing in text box
-        if (e.getSource() == newPlayerScreen.submitButton){
+        if (e.getSource() == newPlayerScreen.getSubmitButton()){
 
             // Grab the text the user has entered
             String text = newPlayerScreen.userNameInput.getText();
@@ -317,7 +318,7 @@ public class ScreenControl implements ActionListener{
         }
 
         //go back to player selection
-        if (e.getSource() == newPlayerScreen.backButton || e.getSource() == returnPlayerScreen.backButton){
+        if (e.getSource() == newPlayerScreen.getBackButton() || e.getSource() == returnPlayerScreen.getBackButton()){
             playerMenu = new PlayerMenu(this);
             addCard(playerMenu, playerMenu.NAME);
             changeCard(playerMenu.NAME);
@@ -325,7 +326,7 @@ public class ScreenControl implements ActionListener{
         }
 
         //exit to mainMenu
-        if (e.getSource() == newPlayerScreen.exitButton || e.getSource() == returnPlayerScreen.exitButton){
+        if (e.getSource() == newPlayerScreen.getExitButton() || e.getSource() == returnPlayerScreen.getExitButton()){
             changeCard(mainMenu.NAME);
             removeCard(source);
         }

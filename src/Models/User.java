@@ -1,7 +1,6 @@
-package PDC.UserPackage;
+package Models;
 
-import PDC.Money;
-import PDC.Question;
+import Models.Money;
 
 import java.io.*;
 import java.util.HashMap;
@@ -9,8 +8,9 @@ import java.util.Map;
 
 public class User {
     private static final String userDatabase = "./resources/userStats.csv";
-    String userName;
-    int score;
+
+    protected int score;
+    protected String userName;
 
     public User() {
 
@@ -28,16 +28,15 @@ public class User {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setScore() {
+        this.score = 0;
     }
 
     /**
      * method updates players Scores based on if they answered a question correctly or not.
      * A Enum class Money is used.
      *
-     * @param correct boolean passed in to know if answer was true or false
-     * @param question question to gather score to update player score
+     *
      */
     public void upDateScore( int gameRoundWon){
 

@@ -1,4 +1,4 @@
-package PDC;
+package Models;
 
 public enum Money {
     /**

@@ -1,20 +1,19 @@
-package PDC.GUI;
+package Views;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 public class NewPlayerScreen extends JPanel {
-     String NAME = "newPlayerScreen";
+     public String NAME = "newPlayerScreen";
      //JPasswordField passwordInput;
-     JLabel userNameLabel, label2, label3;
-     JTextField userNameInput;
+     private JLabel userNameLabel, label2, label3;
+    public JTextField userNameInput;
      //JLabel passwordLabel;
-     JButton submitButton;
-     JButton exitButton;
-     JButton backButton;
-     JLabel instructionsText;
+     private JButton submitButton;
+     private JButton exitButton;
+     private JButton backButton;
+     private JLabel instructionsText;
      //JLabel jcomp9;
 
     public NewPlayerScreen(ActionListener listener) {
@@ -74,5 +73,22 @@ public class NewPlayerScreen extends JPanel {
         panel.setSize(650,450);
         add(panel);
     }
+
+    public JTextField getUserNameInput() {
+        return userNameInput;
+    }
+
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
+
+    public JButton getExitButton() {
+        return exitButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
 
 }

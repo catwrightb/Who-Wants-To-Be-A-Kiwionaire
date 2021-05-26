@@ -1,11 +1,11 @@
-package PDC.GUI;
+package Views;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ConfirmScreen extends JPanel {
-    String NAME = "confirmScreen";
+    public String NAME = "confirmScreen";
     private JLabel infoText;
     private JLabel infoText2;
 
