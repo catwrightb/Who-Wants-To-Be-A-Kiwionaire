@@ -11,7 +11,7 @@ public class ReturnPlayerScreen extends JPanel {
     //private ReturnUser returnUser;
      private JPasswordField passwordInput;
     private JLabel userNameLabel;
-    private JTextField userNameInput;
+    public JTextField userNameInput;
     private JLabel passwordLabel;
     private JButton submitButton;
     private JButton exitButton;
@@ -32,6 +32,7 @@ public class ReturnPlayerScreen extends JPanel {
         instructionsText = new JLabel ("Please enter your saved UserName");
         instructionsText.setForeground(Color.WHITE);
        // forgotPasswordButton = new JButton ("Forgot Password");
+
 
         //adjust size and set layout
         setPreferredSize (new Dimension (460, 368));

@@ -8,7 +8,7 @@ public class NewPlayerScreen extends JPanel {
      public String NAME = "newPlayerScreen";
      //JPasswordField passwordInput;
      private JLabel userNameLabel, label2, label3;
-    private JTextField userNameInput;
+    public JTextField userNameInput;
      //JLabel passwordLabel;
      private JButton submitButton;
      private JButton exitButton;

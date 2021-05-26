@@ -273,7 +273,7 @@ public class ScreenControl implements ActionListener{
         if (e.getSource() == returnPlayerScreen.getSubmitButton()) {
 
             // Grab the text the user has entered
-            String text = String.valueOf(returnPlayerScreen.getUserNameInput());
+            String text = returnPlayerScreen.userNameInput.getText();
             // Retrieve the user's details
             gameUser = userDB.retrieveUser(text);
 
@@ -294,7 +294,7 @@ public class ScreenControl implements ActionListener{
         if (e.getSource() == newPlayerScreen.getSubmitButton()){
 
             // Grab the text the user has entered
-            String text = String.valueOf(newPlayerScreen.getUserNameInput());
+            String text = newPlayerScreen.userNameInput.getText();
 
             // Check if the username is available
             // Otherwise show an error

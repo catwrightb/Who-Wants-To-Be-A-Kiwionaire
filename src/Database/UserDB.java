@@ -34,7 +34,9 @@ public class UserDB {
             while (rs.next()){
                 User gameUser = new User();
                 gameUser.setUserName(rs.getString("USERNAME"));
-                gameUser.setScore(rs.getInt("SCORE"));
+                //gameUser.setScore(rs.getInt("SCORE"));
+                //user is always set with a score of zero at start of game
+                //regardless of past score
 
                 users.add(gameUser);
             }
