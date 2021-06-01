@@ -34,7 +34,7 @@ public class CorrectAnswerPanel extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
         exitButton.setBounds (545, 15, 80, 35);
-        correctText.setBounds (290, 180, 100, 30);
+        correctText.setBounds (300, 180, 100, 30);
         continueButton.setBounds (270, 240, 120, 30);
 
         ImagePanel panel = new ImagePanel(new ImageIcon("images/Sheep.jpeg").getImage());

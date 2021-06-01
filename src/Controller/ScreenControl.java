@@ -299,8 +299,8 @@ public class ScreenControl implements ActionListener{
             // Check if the username is available
             // Otherwise show an error
             if (!(userDB.checkUsernameAvailability(text))) {
-                JOptionPane.showMessageDialog(null, "Sorry that UserName is already in User" +
-                                " or you have entered a invalid UserName", "INFO",
+                JOptionPane.showMessageDialog(null, "Sorry that UserName is already being used," +
+                                " or you have entered a invalid UserName format with a space or whitespace. Please try again.", "INFO",
                         JOptionPane.ERROR_MESSAGE);
             }
            else if ((userDB.checkUsernameAvailability(text))) {
@@ -397,7 +397,7 @@ public class ScreenControl implements ActionListener{
                     changeCard(correctAnswerPanel.NAME);
                 }
                 else {
-                    inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), this);
+                    inCorrectAnswerPanel = new InCorrectAnswerPanel(currentGame.getGameRounds(), currentGame.currentQuestion.getCorrectAnswerStr(), this);
                     addCard(inCorrectAnswerPanel, inCorrectAnswerPanel.NAME);
                     changeCard(inCorrectAnswerPanel.NAME);
                 }

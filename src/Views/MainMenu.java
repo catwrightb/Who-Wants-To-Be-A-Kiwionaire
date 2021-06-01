@@ -35,8 +35,8 @@ public class MainMenu extends JPanel {
         add (creditButton);
 
         //set component bounds
-        enterButton.setBounds (260, 200, 100, 25);
-        gameTitle.setBounds (150, 100, 400, 100);
+        enterButton.setBounds (280, 200, 100, 25);
+        gameTitle.setBounds (170, 100, 400, 100);
         instructionButton.setBounds (145, 340, 125, 35);
         creditButton.setBounds (395, 340, 135, 35);
 
