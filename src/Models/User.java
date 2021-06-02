@@ -1,7 +1,5 @@
 package Models;
 
-import Models.Money;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,8 +26,8 @@ public class User {
         return score;
     }
 
-    public void setScore() {
-        this.score = 0;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     /**

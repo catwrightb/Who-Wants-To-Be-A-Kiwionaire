@@ -2,12 +2,15 @@ package Database;
 
 import Models.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserDB {
     private static final String USER_DATABASE = "./resources/userStats.csv";
@@ -34,9 +37,7 @@ public class UserDB {
             while (rs.next()){
                 User gameUser = new User();
                 gameUser.setUserName(rs.getString("USERNAME"));
-                //gameUser.setScore(rs.getInt("SCORE"));
-                //user is always set with a score of zero at start of game
-                //regardless of past score
+                gameUser.setScore(rs.getInt("SCORE"));
 
                 users.add(gameUser);
             }
@@ -47,24 +48,14 @@ public class UserDB {
         return users;
     }
 
-    public void addUserToDB(User user){
-        String sqlAdd = "INSERT INTO " + USER_TABLE_NAME + " VALUES ('";
-        sqlAdd += user.getUserName() + "', ";
-        sqlAdd += user.getScore() + ")";
-        // Update Database
-        dbManager.updateDB(sqlAdd);
+    /*public static void main(String[] args) {
+        UserDB blah = new UserDB();
+        User test = new User();
+        test.setUserName("Test1234567");
+        test.setScore(99999);
+        blah.updateUser(test);
 
-        try{
-            ResultSet rs = dbManager.queryDB("SELECT * FROM " + USER_TABLE_NAME);
-            while(rs.next()){
-                System.out.println("Username: " + rs.getString("USERNAME"));
-                System.out.println("Score: " + rs.getInt("SCORE"));
-                System.out.println("=============================");
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+    }*/
 
     public User retrieveUser(String username){
         ArrayList<User> users = returningUserList();
@@ -101,10 +92,17 @@ public class UserDB {
     }
 
     public void addUserToDatabase(User user){
-        String sql = "INSERT INTO " + USER_TABLE_NAME + " VALUES ('";
+        String sql = "INSERT INTO " + USER_TABLE_NAME
+                + " VALUES ('";
         sql += user.getUserName() + "', ";
         sql += user.getScore() + ")";
 
+        dbManager.updateDB(sql);
+    }
+
+    public void updateUser(User user){
+        String sql = "UPDATE " + USER_TABLE_NAME + " SET SCORE = " + user.getScore()
+                + " WHERE USERNAME = '" + user.getUserName() + "'";
         dbManager.updateDB(sql);
     }
 
