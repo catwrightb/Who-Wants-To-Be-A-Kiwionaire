@@ -275,7 +275,6 @@ public class GameApplication {
         }
         else {
             gameRounds++;
-
         }
 
     }

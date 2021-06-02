@@ -32,6 +32,7 @@ public class ScreenControl implements ActionListener {
     EndGamePanel endGamePanel;
     InstructionPanel instructionPanel;
     CreditPanel creditPanel;
+    LeaderBoard leaderBoardPanel;
     private final int LEVELS_TO_WIN = Money.LEVEL15.getPrizeLevel()+1;
 
     public ScreenControl() {
@@ -101,7 +102,8 @@ public class ScreenControl implements ActionListener {
         // Route the event to the correct handler
         if (source instanceof ReturnPlayerScreen || source instanceof NewPlayerScreen) {
             playerSelectionHandler(e);
-        } else if (source instanceof QuestionPanel) {
+        }
+        else if (source instanceof QuestionPanel) {
             questionEventHandler(e);
         }
         else if (source instanceof PlayerMenu) {
@@ -192,6 +194,17 @@ public class ScreenControl implements ActionListener {
             creditPanel.getBackButton().addActionListener(e12 -> {
                 changeCard(mainMenu.NAME);
                 removeCard(creditPanel);
+            });
+
+        }
+        else if (e.getSource() == mainMenu.getHighScoreButton()){
+            leaderBoardPanel = new LeaderBoard(this);
+            addCard(leaderBoardPanel, leaderBoardPanel.NAME);
+            changeCard(leaderBoardPanel.NAME);
+
+            leaderBoardPanel.getBackButton().addActionListener(e13 -> {
+                changeCard(mainMenu.NAME);
+                removeCard(leaderBoardPanel);
             });
 
         }

@@ -10,6 +10,7 @@ public class MainMenu extends JPanel {
     private JLabel gameTitle;
     private JButton instructionButton;
     private JButton creditButton;
+    private JButton highScoreButton;
 
     public MainMenu(ActionListener listener) {
         //construct components
@@ -23,6 +24,8 @@ public class MainMenu extends JPanel {
         instructionButton.addActionListener(listener);
         creditButton = new JButton ("Credits");
         creditButton.addActionListener(listener);
+        highScoreButton = new JButton ("LeaderBoard");
+        highScoreButton.addActionListener(listener);
 
         //adjust size and set layout
         setPreferredSize (new Dimension (650, 450));
@@ -33,13 +36,14 @@ public class MainMenu extends JPanel {
         add (gameTitle);
         add (instructionButton);
         add (creditButton);
+        add (highScoreButton);
 
         //set component bounds
-        enterButton.setBounds (280, 200, 100, 25);
+        enterButton.setBounds (265, 200, 135, 35);
         gameTitle.setBounds (170, 100, 400, 100);
-        instructionButton.setBounds (145, 340, 125, 35);
-        creditButton.setBounds (395, 340, 135, 35);
-
+        instructionButton.setBounds (75, 340, 135, 35);
+        highScoreButton.setBounds (265, 340, 135, 35);
+        creditButton.setBounds (470, 340, 135, 35);
 
         ImagePanel panel = new ImagePanel(new ImageIcon("images/Auckland.jpeg").getImage());
 
@@ -58,5 +62,9 @@ public class MainMenu extends JPanel {
 
     public JButton getEnterButton() {
         return enterButton;
+    }
+
+    public JButton getHighScoreButton() {
+        return highScoreButton;
     }
 }
