@@ -63,17 +63,19 @@ public class GameApplication {
             currentQ.bChoice = "";
         }
 
+        this.setHasFiftyFifty(false);
+
      }
 
 
-     public void useAskAudience(){
+     public StringBuilder useAskAudience(){
          Question currentQ = this.getCurrentQuestion();
          StringBuilder audienceDecision = new StringBuilder("The audience think the answer is:\n");
 
          Random rand = new Random();
          int chance = rand.nextInt(100);
 
-         if (chance >= 33) {
+         if (chance >= 23) {
              audienceDecision.append(currentQ.getCorrectAnswerStr());
          } else {
              int randomAnswer = rand.nextInt(4);
@@ -114,12 +116,16 @@ public class GameApplication {
                  }
              }
          }
-         JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
-                 JOptionPane.QUESTION_MESSAGE);
+//         JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
+//                 JOptionPane.QUESTION_MESSAGE);
+
+         this.setAskTheAudience(false);
+
+         return audienceDecision;
      }
 
 
-    public void usePhoneAFriend(){
+    public StringBuilder usePhoneAFriend(){
         Question currentQ = this.getCurrentQuestion();
         StringBuilder friendString = new StringBuilder();
 
@@ -148,7 +154,7 @@ public class GameApplication {
 
         int chance = rand.nextInt(100);
 
-        if (chance >= 45){
+        if (chance >= 40){
 
             friendString.append(currentQ.getCorrectAnswerStr());
         }
@@ -195,10 +201,12 @@ public class GameApplication {
         }
         friendString.append(".");
 
-        JOptionPane.showMessageDialog(null, friendString.toString(), "PHONE A FRIEND",
-                JOptionPane.QUESTION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, friendString.toString(), "PHONE A FRIEND",
+//                JOptionPane.QUESTION_MESSAGE);
 
+        this.setPhoneAFriend(false);
 
+        return friendString;
 
     }
 

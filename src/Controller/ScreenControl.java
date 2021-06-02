@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class ScreenControl implements ActionListener{
+public class ScreenControl implements ActionListener {
     JFrame frame = new JFrame();
     JPanel panelCont = new JPanel();
 
@@ -70,11 +70,13 @@ public class ScreenControl implements ActionListener{
         frame.setResizable(false);
     }
 
-    /**
-     *   changes the cardLayout to display desired panels as game moves
-     *
-     * @param newCard
-     */
+    public void cardSwitch(JPanel newPanel, String name, JPanel oldPanel ){
+        addCard(newPanel, name);
+        changeCard(name);
+        removeCard(oldPanel);
+    }
+
+
     public void changeCard(String newCard){
         cl.show(panelCont, newCard);
     }
@@ -88,6 +90,8 @@ public class ScreenControl implements ActionListener{
     public void addCard(JPanel panel, String name){
         panelCont.add(panel, name);
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -122,9 +126,10 @@ public class ScreenControl implements ActionListener{
 
         if (e.getSource() == correctAnswerPanel.getContinueButton() && !currentGame.isGameWon()){
             questionPanel = new QuestionPanel(currentGame,this);
-            addCard(questionPanel, questionPanel.NAME);
-            changeCard(questionPanel.NAME);
-            removeCard(source);
+            cardSwitch(questionPanel, questionPanel.NAME, source);
+//            addCard(questionPanel, questionPanel.NAME);
+//            changeCard(questionPanel.NAME);
+//            removeCard(source);
         }
 
         if (e.getSource() == correctAnswerPanel.getExitButton()
@@ -144,19 +149,17 @@ public class ScreenControl implements ActionListener{
 
     public void endGame(JPanel source){
         endGamePanel = new EndGamePanel(currentGame,this);
-        addCard(endGamePanel, endGamePanel.NAME);
-        changeCard(endGamePanel.NAME);
-        removeCard(source);
+        cardSwitch(endGamePanel, endGamePanel.NAME, source);
+//        addCard(endGamePanel, endGamePanel.NAME);
+//        changeCard(endGamePanel.NAME);
+//        removeCard(source);
 
-        endGamePanel.getContinueButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeCard(mainMenu.NAME);
-                removeCard(endGamePanel);
+        endGamePanel.getContinueButton().addActionListener(e -> {
+            changeCard(mainMenu.NAME);
+            removeCard(endGamePanel);
 
-                currentGame = null;
-                System.gc(); //garbage collect old game
-            }
+            currentGame = null;
+            System.gc(); //garbage collect old game
         });
     }
 
@@ -175,12 +178,9 @@ public class ScreenControl implements ActionListener{
             addCard(instructionPanel, instructionPanel.NAME);
             changeCard(instructionPanel.NAME);
 
-            instructionPanel.getBackButton().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    changeCard(mainMenu.NAME);
-                    removeCard(instructionPanel);
-                }
+            instructionPanel.getBackButton().addActionListener(e1 -> {
+                changeCard(mainMenu.NAME);
+                removeCard(instructionPanel);
             });
 
         }
@@ -189,12 +189,9 @@ public class ScreenControl implements ActionListener{
             addCard(creditPanel, creditPanel.NAME);
             changeCard(creditPanel.NAME);
 
-            creditPanel.getBackButton().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    changeCard(mainMenu.NAME);
-                    removeCard(creditPanel);
-                }
+            creditPanel.getBackButton().addActionListener(e12 -> {
+                changeCard(mainMenu.NAME);
+                removeCard(creditPanel);
             });
 
         }
@@ -203,16 +200,18 @@ public class ScreenControl implements ActionListener{
     public void playerMenuHandler(ActionEvent e){
         if (e.getSource() == playerMenu.getNewPlayerButton()){
             newPlayerScreen = new NewPlayerScreen(this);
-            addCard(newPlayerScreen, newPlayerScreen.NAME);
-            changeCard(newPlayerScreen.NAME);
-            removeCard(playerMenu);
+            cardSwitch(newPlayerScreen, newPlayerScreen.NAME, playerMenu);
+//            addCard(newPlayerScreen, newPlayerScreen.NAME);
+//            changeCard(newPlayerScreen.NAME);
+//            removeCard(playerMenu);
         }
 
         if (e.getSource() == playerMenu.getReturnPlayerButton()){
             returnPlayerScreen = new ReturnPlayerScreen(this);
-            addCard(returnPlayerScreen, returnPlayerScreen.NAME);
-            changeCard(returnPlayerScreen.NAME);
-            removeCard(playerMenu);
+            cardSwitch(returnPlayerScreen, returnPlayerScreen.NAME, playerMenu);
+//            addCard(returnPlayerScreen, returnPlayerScreen.NAME);
+//            changeCard(returnPlayerScreen.NAME);
+//            removeCard(playerMenu);
         }
 
         if (e.getSource() == playerMenu.getExitButton()){
@@ -234,23 +233,35 @@ public class ScreenControl implements ActionListener{
                 endGame(source);
             }
             else {
-                if (string.equals("Fifty Fifty")){
-                    currentGame.useFiftyFiftyLifeLine();
-                    currentGame.setHasFiftyFifty(false);
-                }
-                else if (string.equals("Ask The Audience")){
-                    currentGame.useAskAudience();
-                    currentGame.setAskTheAudience(false);
-                }
-                else if (string.equals("Phone A Friend")){
-                    currentGame.usePhoneAFriend();
-                    currentGame.setPhoneAFriend(false);
+                switch (string) {
+                    case "Fifty Fifty":
+                        currentGame.useFiftyFiftyLifeLine();
+                        break;
+                    case "Ask The Audience":
+                        StringBuilder audienceDecision = currentGame.useAskAudience();
+                        if (!currentGame.isAskTheAudience()){
+                            JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
+                                    JOptionPane.QUESTION_MESSAGE);
+                        }
+                        //currentGame.setAskTheAudience(false);
+                        break;
+                    case "Phone A Friend":
+                        StringBuilder friendString = currentGame.usePhoneAFriend();
+
+                        if (!currentGame.isHasFiftyFifty()){
+                            JOptionPane.showMessageDialog(null, friendString.toString(), "PHONE A FRIEND",
+                                    JOptionPane.QUESTION_MESSAGE);
+                        }
+
+                        //currentGame.setPhoneAFriend(false);
+                        break;
                 }
 
                 questionPanel = new QuestionPanel(currentGame, this);
-                addCard(questionPanel, questionPanel.NAME);
-                changeCard(questionPanel.NAME);
-                removeCard(confirmScreen);
+                cardSwitch(questionPanel, questionPanel.NAME, confirmScreen);
+//                addCard(questionPanel, questionPanel.NAME);
+//                changeCard(questionPanel.NAME);
+//                removeCard(confirmScreen);
             }
 
         }
@@ -320,9 +331,10 @@ public class ScreenControl implements ActionListener{
         //go back to player selection
         if (e.getSource() == newPlayerScreen.getBackButton() || e.getSource() == returnPlayerScreen.getBackButton()){
             playerMenu = new PlayerMenu(this);
-            addCard(playerMenu, playerMenu.NAME);
-            changeCard(playerMenu.NAME);
-            removeCard(source);
+            cardSwitch(playerMenu, playerMenu.NAME, source);
+//            addCard(playerMenu, playerMenu.NAME);
+//            changeCard(playerMenu.NAME);
+//            removeCard(source);
         }
 
         //exit to mainMenu
@@ -333,9 +345,10 @@ public class ScreenControl implements ActionListener{
 
         if (playerCreated){
             questionPanel = new QuestionPanel(currentGame, this);
-            addCard(questionPanel, questionPanel.NAME);
-            changeCard(questionPanel.NAME);
-            removeCard(playerMenu);
+            cardSwitch(questionPanel, questionPanel.NAME, playerMenu);
+//            addCard(questionPanel, questionPanel.NAME);
+//            changeCard(questionPanel.NAME);
+//            removeCard(playerMenu);
             removeCard(source);
         }
     }
@@ -345,20 +358,26 @@ public class ScreenControl implements ActionListener{
 
         if (e.getSource() == questionPanel.getFiftyFifty() && currentGame.isHasFiftyFifty()){
             confirmScreen = new ConfirmScreen(currentGame.getFiftyFiftyString(), this);
-            panelCont.add(confirmScreen, confirmScreen.NAME);
-            changeCard(confirmScreen.NAME);
+//            addCard(confirmScreen, confirmScreen.NAME);
+//           // panelCont.add(confirmScreen, confirmScreen.NAME);
+//            changeCard(confirmScreen.NAME);
         }
         else if (e.getSource() == questionPanel.getPhoneFriend() && currentGame.isPhoneAFriend()){
             confirmScreen = new ConfirmScreen(currentGame.getPhoneAFriend(), this);
-            panelCont.add(confirmScreen, confirmScreen.NAME);
-            changeCard(confirmScreen.NAME);
+//            addCard(confirmScreen, confirmScreen.NAME);
+//            //panelCont.add(confirmScreen, confirmScreen.NAME);
+//            changeCard(confirmScreen.NAME);
         }
         else if (e.getSource() == questionPanel.getAskAudience() && currentGame.isAskTheAudience()){
             confirmScreen = new ConfirmScreen(currentGame.getAskTheAudience(), this);
-            panelCont.add(confirmScreen, confirmScreen.NAME);
-            changeCard(confirmScreen.NAME);
+//            addCard(confirmScreen, confirmScreen.NAME);
+//            //panelCont.add(confirmScreen, confirmScreen.NAME);
+//            changeCard(confirmScreen.NAME);
         }
-        else if (e.getSource() == questionPanel.getButtonA()){
+        addCard(confirmScreen, confirmScreen.NAME);
+        changeCard(confirmScreen.NAME);
+
+        if (e.getSource() == questionPanel.getButtonA()){
             currentGame.verifyAnswer(String.valueOf(Letters.A));
             checkGameStatus = true;
         }
@@ -414,12 +433,7 @@ public class ScreenControl implements ActionListener{
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ScreenControl();
-            }
-        });
+        SwingUtilities.invokeLater(ScreenControl::new);
     }
 
 
