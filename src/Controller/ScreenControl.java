@@ -191,7 +191,7 @@ public class ScreenControl implements ActionListener {
                 System.gc(); //garbage collect old game
             });
 
-            newQuestionInputPanel.getSubmitButton().addActionListener( e3 ->{
+            newQuestionInputPanel.getSubmitButton().addActionListener( e4 ->{
                 //TODO action for question input here
 
                 changeCard(mainMenu.NAME);
@@ -248,7 +248,7 @@ public class ScreenControl implements ActionListener {
             });
 
         }
-        //temp action
+        //TODO temp action REMOVE
         else if (e.getSource() == mainMenu.getInputQuestion()){
             newQuestionInputPanel = new NewQuestionInputPanel(this);
             addCard(newQuestionInputPanel, newQuestionInputPanel.NAME);
@@ -267,17 +267,12 @@ public class ScreenControl implements ActionListener {
         if (e.getSource() == playerMenu.getNewPlayerButton()){
             newPlayerScreen = new NewPlayerScreen(this);
             cardSwitch(newPlayerScreen, newPlayerScreen.NAME, playerMenu);
-//            addCard(newPlayerScreen, newPlayerScreen.NAME);
-//            changeCard(newPlayerScreen.NAME);
-//            removeCard(playerMenu);
         }
 
         if (e.getSource() == playerMenu.getReturnPlayerButton()){
             returnPlayerScreen = new ReturnPlayerScreen(this);
             cardSwitch(returnPlayerScreen, returnPlayerScreen.NAME, playerMenu);
-//            addCard(returnPlayerScreen, returnPlayerScreen.NAME);
-//            changeCard(returnPlayerScreen.NAME);
-//            removeCard(playerMenu);
+
         }
 
         if (e.getSource() == playerMenu.getExitButton()){
@@ -309,7 +304,7 @@ public class ScreenControl implements ActionListener {
                             JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
                                     JOptionPane.QUESTION_MESSAGE);
                         }
-                        //currentGame.setAskTheAudience(false);
+
                         break;
                     case "Phone A Friend":
                         StringBuilder friendString = currentGame.usePhoneAFriend();
@@ -319,15 +314,11 @@ public class ScreenControl implements ActionListener {
                                     JOptionPane.QUESTION_MESSAGE);
                         }
 
-                        //currentGame.setPhoneAFriend(false);
                         break;
                 }
 
                 questionPanel = new QuestionPanel(currentGame, this);
                 cardSwitch(questionPanel, questionPanel.NAME, confirmScreen);
-//                addCard(questionPanel, questionPanel.NAME);
-//                changeCard(questionPanel.NAME);
-//                removeCard(confirmScreen);
             }
 
         }
@@ -399,9 +390,6 @@ public class ScreenControl implements ActionListener {
         if (e.getSource() == newPlayerScreen.getBackButton() || e.getSource() == returnPlayerScreen.getBackButton()){
             playerMenu = new PlayerMenu(this);
             cardSwitch(playerMenu, playerMenu.NAME, source);
-//            addCard(playerMenu, playerMenu.NAME);
-//            changeCard(playerMenu.NAME);
-//            removeCard(source);
         }
 
         //exit to mainMenu
@@ -413,9 +401,6 @@ public class ScreenControl implements ActionListener {
         if (playerCreated){
             questionPanel = new QuestionPanel(currentGame, this);
             cardSwitch(questionPanel, questionPanel.NAME, playerMenu);
-//            addCard(questionPanel, questionPanel.NAME);
-//            changeCard(questionPanel.NAME);
-//            removeCard(playerMenu);
             removeCard(source);
         }
     }
@@ -496,7 +481,6 @@ public class ScreenControl implements ActionListener {
 
     public void startGame(){
         currentGame = new GameApplication();
-
     }
 
     public static void main(String[] args) {

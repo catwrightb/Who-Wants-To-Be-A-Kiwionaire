@@ -116,8 +116,6 @@ public class GameApplication {
                  }
              }
          }
-//         JOptionPane.showMessageDialog(null, audienceDecision.toString(), "AUDIENCE",
-//                 JOptionPane.QUESTION_MESSAGE);
 
          this.setAskTheAudience(false);
 
@@ -200,9 +198,6 @@ public class GameApplication {
             }
         }
         friendString.append(".");
-
-//        JOptionPane.showMessageDialog(null, friendString.toString(), "PHONE A FRIEND",
-//                JOptionPane.QUESTION_MESSAGE);
 
         this.setPhoneAFriend(false);
 
