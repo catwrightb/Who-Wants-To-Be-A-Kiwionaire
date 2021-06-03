@@ -1,5 +1,6 @@
 package Controller;
 
+import Database.QuestionDB;
 import Database.UserDB;
 import Models.*;
 import Views.*;
@@ -31,6 +32,7 @@ public class ScreenControl implements ActionListener {
     CreditPanel creditPanel;
     LeaderBoardPanel leaderBoardPanel;
     NewQuestionInputPanel newQuestionInputPanel;
+    private QuestionDB questionDB;
     private final int LEVELS_TO_WIN = Level.LEVEL15.getPrizeLevel()+1;
 
     public ScreenControl() {
@@ -121,16 +123,35 @@ public class ScreenControl implements ActionListener {
         else if (source instanceof NewQuestionInputPanel){
             newAnswerPanelHandler(e);
         }
+        else if (source instanceof EndGamePanel){
+            endGameHandler(e);
+        }
     }
 
     public void newAnswerPanelHandler(ActionEvent e){
         if (e.getSource() == newQuestionInputPanel.getExitButton()){
-            JPanel source = (JPanel) ((Component) e.getSource()).getParent();
-            endGame(source);
+            changeCard(mainMenu.NAME);
+            removeCard(newQuestionInputPanel);
 
         }
         else if (e.getSource() == newQuestionInputPanel.getSubmitButton()){
-            Question newQuestion = new Question();
+
+            String question = newQuestionInputPanel.getQuestionTextArea().getText();
+            String correctAnswer = newQuestionInputPanel.getCorrectAnsText().getText();
+            String[] wrongAnswers = new String[3];
+            wrongAnswers[0] = newQuestionInputPanel.getWrongAnswer1().getText();
+            wrongAnswers[1] = newQuestionInputPanel.getWrongAnswer2().getText();
+            wrongAnswers[2] = newQuestionInputPanel.getWrongAnswer3().getText();
+
+            questionDB = new QuestionDB();
+            boolean result = questionDB.addQuestionToGame(question, correctAnswer, wrongAnswers);
+
+            if (result){
+                JOptionPane.showMessageDialog(null, "Your question has been added!",
+                        "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+
+                newQuestionInputPanel.getSubmitButton().setEnabled(false);
+            }
 
         }
 
@@ -142,15 +163,14 @@ public class ScreenControl implements ActionListener {
         if (e.getSource() == correctAnswerPanel.getContinueButton() && !currentGame.isGameWon()){
             questionPanel = new QuestionPanel(currentGame,this);
             cardSwitch(questionPanel, questionPanel.NAME, source);
-//            addCard(questionPanel, questionPanel.NAME);
-//            changeCard(questionPanel.NAME);
-//            removeCard(source);
+
         }
 
         if (e.getSource() == correctAnswerPanel.getExitButton()
                 || (e.getSource() == correctAnswerPanel.getContinueButton()
                 && currentGame.isGameWon())){
-            endGame(source);
+            endGamePanel = new EndGamePanel(currentGame, this);
+            cardSwitch(endGamePanel, endGamePanel.NAME, source);
         }
     }
 
@@ -158,53 +178,25 @@ public class ScreenControl implements ActionListener {
         JPanel source = (JPanel) ((Component) e.getSource()).getParent();
 
         if (e.getSource() == inCorrectAnswerPanel.getContinueButton()){
-            endGame(source);
+            endGamePanel = new EndGamePanel(currentGame, this);
+            cardSwitch(endGamePanel, endGamePanel.NAME, source);
+
         }
     }
 
-    public void endGame(JPanel source){
-        endGamePanel = new EndGamePanel(currentGame,this);
-        cardSwitch(endGamePanel, endGamePanel.NAME, source);
-//        addCard(endGamePanel, endGamePanel.NAME);
-//        changeCard(endGamePanel.NAME);
-//        removeCard(source);
 
-        endGamePanel.getContinueButton().addActionListener(e -> {
+    public void endGameHandler(ActionEvent e){
+        if (e.getSource() == endGamePanel.getContinueButton()){
             changeCard(mainMenu.NAME);
             removeCard(endGamePanel);
+        }
 
-            currentGame = null;
-            System.gc(); //garbage collect old game
-        });
-
-        endGamePanel.getEnterQuestion().addActionListener(e2 -> {
+        if (e.getSource() == endGamePanel.getEnterQuestion()){
             newQuestionInputPanel = new NewQuestionInputPanel(this);
             addCard(newQuestionInputPanel, newQuestionInputPanel.NAME);
             changeCard(newQuestionInputPanel.NAME);
-
-            //TODO combine actions
-            newQuestionInputPanel.getExitButton().addActionListener(e3 -> {
-                changeCard(mainMenu.NAME);
-                removeCard(newQuestionInputPanel);
-
-                currentGame = null;
-                System.gc(); //garbage collect old game
-            });
-
-            newQuestionInputPanel.getSubmitButton().addActionListener( e4 ->{
-                //TODO action for question input here
-
-                changeCard(mainMenu.NAME);
-                removeCard(newQuestionInputPanel);
-
-                currentGame = null;
-                System.gc(); //garbage collect old game
-
-            });
-
-        });
+        }
     }
-
 
 
     public void enterGameHandler(ActionEvent e){
@@ -248,18 +240,18 @@ public class ScreenControl implements ActionListener {
             });
 
         }
-        //TODO temp action REMOVE
-        else if (e.getSource() == mainMenu.getInputQuestion()){
-            newQuestionInputPanel = new NewQuestionInputPanel(this);
-            addCard(newQuestionInputPanel, newQuestionInputPanel.NAME);
-            changeCard(newQuestionInputPanel.NAME);
-
-            newQuestionInputPanel.getExitButton().addActionListener(e14 -> {
-                changeCard(mainMenu.NAME);
-                removeCard(newQuestionInputPanel);
-            });
-
-        }
+//        // temp action REMOVE once testing done
+//        else if (e.getSource() == mainMenu.getInputQuestion()){
+//            newQuestionInputPanel = new NewQuestionInputPanel(this);
+//            addCard(newQuestionInputPanel, newQuestionInputPanel.NAME);
+//            changeCard(newQuestionInputPanel.NAME);
+//
+//            newQuestionInputPanel.getExitButton().addActionListener(e14 -> {
+//                changeCard(mainMenu.NAME);
+//                removeCard(newQuestionInputPanel);
+//            });
+//
+//        }
 
     }
 
@@ -291,7 +283,8 @@ public class ScreenControl implements ActionListener {
 
             if (string.equals("exit")){
                 JPanel source = (JPanel) ((Component) e.getSource()).getParent();
-                endGame(source);
+                endGamePanel = new EndGamePanel(currentGame, this);
+                cardSwitch(endGamePanel, endGamePanel.NAME, source);
             }
             else {
                 switch (string) {

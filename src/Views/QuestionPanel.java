@@ -6,6 +6,7 @@ import jdk.nashorn.internal.ir.IfNode;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 import javax.swing.*;
@@ -25,15 +26,18 @@ public class QuestionPanel extends JPanel{
 
     public QuestionPanel(GameApplication game, ActionListener listener) {
 
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
 
         Question currentQuestion = game.getCurrentQuestion();
         exitButton = new JButton ("Exit");
         exitButton.addActionListener(listener);
         question = new JLabel (currentQuestion.getQuestion());
-        Font questionFont = new Font("Serif", Font.BOLD, 13);
+        Font questionFont = new Font("Serif", Font.PLAIN, 16);
         question.setFont(questionFont);
         question.setForeground(Color.WHITE);
-        stats = new JLabel("Score: " +game.getGameUser().getScore()
+        stats = new JLabel("Score: $" + decimalFormat.format(game.getGameUser().getScore())
                 + " | Question: " +game.getGameRounds());
         stats.setFont(questionFont);
         stats.setForeground(Color.WHITE);
@@ -46,12 +50,12 @@ public class QuestionPanel extends JPanel{
             //buttonA = new JButton (currentQuestion.getaChoice());
             buttonA.addActionListener(listener);
             add (buttonA);
-            buttonA.setBounds (130, 270, 165, 35);
+            buttonA.setBounds (100, 270, 200, 35);
 
             //buttonB = new JButton (currentQuestion.getbChoice());
             buttonB.addActionListener(listener);
             add (buttonB);
-            buttonB.setBounds (365, 270, 165, 35);
+            buttonB.setBounds (365, 270, 200, 35);
         }
 
         //buttons C & D
@@ -59,12 +63,12 @@ public class QuestionPanel extends JPanel{
             //buttonC = new JButton (currentQuestion.getcChoice());
             buttonC.addActionListener(listener);
             add (buttonC);
-            buttonC.setBounds (130, 335, 165, 35);
+            buttonC.setBounds (100, 335, 200, 35);
 
             //buttonD = new JButton (currentQuestion.getdChoice());
             buttonD.addActionListener(listener);
             add (buttonD);
-            buttonD.setBounds (365, 335, 165, 35);
+            buttonD.setBounds (365, 335, 200, 35);
         }
 
 

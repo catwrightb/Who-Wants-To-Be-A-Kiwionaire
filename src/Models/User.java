@@ -1,6 +1,7 @@
 package Models;
 
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,10 +92,15 @@ public class User implements Comparable<User>{
 
     @Override
     public String toString() {
-        return "" +
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
+
+         return  "" +
                 " " + userName +
-                ", " + score +
+                ", $" + decimalFormat.format(score) +
                 "";
+
     }
 
     @Override

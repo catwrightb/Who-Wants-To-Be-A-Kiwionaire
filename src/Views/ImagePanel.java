@@ -29,7 +29,7 @@ public class ImagePanel extends JPanel {
         //adjust the alpha int value to gradually change shading
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setPaint(Color.black);
-        float alpha = 2 * 0.1f;
+        float alpha = 5 * 0.1f;
         AlphaComposite alcom = AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER, alpha);
         g2d.setComposite(alcom);

@@ -111,30 +111,30 @@ public class LeaderBoardPanel extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
         //left
-        nameOne.setBounds (130, 115, 150, 40);
+        nameOne.setBounds (60, 115, 230, 40);
         nameOne.setBorder(compound);
-        positionOne.setBounds (110, 115, 195, 40);
+        positionOne.setBounds (40, 115, 195, 40);
 
-        nameThree.setBounds (130, 195, 150, 40);
+        nameThree.setBounds (60, 195, 230, 40);
         nameThree.setBorder(compound);
-        positionThree.setBounds (110, 195, 195, 40);
+        positionThree.setBounds (40, 195, 195, 40);
 
-        nameFive.setBounds (130, 275, 150, 40);
+        nameFive.setBounds (60, 275, 230, 40);
         nameFive.setBorder(compound);
-        positionFive.setBounds (110, 275, 195, 40);
+        positionFive.setBounds (40, 275, 195, 40);
 
         //right
-        nameTwo.setBounds (440, 115, 150, 40);
+        nameTwo.setBounds (360, 115, 230, 40);
         nameTwo.setBorder(compound);
-        positionTwo.setBounds (420, 115, 195, 40);
+        positionTwo.setBounds (340, 115, 195, 40);
 
-        nameFour.setBounds (440, 195, 150, 40);
+        nameFour.setBounds (360, 195, 230, 40);
         nameFour.setBorder(compound);
-        positionFour.setBounds (420, 195, 195, 40);
+        positionFour.setBounds (340, 195, 195, 40);
 
-        nameSix.setBounds (440, 275, 150, 40);
+        nameSix.setBounds (360, 275, 230, 40);
         nameSix.setBorder(compound);
-        positionSix.setBounds (420, 275, 195, 40);
+        positionSix.setBounds (340, 275, 195, 40);
 
         leaderboardTitle.setBounds (280, 65, 175, 25);
         backButton.setBounds (25, 15, 80, 35);

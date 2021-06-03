@@ -11,7 +11,7 @@ public class MainMenu extends JPanel {
     private JButton instructionButton;
     private JButton creditButton;
     private JButton highScoreButton;
-    private JButton inputQuestion;
+    //private JButton inputQuestion;
 
     public MainMenu(ActionListener listener) {
         //construct components
@@ -21,13 +21,13 @@ public class MainMenu extends JPanel {
         gameTitle.setFont(new Font("Serif", Font.BOLD, 24));
         gameTitle.setForeground(Color.white);
 
-        //---- temp button
-        inputQuestion = new JButton("Temp button for Q");
-        inputQuestion.addActionListener(listener);
-        inputQuestion.setBounds(100,100,140,35);
-        add(inputQuestion);
-
-        //----
+//        //---- temp button for q input test
+//        inputQuestion = new JButton("Temp button for Q");
+//        inputQuestion.addActionListener(listener);
+//        inputQuestion.setBounds(100,100,140,35);
+//        add(inputQuestion);
+//
+//        //----
 
         instructionButton = new JButton ("Instructions");
         instructionButton.addActionListener(listener);
@@ -77,7 +77,7 @@ public class MainMenu extends JPanel {
         return highScoreButton;
     }
 
-    public JButton getInputQuestion() {
-        return inputQuestion;
-    }
+//    public JButton getInputQuestion() {
+//        return inputQuestion;
+//    }
 }

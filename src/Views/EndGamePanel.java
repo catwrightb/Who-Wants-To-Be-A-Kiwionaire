@@ -7,6 +7,7 @@ import Models.Level;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 public class EndGamePanel extends JPanel {
     public String NAME ="endGamePanel";
@@ -14,6 +15,8 @@ public class EndGamePanel extends JPanel {
     private JLabel secondLabel;
     private JLabel thirdLabel;
     private JLabel fourthLabel;
+    private JLabel fifthLabel;
+    private JLabel sixLabel;
     private JLabel infoLabel;
     private JButton continueButton;
     private JButton enterQuestion;
@@ -23,21 +26,32 @@ public class EndGamePanel extends JPanel {
         UserDB userDB = new UserDB();
         userDB.updateUserScore(game.getGameUser());
 
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
+
         if (game.getGameRounds() >= Level.LEVEL15.getPrizeLevel()){
-            secondLabel = new JLabel("Congratulations "+game.getGameUser().getUserName()+"!");
-            thirdLabel = new JLabel ("You Have Won \"Who Wants to be a Kiwionaire?\"!");
-            fourthLabel = new JLabel ("You have won $" +game.getGameUser().getScore()+ "!");
+            firstLable = new JLabel("Congratulations "+game.getGameUser().getUserName()+"!");
+            secondLabel = new JLabel ("You Have Won \"Who Wants to be a Kiwionaire?\"!");
+            thirdLabel = new JLabel ("You have won $" +decimalFormat.format(game.getGameUser().getScore())+ "!");
+            fourthLabel = new JLabel("If you'd like to input your own question click the enter a question button.");
+            fifthLabel = new JLabel("Otherwise click the continue button to return to the main menu.");
             enterQuestion = new JButton("Submit New Question");
             continueButton = new JButton ("Continue");
 
-            secondLabel.setBounds(275, 80, 160, 30);
-            thirdLabel.setBounds (185, 105, 360, 65);
-            fourthLabel.setBounds (260, 135, 320, 95);
-            enterQuestion.setBounds(120, 310,150,35);
-            continueButton.setBounds (300, 310, 100, 35);
+            firstLable.setBounds(220, 40, 595, 40);
+            secondLabel.setBounds (165, 80, 565, 35);
+            thirdLabel.setBounds (230, 110, 485, 45);
+            fourthLabel.setBounds(100, 150, 505, 30);
+            fifthLabel.setBounds (140, 170, 405, 30);
 
+            firstLable.setForeground(Color.WHITE);
+            add(firstLable);
             add(enterQuestion);
+            add(firstLable);
             enterQuestion.addActionListener(listener);
+            enterQuestion.setBounds(125, 260, 175, 35);
+            continueButton.setBounds(355, 260, 175, 35);
 
         }
         else {
@@ -47,17 +61,19 @@ public class EndGamePanel extends JPanel {
             thirdLabel = new JLabel ("We will automatically save your last game score and username for you.");
             fourthLabel = new JLabel ("Make sure to play again soon to improve your score and maybe even WIN!");
             continueButton = new JButton ("Continue");
+            infoLabel = new JLabel ("Please press continue to return to the main menu.");
+            infoLabel.setForeground(Color.WHITE);
 
             firstLable.setBounds (180, 30, 355, 70);
             secondLabel.setBounds (125, 60, 435, 90);
             thirdLabel.setBounds (110, 110, 465, 70);
             fourthLabel.setBounds (105, 140, 475, 90);
-
+            infoLabel.setBounds (170, 240, 325, 30);
 
             firstLable.setForeground(Color.WHITE);
             add (firstLable);
-
-            continueButton.setBounds (270, 310, 100, 25);
+            add (infoLabel);
+            continueButton.setBounds (245, 290, 175, 35);
 
         }
 
@@ -67,30 +83,17 @@ public class EndGamePanel extends JPanel {
         secondLabel.setForeground(Color.WHITE);
         thirdLabel.setForeground(Color.WHITE);
         fourthLabel.setForeground(Color.WHITE);
-
-
-        infoLabel = new JLabel ("Please press continue to return to the main menu.");
-        infoLabel.setForeground(Color.WHITE);
-
-
         continueButton.addActionListener(listener);
 
         //adjust size and set layout
         setPreferredSize (new Dimension(672, 454));
         setLayout (null);
 
-        //add components
-
         add (secondLabel);
         add (thirdLabel);
         add (fourthLabel);
-        add (infoLabel);
+
         add (continueButton);
-
-        //set component bounds (only needed by Absolute Positioning)
-
-        infoLabel.setBounds (170, 270, 325, 30);
-       // continueButton.setBounds (270, 310, 100, 25);
 
         ImagePanel panel = new ImagePanel(new ImageIcon("images/Kea.jpeg").getImage());
         panel.setSize(650,450);

@@ -27,10 +27,10 @@ public class QuestionDB {
         conn = dbManager.getConnection();
     }
 
-    public static void main(String[] args) {
-        QuestionDB users = new QuestionDB();
-        users.printTableContents();
-    }
+//    public static void main(String[] args) {
+//        QuestionDB users = new QuestionDB();
+//        users.printTableContents();
+//    }
 
     public ArrayList<Question> questionListCreator(){
         ResultSet rs = dbManager.queryDB("SELECT * FROM " + QUESTIONS_TABLE_NAME);
@@ -89,7 +89,7 @@ public class QuestionDB {
         System.out.println(QUESTIONS_TABLE_NAME + " TABLE DROPPED");
     }
 
-    public void addQuestionToGame(String question, String correctAnswer, String[] wrongAnswers){
+    public boolean addQuestionToGame(String question, String correctAnswer, String[] wrongAnswers){
         if (checkIfQuestionExists(question)){
             int level = new Random().nextInt(15) + 1;
             String sql = "INSERT INTO " + QUESTIONS_TABLE_NAME + " VALUES ('";
@@ -101,8 +101,10 @@ public class QuestionDB {
             sql += correctAnswer + "', ";
             sql += level + ")";
             dbManager.updateDB(sql);
-            JOptionPane.showMessageDialog(null, "Your question has been added.", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+
+            return true;
         }
+        return false;
     }
 
     public boolean checkIfQuestionExists(String question){
