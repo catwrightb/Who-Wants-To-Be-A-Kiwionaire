@@ -134,19 +134,19 @@ public class GameApplication {
 
         switch (textRandom){
             case 0:
-                friendString.append("Dude, it's great to hear from you! " +
+                friendString.append("Dude, it's great to hear from you!\n" +
                         "I'm not entirely sure but I think the answer is ");
                 break;
             case 1:
-                friendString.append("Oh my glob, I totally know this answer. " +
+                friendString.append("Oh my glob, I totally know this answer.\n" +
                         "The answer is for sure ");
                 break;
             case 2:
-                friendString.append("I'm not sure why you called me you know I failed Maths class. " +
+                friendString.append("I'm not sure why you called me you know I failed Maths class.\n" +
                         "I guess if I have to pick I'd say the answer is ");
                 break;
             case 3:
-                friendString.append("Pizza Palace how can I help you . . . Oh umm I think you have the wrong number. " +
+                friendString.append("Pizza Palace how can I help you . . . Oh umm I think you have the wrong number.\n" +
                         "I guess I could pick a answer though, maybe it's ");
                 break;
         }

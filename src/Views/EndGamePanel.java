@@ -20,6 +20,8 @@ public class EndGamePanel extends JPanel {
 
     public EndGamePanel(GameApplication game, ActionListener listener) {
         //construct components
+        UserDB userDB = new UserDB();
+        userDB.updateUserScore(game.getGameUser());
 
         if (game.getGameRounds() >= Level.LEVEL15.getPrizeLevel()){
             secondLabel = new JLabel("Congratulations "+game.getGameUser().getUserName()+"!");

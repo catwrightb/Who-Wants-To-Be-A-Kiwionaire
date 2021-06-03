@@ -274,7 +274,7 @@ public class ScreenControl implements ActionListener {
                     case "Phone A Friend":
                         StringBuilder friendString = currentGame.usePhoneAFriend();
 
-                        if (!currentGame.isHasFiftyFifty()){
+                        if (!currentGame.isPhoneAFriend()){
                             JOptionPane.showMessageDialog(null, friendString.toString(), "PHONE A FRIEND",
                                     JOptionPane.QUESTION_MESSAGE);
                         }
