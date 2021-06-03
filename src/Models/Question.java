@@ -20,7 +20,6 @@ public class Question {
     HashSet<String> stringHashSet;
 
     public Question() {
-
     }
 
     public Question(String question, String correctAnswerStr, String inputOne,
