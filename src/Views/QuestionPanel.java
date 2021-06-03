@@ -2,9 +2,11 @@ package Views;
 
 import Models.GameApplication;
 import Models.Question;
+import jdk.nashorn.internal.ir.IfNode;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -17,13 +19,12 @@ public class QuestionPanel extends JPanel{
     private JButton buttonD;
     private JLabel question;
     private JLabel stats;
-
-
     private JButton fiftyFifty;
     private JButton phoneFriend;
     private JButton askAudience;
 
     public QuestionPanel(GameApplication game, ActionListener listener) {
+
 
         Question currentQuestion = game.getCurrentQuestion();
         exitButton = new JButton ("Exit");
@@ -37,28 +38,30 @@ public class QuestionPanel extends JPanel{
         stats.setFont(questionFont);
         stats.setForeground(Color.WHITE);
 
+        JButtonRandom(game);
+
         //TODO make sure buttons are large enough
         //buttons A & B
-        if (!currentQuestion.getaChoice().isEmpty() && !currentQuestion.getbChoice().isEmpty()){
-            buttonA = new JButton (currentQuestion.getaChoice());
+        if (!currentQuestion.getaChoice().equals(" ") && !currentQuestion.getbChoice().equals(" ")){
+            //buttonA = new JButton (currentQuestion.getaChoice());
             buttonA.addActionListener(listener);
             add (buttonA);
             buttonA.setBounds (130, 270, 165, 35);
 
-            buttonB = new JButton (currentQuestion.getbChoice());
+            //buttonB = new JButton (currentQuestion.getbChoice());
             buttonB.addActionListener(listener);
             add (buttonB);
             buttonB.setBounds (365, 270, 165, 35);
         }
 
         //buttons C & D
-        if (!currentQuestion.getcChoice().isEmpty() && !currentQuestion.getdChoice().isEmpty()){
-            buttonC = new JButton (currentQuestion.getcChoice());
+        if (!currentQuestion.getcChoice().equals(" ") && !currentQuestion.getdChoice().equals(" ")){
+            //buttonC = new JButton (currentQuestion.getcChoice());
             buttonC.addActionListener(listener);
             add (buttonC);
             buttonC.setBounds (130, 335, 165, 35);
 
-            buttonD = new JButton (currentQuestion.getdChoice());
+            //buttonD = new JButton (currentQuestion.getdChoice());
             buttonD.addActionListener(listener);
             add (buttonD);
             buttonD.setBounds (365, 335, 165, 35);
@@ -105,14 +108,55 @@ public class QuestionPanel extends JPanel{
         question.setBounds (50, 90, 565, 80);
         stats.setBounds(35, 15, 470, 35);
 
-
-
         this.setVisible(true);
 
         ImagePanel panel = new ImagePanel(new ImageIcon("images/Milford.jpeg").getImage());
-
         panel.setSize(650,450);
         add(panel);
+
+    }
+
+    public void JButtonRandom(GameApplication game){
+        Question currentQuestion = game.getCurrentQuestion();
+        Random random = new Random();
+
+        if (!currentQuestion.getaChoice().equals(" ") && !currentQuestion.getbChoice().equals(" ")
+        && !currentQuestion.getcChoice().equals(" ") && !currentQuestion.getdChoice().equals(" ")){
+            int randomNumber = random.nextInt(4);
+
+            if (randomNumber == 1){
+                this.buttonA = new JButton (currentQuestion.getaChoice()); //a
+                this.buttonB = new JButton(currentQuestion.getbChoice()); //b
+                this.buttonC = new JButton (currentQuestion.getcChoice()); //c
+                this.buttonD = new JButton(currentQuestion.getdChoice()); //d
+            }
+            else if (randomNumber == 2){
+                this.buttonA = new JButton (currentQuestion.getcChoice()); //c
+                this.buttonB = new JButton(currentQuestion.getbChoice()); //b
+                this.buttonC = new JButton (currentQuestion.getaChoice()); //a
+                this.buttonD = new JButton(currentQuestion.getdChoice()); //d
+            }
+            else if (randomNumber == 3){
+                this.buttonA = new JButton (currentQuestion.getbChoice()); //b
+                this.buttonB = new JButton(currentQuestion.getcChoice()); //c
+                this.buttonC = new JButton (currentQuestion.getdChoice()); //d
+                this.buttonD = new JButton(currentQuestion.getaChoice()); //a
+            }
+            else {
+                this.buttonA = new JButton (currentQuestion.getcChoice()); //c
+                this.buttonB = new JButton(currentQuestion.getaChoice()); //a
+                this.buttonC = new JButton (currentQuestion.getdChoice()); //d
+                this.buttonD = new JButton(currentQuestion.getbChoice()); //b
+            }
+        }
+        else if (!currentQuestion.getaChoice().equals(" ") && !currentQuestion.getbChoice().equals(" ")){
+            this.buttonA = new JButton (currentQuestion.getaChoice());
+            this.buttonB = new JButton(currentQuestion.getbChoice());
+        }
+        else if (!currentQuestion.getcChoice().equals(" ") && !currentQuestion.getdChoice().equals(" ")){
+            this.buttonC = new JButton (currentQuestion.getcChoice());
+            this.buttonD = new JButton(currentQuestion.getdChoice());
+        }
 
 
 
@@ -162,4 +206,6 @@ public class QuestionPanel extends JPanel{
     public void setAskAudience(JButton askAudience) {
         this.askAudience = askAudience;
     }
+
+
 }

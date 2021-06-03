@@ -32,7 +32,7 @@ public class GameApplication {
         //questions and rounds
         //this.questionArrayList = readInQuestions();
         this.questionArrayList = new QuestionDB().questionListCreator();
-        this.gameRounds = 15;
+        this.gameRounds = 1;
 
         //linelife
         this.hasFiftyFifty = true;
@@ -54,13 +54,13 @@ public class GameApplication {
      public void useFiftyFiftyLifeLine(){
         Question currentQ = this.getCurrentQuestion();
 
-        if (currentQ.correctAnswerChar.equals("A") || currentQ.correctAnswerChar.equals("B") ){
-            currentQ.cChoice = "";
-            currentQ.dChoice = "";
+        if (currentQ.getCorrectAnswerStr().equals(currentQ.aChoice) || currentQ.getCorrectAnswerStr().equals(currentQ.bChoice) ){
+            currentQ.cChoice = " ";
+            currentQ.dChoice = " ";
         }
-        else if (currentQ.correctAnswerChar.equals("C") || currentQ.correctAnswerChar.equals("D") ){
-            currentQ.aChoice = "";
-            currentQ.bChoice = "";
+        else if (currentQ.getCorrectAnswerStr().equals(currentQ.cChoice) || currentQ.getCorrectAnswerStr().equals(currentQ.dChoice) ){
+            currentQ.aChoice = " ";
+            currentQ.bChoice = " ";
         }
 
         this.setHasFiftyFifty(false);

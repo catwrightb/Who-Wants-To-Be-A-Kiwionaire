@@ -430,19 +430,19 @@ public class ScreenControl implements ActionListener {
 //        changeCard(confirmScreen.NAME);
 
         if (e.getSource() == questionPanel.getButtonA()){
-            currentGame.verifyAnswer(currentGame.currentQuestion.getaChoice());
+            currentGame.verifyAnswer(questionPanel.getButtonA().getText());
             checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonB()){
-            currentGame.verifyAnswer(currentGame.currentQuestion.getbChoice());
+            currentGame.verifyAnswer(questionPanel.getButtonB().getText());
             checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonC()){
-            currentGame.verifyAnswer(currentGame.currentQuestion.getcChoice());
+            currentGame.verifyAnswer(questionPanel.getButtonC().getText());
             checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonD()){
-            currentGame.verifyAnswer(currentGame.currentQuestion.getdChoice());
+            currentGame.verifyAnswer(questionPanel.getButtonD().getText());
             checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getExitButton()){
