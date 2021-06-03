@@ -32,7 +32,7 @@ public class GameApplication {
         //questions and rounds
         //this.questionArrayList = readInQuestions();
         this.questionArrayList = new QuestionDB().questionListCreator();
-        this.gameRounds = 14;
+        this.gameRounds = 1;
 
         //linelife
         this.hasFiftyFifty = true;

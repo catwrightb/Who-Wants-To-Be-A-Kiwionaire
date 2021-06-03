@@ -38,6 +38,7 @@ public class User implements Comparable<User>{
      *
      */
     public void upDateScore( int gameRoundWon){
+            gameRoundWon--;
 
             Level[] level = Level.values();
 
