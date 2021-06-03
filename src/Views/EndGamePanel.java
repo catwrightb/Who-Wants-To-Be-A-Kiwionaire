@@ -16,6 +16,7 @@ public class EndGamePanel extends JPanel {
     private JLabel fourthLabel;
     private JLabel infoLabel;
     private JButton continueButton;
+    private JButton enterQuestion;
 
     public EndGamePanel(GameApplication game, ActionListener listener) {
         //construct components
@@ -24,10 +25,13 @@ public class EndGamePanel extends JPanel {
             secondLabel = new JLabel("Congratulations "+game.getGameUser().getUserName()+"!");
             thirdLabel = new JLabel ("You Have Won \"Who Wants to be a Kiwionaire?\"!");
             fourthLabel = new JLabel ("You have won $" +game.getGameUser().getScore()+ "!");
+            enterQuestion = new JButton("Submit New Question");
 
             secondLabel.setBounds(275, 80, 160, 30);
             thirdLabel.setBounds (185, 105, 360, 65);
             fourthLabel.setBounds (260, 135, 320, 95);
+            enterQuestion.setBounds(180, 310,100,35);
+            continueButton.setBounds (270, 310, 100, 35);
 
         }
         else {
@@ -44,6 +48,8 @@ public class EndGamePanel extends JPanel {
 
             firstLable.setForeground(Color.WHITE);
             add (firstLable);
+
+            continueButton.setBounds (270, 310, 100, 25);
 
         }
 
@@ -76,7 +82,7 @@ public class EndGamePanel extends JPanel {
         //set component bounds (only needed by Absolute Positioning)
 
         infoLabel.setBounds (170, 270, 325, 30);
-        continueButton.setBounds (270, 310, 100, 25);
+       // continueButton.setBounds (270, 310, 100, 25);
 
         ImagePanel panel = new ImagePanel(new ImageIcon("images/Kea.jpeg").getImage());
         panel.setSize(650,450);

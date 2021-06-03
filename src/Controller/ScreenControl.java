@@ -1,10 +1,7 @@
 package Controller;
 
 import Database.UserDB;
-import Models.GameApplication;
-import Models.Letters;
-import Models.Level;
-import Models.User;
+import Models.*;
 import Views.*;
 
 import javax.swing.*;
@@ -33,6 +30,7 @@ public class ScreenControl implements ActionListener {
     InstructionPanel instructionPanel;
     CreditPanel creditPanel;
     LeaderBoardPanel leaderBoardPanel;
+    NewQuestionInputPanel newQuestionInputPanel;
     private final int LEVELS_TO_WIN = Level.LEVEL15.getPrizeLevel()+1;
 
     public ScreenControl() {
@@ -42,7 +40,6 @@ public class ScreenControl implements ActionListener {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
 
         frame.setSize(width, height);
 
@@ -121,6 +118,22 @@ public class ScreenControl implements ActionListener {
         else if (source instanceof CorrectAnswerPanel){
             correctAnswerPanelHandler(e);
         }
+        else if (source instanceof NewQuestionInputPanel){
+            newAnswerPanelHandler(e);
+        }
+    }
+
+    public void newAnswerPanelHandler(ActionEvent e){
+        if (e.getSource() == newQuestionInputPanel.getExitButton()){
+            JPanel source = (JPanel) ((Component) e.getSource()).getParent();
+            endGame(source);
+
+        }
+        else if (e.getSource() == newQuestionInputPanel.getSubmitButton()){
+            Question newQuestion = new Question();
+
+        }
+
     }
 
     public void correctAnswerPanelHandler(ActionEvent e){
@@ -310,6 +323,7 @@ public class ScreenControl implements ActionListener {
             }
             else { // Setup the user's game
                 currentGame.setGameUser(gameUser);
+                gameUser.resetScoreToZero();
                 playerCreated = true;
             }
         }

@@ -16,9 +16,41 @@ public class Question {
     String cChoice;
     String dChoice;
     Integer level;
+    ArrayList<String> stringAnswers;
+    HashSet<String> stringHashSet;
 
     public Question() {
 
+    }
+
+    public Question(String question, String correctAnswerStr, String inputOne,
+                    String inputTwo, String inputThree) {
+        this.question = question;
+        //this.correctAnswerStr = correctAnswerStr;
+        //this.correctAnswerChar = correctAnswerChar;
+
+        stringAnswers = new ArrayList<>();
+        stringHashSet = new HashSet<>();
+        stringAnswers.add(inputOne);
+        stringAnswers.add(inputTwo);
+        stringAnswers.add(inputThree);
+        stringAnswers.add(correctAnswerStr);
+
+        stringHashSet.addAll(stringAnswers);
+
+        for (int i = 0; i < stringHashSet.size(); i++) {
+
+        }
+
+
+
+
+
+        this.aChoice = aChoice;
+        this.bChoice = bChoice;
+        this.cChoice = cChoice;
+        this.dChoice = dChoice;
+        this.level = level;
     }
 
     public String getCorrectAnswerStr() {

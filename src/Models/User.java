@@ -48,6 +48,13 @@ public class User implements Comparable<User>{
 
     }
 
+    public void resetScoreToZero(){
+        if (this.score > 0){
+            this.setScore(0);
+        }
+
+    }
+
 
     public void updateScoreFile(){
         // Create HashMap to store user names / scores for overwriting file
