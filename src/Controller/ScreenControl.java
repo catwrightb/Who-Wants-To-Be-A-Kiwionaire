@@ -371,24 +371,24 @@ public class ScreenControl implements ActionListener {
 
         if (e.getSource() == questionPanel.getFiftyFifty() && currentGame.isHasFiftyFifty()){
             confirmScreen = new ConfirmScreen(currentGame.getFiftyFiftyString(), this);
-//            addCard(confirmScreen, confirmScreen.NAME);
-//           // panelCont.add(confirmScreen, confirmScreen.NAME);
-//            changeCard(confirmScreen.NAME);
+            addCard(confirmScreen, confirmScreen.NAME);
+           // panelCont.add(confirmScreen, confirmScreen.NAME);
+            changeCard(confirmScreen.NAME);
         }
         else if (e.getSource() == questionPanel.getPhoneFriend() && currentGame.isPhoneAFriend()){
             confirmScreen = new ConfirmScreen(currentGame.getPhoneAFriend(), this);
-//            addCard(confirmScreen, confirmScreen.NAME);
-//            //panelCont.add(confirmScreen, confirmScreen.NAME);
-//            changeCard(confirmScreen.NAME);
+            addCard(confirmScreen, confirmScreen.NAME);
+            //panelCont.add(confirmScreen, confirmScreen.NAME);
+            changeCard(confirmScreen.NAME);
         }
         else if (e.getSource() == questionPanel.getAskAudience() && currentGame.isAskTheAudience()){
             confirmScreen = new ConfirmScreen(currentGame.getAskTheAudience(), this);
-//            addCard(confirmScreen, confirmScreen.NAME);
-//            //panelCont.add(confirmScreen, confirmScreen.NAME);
-//            changeCard(confirmScreen.NAME);
+            addCard(confirmScreen, confirmScreen.NAME);
+            //panelCont.add(confirmScreen, confirmScreen.NAME);
+            changeCard(confirmScreen.NAME);
         }
-        addCard(confirmScreen, confirmScreen.NAME);
-        changeCard(confirmScreen.NAME);
+//        addCard(confirmScreen, confirmScreen.NAME);
+//        changeCard(confirmScreen.NAME);
 
         if (e.getSource() == questionPanel.getButtonA()){
             currentGame.verifyAnswer(String.valueOf(Letters.A));
