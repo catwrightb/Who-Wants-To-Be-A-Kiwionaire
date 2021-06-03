@@ -27,10 +27,10 @@ public class QuestionDB {
         conn = dbManager.getConnection();
     }
 
-//    public static void main(String[] args) {
-//        QuestionDB users = new QuestionDB();
-//        users.printTableContents();
-//    }
+    public static void main(String[] args) {
+        QuestionDB users = new QuestionDB();
+        users.printTableContents();
+    }
 
     public ArrayList<Question> questionListCreator(){
         ResultSet rs = dbManager.queryDB("SELECT * FROM " + QUESTIONS_TABLE_NAME);
