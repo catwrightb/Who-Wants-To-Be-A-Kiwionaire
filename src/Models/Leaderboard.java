@@ -30,25 +30,26 @@ public class Leaderboard {
     }
 
     public void getTopSixUsers(ArrayList<User> users){
-        Leaderboard test2 = new Leaderboard();
-        test2.leaderBoardSet = new HashMap<>();
+        Leaderboard leaderboard = new Leaderboard();
+        leaderboard.leaderBoardSet = new HashMap<>();
 
         for (int i = 0; i < 6; i++) {
-            test2.leaderBoardSet.put(i, users.get(i));
+            leaderboard.leaderBoardSet.put(i, users.get(i));
         }
 
-        for (int i = 0; i < test2.leaderBoardSet.size(); i++) {
-            System.out.println(test2.leaderBoardSet.get(i));
-        }
+        //testing population occurring correctly
+//        for (int i = 0; i < test2.leaderBoardSet.size(); i++) {
+//            System.out.println(test2.leaderBoardSet.get(i));
+//        }
 
-        this.leaderBoardSet = test2.leaderBoardSet;
+        this.leaderBoardSet = leaderboard.leaderBoardSet;
 
     }
 
-    public static void main(String[] args) {
-        Leaderboard test = new Leaderboard();
-        test.getUsersFromDataBase(test);
-    }
+//    public static void main(String[] args) {
+//        Leaderboard test = new Leaderboard();
+//        test.getUsersFromDataBase(test);
+//    }
 
 
 
