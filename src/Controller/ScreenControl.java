@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 
 
 public class ScreenControl implements ActionListener {
-    JFrame frame = new JFrame();
+    JFrame frame = new JFrame("Who wants to be a Kiwionaire?");
     JPanel panelCont = new JPanel();
 
     CardLayout cl = new CardLayout();
@@ -66,8 +66,18 @@ public class ScreenControl implements ActionListener {
         frame.add(panelCont);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenDimension = tk.getScreenSize();
+        Dimension frameDimension = frame.getSize();
+        frame.setLocation((screenDimension.width - frameDimension.width) / 2,
+                (screenDimension.height - frameDimension.height) / 2);
+
         frame.setVisible(true);
         frame.setResizable(false);
+
+
+
     }
 
     public void cardSwitch(JPanel newPanel, String name, JPanel oldPanel ){
@@ -478,6 +488,8 @@ public class ScreenControl implements ActionListener {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ScreenControl::new);
+
+
     }
 
 
