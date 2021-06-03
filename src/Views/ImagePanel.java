@@ -32,7 +32,6 @@ public class ImagePanel extends JPanel {
         float alpha = 2 * 0.1f;
         AlphaComposite alcom = AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER, alpha);
-
         g2d.setComposite(alcom);
         g2d.fillRect(0, 0, 650, 450);
 
