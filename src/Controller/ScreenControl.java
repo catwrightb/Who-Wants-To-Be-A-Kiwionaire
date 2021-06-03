@@ -221,6 +221,18 @@ public class ScreenControl implements ActionListener {
             });
 
         }
+        else if (e.getSource() == mainMenu.getInputQuestion()){
+            newQuestionInputPanel = new NewQuestionInputPanel(this);
+            addCard(newQuestionInputPanel, newQuestionInputPanel.NAME);
+            changeCard(newQuestionInputPanel.NAME);
+
+            newQuestionInputPanel.getExitButton().addActionListener(e13 -> {
+                changeCard(mainMenu.NAME);
+                removeCard(newQuestionInputPanel);
+            });
+
+        }
+
     }
 
     public void playerMenuHandler(ActionEvent e){

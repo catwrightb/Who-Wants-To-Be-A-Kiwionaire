@@ -28,12 +28,16 @@ public class EndGamePanel extends JPanel {
             thirdLabel = new JLabel ("You Have Won \"Who Wants to be a Kiwionaire?\"!");
             fourthLabel = new JLabel ("You have won $" +game.getGameUser().getScore()+ "!");
             enterQuestion = new JButton("Submit New Question");
+            continueButton = new JButton ("Continue");
 
             secondLabel.setBounds(275, 80, 160, 30);
             thirdLabel.setBounds (185, 105, 360, 65);
             fourthLabel.setBounds (260, 135, 320, 95);
-            enterQuestion.setBounds(180, 310,100,35);
+            enterQuestion.setBounds(120, 310,100,35);
             continueButton.setBounds (270, 310, 100, 35);
+
+            add(enterQuestion);
+            enterQuestion.addActionListener(listener);
 
         }
         else {
@@ -42,11 +46,13 @@ public class EndGamePanel extends JPanel {
                     "and your game ended on question "+game.getGameRounds()+".");
             thirdLabel = new JLabel ("We will automatically save your last game score and username for you.");
             fourthLabel = new JLabel ("Make sure to play again soon to improve your score and maybe even WIN!");
+            continueButton = new JButton ("Continue");
 
             firstLable.setBounds (180, 30, 355, 70);
             secondLabel.setBounds (125, 60, 435, 90);
             thirdLabel.setBounds (110, 110, 465, 70);
             fourthLabel.setBounds (105, 140, 475, 90);
+
 
             firstLable.setForeground(Color.WHITE);
             add (firstLable);
@@ -65,7 +71,7 @@ public class EndGamePanel extends JPanel {
 
         infoLabel = new JLabel ("Please press continue to return to the main menu.");
         infoLabel.setForeground(Color.WHITE);
-        continueButton = new JButton ("Continue");
+
 
         continueButton.addActionListener(listener);
 
