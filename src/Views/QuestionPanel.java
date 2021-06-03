@@ -33,7 +33,7 @@ public class QuestionPanel extends JPanel{
         Question currentQuestion = game.getCurrentQuestion();
         exitButton = new JButton ("Exit");
         exitButton.addActionListener(listener);
-        question = new JLabel (currentQuestion.getQuestion());
+        question = new JLabel ("<html>" +currentQuestion.getQuestion() + "<html>");
         Font questionFont = new Font("Serif", Font.PLAIN, 16);
         question.setFont(questionFont);
         question.setForeground(Color.WHITE);
@@ -109,7 +109,7 @@ public class QuestionPanel extends JPanel{
 
         //set component bounds (only needed by Absolute Positioning)
         exitButton.setBounds (545, 15, 80, 35);
-        question.setBounds (50, 90, 565, 80);
+        question.setBounds (50, 40, 400, 150);
         stats.setBounds(35, 15, 470, 35);
 
         this.setVisible(true);
