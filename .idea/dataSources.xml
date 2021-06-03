@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="User Data Source" uuid="0ebbe616-2c77-4106-b337-47635bbf7b6e">
+    <data-source source="LOCAL" name="KiwionaireDB" uuid="87502e23-f5c1-4895-8a0e-ce7971c2f432">
+      <driver-ref>derby.embedded</driver-ref>
       <synchronize>true</synchronize>
-      <configured-by-url>true</configured-by-url>
-      <jdbc-driver>org.apache.derby.jdbc.AutoloadedDriver</jdbc-driver>
-      <jdbc-url>jdbc:derby:KiwionaireDB; create=true</jdbc-url>
+      <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>
+      <jdbc-url>jdbc:derby:$PROJECT_DIR$/KiwionaireDB</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="Apache Derby (Embedded)" uuid="ff1dd922-e612-4724-a17f-6ba2b291114f">
