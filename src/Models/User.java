@@ -38,8 +38,10 @@ public class User implements Comparable<User>{
      *
      */
     public void upDateScore( int gameRoundWon){
-            gameRoundWon--;
-
+            if (gameRoundWon < 15){
+                gameRoundWon--;
+            }
+            
             Level[] level = Level.values();
 
             for (Level value : level) {

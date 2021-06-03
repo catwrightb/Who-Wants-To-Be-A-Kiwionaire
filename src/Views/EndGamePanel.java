@@ -33,31 +33,33 @@ public class EndGamePanel extends JPanel {
         if (game.getGameRounds() >= Level.LEVEL15.getPrizeLevel()){
             firstLable = new JLabel("Congratulations "+game.getGameUser().getUserName()+"!");
             secondLabel = new JLabel ("You Have Won \"Who Wants to be a Kiwionaire?\"!");
-            thirdLabel = new JLabel ("You have won $" +decimalFormat.format(game.getGameUser().getScore())+ "!");
+            thirdLabel = new JLabel ("You have won $" +decimalFormat.format(game.getGameUser().getScore())+ ", " +
+                    "and a opportunity to submit your own question into the game!");
             fourthLabel = new JLabel("If you'd like to input your own question click the enter a question button.");
             fifthLabel = new JLabel("Otherwise click the continue button to return to the main menu.");
             enterQuestion = new JButton("Submit New Question");
             continueButton = new JButton ("Continue");
 
-            firstLable.setBounds(220, 120, 595, 40);
-            secondLabel.setBounds (165, 150, 565, 35);
-            thirdLabel.setBounds (230, 180, 485, 45);
-            fourthLabel.setBounds(100, 210, 505, 30);
+            firstLable.setBounds(230, 110, 595, 40);
+            secondLabel.setBounds (165, 140, 565, 35);
+            thirdLabel.setBounds (40, 160, 700, 45);
+            fourthLabel.setBounds(100, 190, 505, 30);
             fifthLabel.setBounds (140, 240, 405, 30);
 
             firstLable.setForeground(Color.WHITE);
+            fifthLabel.setForeground(Color.WHITE);
             add(firstLable);
             add(enterQuestion);
             add(firstLable);
             add(fifthLabel);
             enterQuestion.addActionListener(listener);
-            enterQuestion.setBounds(125, 260, 175, 35);
-            continueButton.setBounds(355, 260, 175, 35);
+            enterQuestion.setBounds(125, 290, 180, 35);
+            continueButton.setBounds(355, 290, 180, 35);
 
         }
         else {
             firstLable = new JLabel ("Thanks for playing \"Who Wants to be a Kiwionaire?\"");
-            secondLabel = new JLabel ("Your final score was $" +game.getGameUser().getScore() +", " +
+            secondLabel = new JLabel ("Your final score was $" +decimalFormat.format(game.getGameUser().getScore())+", " +
                     "and your game ended on question "+game.getGameRounds()+".");
             thirdLabel = new JLabel ("We will automatically save your last game score and username for you.");
             fourthLabel = new JLabel ("Make sure to play again soon to improve your score and maybe even WIN!");
