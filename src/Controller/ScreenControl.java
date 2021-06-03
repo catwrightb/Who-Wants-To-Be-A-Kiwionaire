@@ -137,7 +137,7 @@ public class ScreenControl implements ActionListener {
         else if (e.getSource() == newQuestionInputPanel.getSubmitButton()){
 
             String question = newQuestionInputPanel.getQuestionTextArea().getText();
-            String correctAnswer = newQuestionInputPanel.getCorrectAnsText().getText();
+            String correctAnswer = newQuestionInputPanel.getCorrectAns().getText();
             String[] wrongAnswers = new String[3];
             wrongAnswers[0] = newQuestionInputPanel.getWrongAnswer1().getText();
             wrongAnswers[1] = newQuestionInputPanel.getWrongAnswer2().getText();

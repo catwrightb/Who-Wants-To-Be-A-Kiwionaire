@@ -146,4 +146,7 @@ public class NewQuestionInputPanel extends JPanel {
         return wrongAnswer3;
     }
 
+    public JTextField getCorrectAns() {
+        return correctAns;
+    }
 }

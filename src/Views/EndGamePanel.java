@@ -39,16 +39,17 @@ public class EndGamePanel extends JPanel {
             enterQuestion = new JButton("Submit New Question");
             continueButton = new JButton ("Continue");
 
-            firstLable.setBounds(220, 40, 595, 40);
-            secondLabel.setBounds (165, 80, 565, 35);
-            thirdLabel.setBounds (230, 110, 485, 45);
-            fourthLabel.setBounds(100, 150, 505, 30);
-            fifthLabel.setBounds (140, 170, 405, 30);
+            firstLable.setBounds(220, 120, 595, 40);
+            secondLabel.setBounds (165, 150, 565, 35);
+            thirdLabel.setBounds (230, 180, 485, 45);
+            fourthLabel.setBounds(100, 210, 505, 30);
+            fifthLabel.setBounds (140, 240, 405, 30);
 
             firstLable.setForeground(Color.WHITE);
             add(firstLable);
             add(enterQuestion);
             add(firstLable);
+            add(fifthLabel);
             enterQuestion.addActionListener(listener);
             enterQuestion.setBounds(125, 260, 175, 35);
             continueButton.setBounds(355, 260, 175, 35);
