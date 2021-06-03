@@ -226,7 +226,7 @@ public class ScreenControl implements ActionListener {
             addCard(newQuestionInputPanel, newQuestionInputPanel.NAME);
             changeCard(newQuestionInputPanel.NAME);
 
-            newQuestionInputPanel.getExitButton().addActionListener(e13 -> {
+            newQuestionInputPanel.getExitButton().addActionListener(e14 -> {
                 changeCard(mainMenu.NAME);
                 removeCard(newQuestionInputPanel);
             });
