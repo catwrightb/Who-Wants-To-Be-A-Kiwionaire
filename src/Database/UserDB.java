@@ -1,6 +1,7 @@
 package Database;
 
 import Models.User;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -47,7 +48,15 @@ public class UserDB {
         return users;
     }
 
-    public void addUserToDB(User user){
+    public void updateUserScore(User user){
+        String sqlUpdate = "UPDATE " + USER_TABLE_NAME;
+        sqlUpdate += " SET SCORE = " + user.getScore();
+        sqlUpdate += " WHERE USERNAME = '" + user.getUserName() + "'";
+
+        dbManager.updateDB(sqlUpdate);
+    }
+
+    /*public void addUserToDB(User user){
         String sqlAdd = "INSERT INTO " + USER_TABLE_NAME + " VALUES ('";
         sqlAdd += user.getUserName() + "', ";
         sqlAdd += user.getScore() + ")";
@@ -64,7 +73,7 @@ public class UserDB {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
+    }*/
 
     public User retrieveUser(String username){
         ArrayList<User> users = returningUserList();
@@ -76,6 +85,7 @@ public class UserDB {
         }
         return null;
     }
+
 
     /**
      * Checks if the username is available within the database, otherwise
