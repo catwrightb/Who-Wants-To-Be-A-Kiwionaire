@@ -1,5 +1,6 @@
 package Views;
 
+import Database.UserDB;
 import Models.GameApplication;
 import Models.Level;
 
@@ -45,6 +46,9 @@ public class EndGamePanel extends JPanel {
             add (firstLable);
 
         }
+
+        UserDB db = new UserDB();
+        db.updateUser(game.getGameUser());
 
         secondLabel.setForeground(Color.WHITE);
         thirdLabel.setForeground(Color.WHITE);
