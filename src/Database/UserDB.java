@@ -169,6 +169,12 @@ public class UserDB {
         }
     }
 
+    public void updateUser(User user){
+        String sql = "UPDATE " + USER_TABLE_NAME + " SET SCORE = " + user.getScore()
+                + " WHERE USERNAME = '" + user.getUserName() + "'";
+        dbManager.updateDB(sql);
+    }
+
     // Method to check the DATABASE can be accessed & prints correctly when needing to be used
     public void printTableContents() {
         try{
