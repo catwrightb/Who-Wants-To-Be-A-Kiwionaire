@@ -176,6 +176,33 @@ public class ScreenControl implements ActionListener {
             currentGame = null;
             System.gc(); //garbage collect old game
         });
+
+        endGamePanel.getEnterQuestion().addActionListener(e2 -> {
+            newQuestionInputPanel = new NewQuestionInputPanel(this);
+            addCard(newQuestionInputPanel, newQuestionInputPanel.NAME);
+            changeCard(newQuestionInputPanel.NAME);
+
+            //TODO combine actions
+            newQuestionInputPanel.getExitButton().addActionListener(e3 -> {
+                changeCard(mainMenu.NAME);
+                removeCard(newQuestionInputPanel);
+
+                currentGame = null;
+                System.gc(); //garbage collect old game
+            });
+
+            newQuestionInputPanel.getSubmitButton().addActionListener( e3 ->{
+                //TODO action for question input here
+
+                changeCard(mainMenu.NAME);
+                removeCard(newQuestionInputPanel);
+
+                currentGame = null;
+                System.gc(); //garbage collect old game
+
+            });
+
+        });
     }
 
 
@@ -221,6 +248,7 @@ public class ScreenControl implements ActionListener {
             });
 
         }
+        //temp action
         else if (e.getSource() == mainMenu.getInputQuestion()){
             newQuestionInputPanel = new NewQuestionInputPanel(this);
             addCard(newQuestionInputPanel, newQuestionInputPanel.NAME);
@@ -417,19 +445,19 @@ public class ScreenControl implements ActionListener {
 //        changeCard(confirmScreen.NAME);
 
         if (e.getSource() == questionPanel.getButtonA()){
-            currentGame.verifyAnswer(String.valueOf(Letters.A));
+            currentGame.verifyAnswer(currentGame.currentQuestion.getaChoice());
             checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonB()){
-            currentGame.verifyAnswer(String.valueOf(Letters.B));
+            currentGame.verifyAnswer(currentGame.currentQuestion.getbChoice());
             checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonC()){
-            currentGame.verifyAnswer(String.valueOf(Letters.C));
+            currentGame.verifyAnswer(currentGame.currentQuestion.getcChoice());
             checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getButtonD()){
-            currentGame.verifyAnswer(String.valueOf(Letters.D));
+            currentGame.verifyAnswer(currentGame.currentQuestion.getdChoice());
             checkGameStatus = true;
         }
         else if (e.getSource() == questionPanel.getExitButton()){

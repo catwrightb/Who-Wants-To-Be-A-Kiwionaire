@@ -33,8 +33,8 @@ public class EndGamePanel extends JPanel {
             secondLabel.setBounds(275, 80, 160, 30);
             thirdLabel.setBounds (185, 105, 360, 65);
             fourthLabel.setBounds (260, 135, 320, 95);
-            enterQuestion.setBounds(120, 310,100,35);
-            continueButton.setBounds (270, 310, 100, 35);
+            enterQuestion.setBounds(120, 310,150,35);
+            continueButton.setBounds (300, 310, 100, 35);
 
             add(enterQuestion);
             enterQuestion.addActionListener(listener);
@@ -103,5 +103,9 @@ public class EndGamePanel extends JPanel {
 
     public void setContinueButton(JButton continueButton) {
         this.continueButton = continueButton;
+    }
+
+    public JButton getEnterQuestion() {
+        return enterQuestion;
     }
 }

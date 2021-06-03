@@ -32,7 +32,7 @@ public class GameApplication {
         //questions and rounds
         //this.questionArrayList = readInQuestions();
         this.questionArrayList = new QuestionDB().questionListCreator();
-        this.gameRounds = 14;
+        this.gameRounds = 15;
 
         //linelife
         this.hasFiftyFifty = true;
@@ -213,7 +213,7 @@ public class GameApplication {
 
     public void verifyAnswer(String playerAnswer){
 
-        if (getCurrentQuestion().getCorrectAnswerChar().equalsIgnoreCase(playerAnswer)){
+        if (getCurrentQuestion().getCorrectAnswerStr().equalsIgnoreCase(playerAnswer)){
             increaseGameRound();
             gameUser.upDateScore(getGameRounds());
             if (!isGameWon()){
@@ -349,6 +349,8 @@ public class GameApplication {
     public User getGameUser() {
         return gameUser;
     }
+
+
 
 
 
