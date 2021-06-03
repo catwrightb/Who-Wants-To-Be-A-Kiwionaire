@@ -1,6 +1,6 @@
 package Models;
 
-public enum Money {
+public enum Level {
     /**
      * enum type constants for assigning users score
      * used in the User class and GameApplication
@@ -26,7 +26,7 @@ public enum Money {
     private int prizeMoney;
     private int prizeLevel;
 
-    Money(int prizeMoney, int prizeLevel) {
+    Level(int prizeMoney, int prizeLevel) {
         this.prizeMoney = prizeMoney;
         this.prizeLevel = prizeLevel;
     }

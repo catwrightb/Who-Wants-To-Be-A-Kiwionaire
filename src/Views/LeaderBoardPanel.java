@@ -3,9 +3,10 @@ package Views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-public class LeaderBoard extends JPanel {
+import Models.*;
+
+public class LeaderBoardPanel extends JPanel {
     private JLabel nameOne;
     private JLabel positionOne;
     private JLabel nameTwo;
@@ -21,10 +22,11 @@ public class LeaderBoard extends JPanel {
     private JLabel leaderboardTitle;
     public String NAME = "leaderBoard";
     private JButton backButton;
-    ArrayList<JLabel> labelList = new ArrayList<>();
 
 
-    public LeaderBoard(ActionListener listener){
+    public LeaderBoardPanel(ActionListener listener){
+        Leaderboard leaderboard = new Leaderboard();
+        leaderboard.getUsersFromDataBase(leaderboard);
 
         leaderboardTitle = new JLabel ("Leaderboard");
         Font font1 = new Font("Serif", Font.BOLD, 24);
@@ -33,41 +35,45 @@ public class LeaderBoard extends JPanel {
         leaderboardTitle.setForeground(Color.WHITE);
 
         //construct components
-        nameOne = new JLabel ("nameOne");
+        nameOne = new JLabel ("" + leaderboard.leaderBoardSet.get(Level.LEVEL1.getPrizeLevel()-1));
         nameOne.setFont(font);
         nameOne.setForeground(Color.WHITE);
-        positionOne = new JLabel ("1.");
+        positionOne = new JLabel (Level.LEVEL1.getPrizeLevel()+".");
         positionOne.setFont(font);
         positionOne.setForeground(Color.WHITE);
-        nameTwo = new JLabel ("nameTwo");
+
+        nameTwo = new JLabel ("" + leaderboard.leaderBoardSet.get(Level.LEVEL2.getPrizeLevel()-1));
         nameTwo.setFont(font);
         nameTwo.setForeground(Color.WHITE);
-        positionTwo = new JLabel ("2.");
+        positionTwo = new JLabel (Level.LEVEL2.getPrizeLevel()+".");
         positionTwo.setFont(font);
         positionTwo.setForeground(Color.WHITE);
-        positionThree = new JLabel ("3.");
-        positionThree.setFont(font);
-        positionThree.setForeground(Color.WHITE);
-        nameThree = new JLabel ("nameThree");
+
+        nameThree = new JLabel ("" + leaderboard.leaderBoardSet.get(Level.LEVEL3.getPrizeLevel()-1));
         nameThree.setFont(font);
         nameThree.setForeground(Color.WHITE);
+        positionThree = new JLabel(Level.LEVEL3.getPrizeLevel()+".");
+        positionThree.setFont(font);
+        positionThree.setForeground(Color.WHITE);
 
-        nameFour = new JLabel ("nameFour");
+        nameFour = new JLabel ("" + leaderboard.leaderBoardSet.get(Level.LEVEL4.getPrizeLevel()-1));
         nameFour.setFont(font);
         nameFour.setForeground(Color.WHITE);
-        positionFour= new JLabel ("4.");
+        positionFour= new JLabel (Level.LEVEL4.getPrizeLevel()+".");
         positionFour.setFont(font);
         positionFour.setForeground(Color.WHITE);
-        nameFive = new JLabel ("nameFive");
+
+        nameFive = new JLabel ("" + leaderboard.leaderBoardSet.get(Level.LEVEL5.getPrizeLevel()-1));
         nameFive.setFont(font);
         nameFive.setForeground(Color.WHITE);
-        positionFive = new JLabel ("5.");
+        positionFive = new JLabel (Level.LEVEL5.getPrizeLevel()+".");
         positionFive.setFont(font);
         positionFive.setForeground(Color.WHITE);
-        positionSix= new JLabel ("6.");
+
+        positionSix= new JLabel ("" + leaderboard.leaderBoardSet.get(Level.LEVEL6.getPrizeLevel()-1));
         positionSix.setFont(font);
         positionSix.setForeground(Color.WHITE);
-        nameSix = new JLabel ("nameSix");
+        nameSix = new JLabel (Level.LEVEL6.getPrizeLevel()+".");
         nameSix.setFont(font);
         nameSix.setForeground(Color.WHITE);
 
@@ -123,6 +129,30 @@ public class LeaderBoard extends JPanel {
         panel.setSize(650,450);
         add(panel);
 
+    }
+
+    public JLabel getPositionOne() {
+        return positionOne;
+    }
+
+    public JLabel getPositionTwo() {
+        return positionTwo;
+    }
+
+    public JLabel getPositionThree() {
+        return positionThree;
+    }
+
+    public JLabel getPositionFour() {
+        return positionFour;
+    }
+
+    public JLabel getPositionFive() {
+        return positionFive;
+    }
+
+    public JLabel getPositionSix() {
+        return positionSix;
     }
 
     public JButton getBackButton() {

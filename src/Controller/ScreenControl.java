@@ -3,7 +3,7 @@ package Controller;
 import Database.UserDB;
 import Models.GameApplication;
 import Models.Letters;
-import Models.Money;
+import Models.Level;
 import Models.User;
 import Views.*;
 
@@ -32,8 +32,8 @@ public class ScreenControl implements ActionListener {
     EndGamePanel endGamePanel;
     InstructionPanel instructionPanel;
     CreditPanel creditPanel;
-    LeaderBoard leaderBoardPanel;
-    private final int LEVELS_TO_WIN = Money.LEVEL15.getPrizeLevel()+1;
+    LeaderBoardPanel leaderBoardPanel;
+    private final int LEVELS_TO_WIN = Level.LEVEL15.getPrizeLevel()+1;
 
     public ScreenControl() {
         // Make UI look nice
@@ -198,7 +198,7 @@ public class ScreenControl implements ActionListener {
 
         }
         else if (e.getSource() == mainMenu.getHighScoreButton()){
-            leaderBoardPanel = new LeaderBoard(this);
+            leaderBoardPanel = new LeaderBoardPanel(this);
             addCard(leaderBoardPanel, leaderBoardPanel.NAME);
             changeCard(leaderBoardPanel.NAME);
 

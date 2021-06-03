@@ -21,10 +21,10 @@ public class UserDB {
         conn = dbManager.getConnection();
     }
 
-//    public static void main(String[] args) {
-//        UserDB users = new UserDB();
-//        users.printTableContents();
-//    }
+    public static void main(String[] args) {
+        UserDB users = new UserDB();
+        users.printTableContents();
+    }
 
     public ArrayList<User> returningUserList() {
         ResultSet rs = dbManager.queryDB("SELECT * FROM " + USER_TABLE_NAME);
@@ -34,7 +34,7 @@ public class UserDB {
             while (rs.next()){
                 User gameUser = new User();
                 gameUser.setUserName(rs.getString("USERNAME"));
-                //gameUser.setScore(rs.getInt("SCORE"));
+                gameUser.setScore(rs.getInt("SCORE"));
                 //user is always set with a score of zero at start of game
                 //regardless of past score
 

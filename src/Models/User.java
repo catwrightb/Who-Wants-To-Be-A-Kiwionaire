@@ -1,12 +1,10 @@
 package Models;
 
-import Models.Money;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User {
+public class User implements Comparable<User>{
     private static final String userDatabase = "./resources/userStats.csv";
 
     protected int score;
@@ -28,8 +26,8 @@ public class User {
         return score;
     }
 
-    public void setScore() {
-        this.score = 0;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     /**
@@ -40,15 +38,16 @@ public class User {
      */
     public void upDateScore( int gameRoundWon){
 
-            Money[] money = Money.values();
+            Level[] level = Level.values();
 
-            for (Money value : money) {
+            for (Level value : level) {
                 if (gameRoundWon == value.getPrizeLevel()) {
                     this.score = value.getPrizeMoney();
                 }
             }
 
     }
+
 
     public void updateScoreFile(){
         // Create HashMap to store user names / scores for overwriting file
@@ -85,9 +84,21 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
-                ", score=" + score +
-                '}';
+        return "" +
+                " " + userName +
+                ", " + score +
+                "";
+    }
+
+    @Override
+    public int compareTo(User o) {
+        if (this.score > o.score){
+            return 1;
+        }
+        else if (this.score < o.score){
+            return -1;
+        }
+        else
+            return 0;
     }
 }

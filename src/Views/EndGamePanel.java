@@ -1,7 +1,7 @@
 package Views;
 
 import Models.GameApplication;
-import Models.Money;
+import Models.Level;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class EndGamePanel extends JPanel {
     public EndGamePanel(GameApplication game, ActionListener listener) {
         //construct components
 
-        if (game.getGameRounds() >= Money.LEVEL15.getPrizeLevel()){
+        if (game.getGameRounds() >= Level.LEVEL15.getPrizeLevel()){
             secondLabel = new JLabel("Congratulations "+game.getGameUser().getUserName()+"!");
             thirdLabel = new JLabel ("You Have Won \"Who Wants to be a Kiwionaire?\"!");
             fourthLabel = new JLabel ("You have won $" +game.getGameUser().getScore()+ "!");
