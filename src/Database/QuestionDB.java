@@ -1,12 +1,15 @@
 package Database;
 
 import Models.Question;
+
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -33,7 +36,7 @@ public class QuestionDB {
                 Question q = new Question();
                 q.setQuestion(rs.getString("QUESTION"));
                 q.setCorrectAnswerStr(rs.getString("ANSWER_STR"));
-                q.setCorrectAnswerChar(rs.getString("ANSWER_CHAR"));
+                //q.setCorrectAnswerChar(rs.getString("ANSWER_CHAR"));
                 q.setaChoice(rs.getString("CHOICE_A"));
                 q.setbChoice(rs.getString("CHOICE_B"));
                 q.setcChoice(rs.getString("CHOICE_C"));
@@ -61,14 +64,14 @@ public class QuestionDB {
             }
 
             // Create Table
-            String newTable = "CREATE TABLE " + QUESTIONS_TABLE_NAME + " (QUESTION LONG VARCHAR, ANSWER_STR VARCHAR(255), ANSWER_CHAR CHAR, CHOICE_A VARCHAR(255), CHOICE_B VARCHAR(255), CHOICE_C VARCHAR(255), CHOICE_D VARCHAR(255), LEVEL INT)";
+            String newTable = "CREATE TABLE " + QUESTIONS_TABLE_NAME + " (QUESTION VARCHAR(255), ANSWER_STR VARCHAR(255), CHOICE_A VARCHAR(255), CHOICE_B VARCHAR(255), CHOICE_C VARCHAR(255), CHOICE_D VARCHAR(255), LEVEL INT)";
             dbManager.updateDB(newTable);
 
             // Print completion message
             System.out.println("TABLE CREATION COMPLETED Successfully");
 
             // Populate Database Table
-            populateTable(dbManager);
+            populateTable();
         }catch (SQLException e){
             System.err.println("SQLException: " + e.getMessage());
         }
@@ -81,7 +84,39 @@ public class QuestionDB {
         System.out.println(QUESTIONS_TABLE_NAME + " TABLE DROPPED");
     }
 
-    public void populateTable(DBManager dbManager){
+    public void addQuestionToGame(String question, String correctAnswer, String[] wrongAnswers){
+        if (checkIfQuestionExists(question)){
+            int level = new Random().nextInt(15) + 1;
+            String sql = "INSERT INTO " + QUESTIONS_TABLE_NAME + " VALUES ('";
+            sql += question + "', '";
+            sql += correctAnswer + "', '";
+            sql += wrongAnswers[0] + "', '";
+            sql += wrongAnswers[1] + "', '";
+            sql += wrongAnswers[2] + "', '";
+            sql += correctAnswer + "', ";
+            sql += level + ")";
+            dbManager.updateDB(sql);
+            JOptionPane.showMessageDialog(null, "Your question has been added.", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public boolean checkIfQuestionExists(String question){
+        ResultSet rs = dbManager.queryDB("SELECT QUESTION FROM " + QUESTIONS_TABLE_NAME);
+        try{
+            while (rs.next()){
+                if (question.equalsIgnoreCase(rs.getString("QUESTION"))){
+                    JOptionPane.showMessageDialog(null, "Question already exists.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return true;
+    }
+
+    public void populateTable(){
         try{
             File file = new File(QUESTION_DATABASE);
             BufferedReader csvReader = new BufferedReader(new FileReader(file));
@@ -96,8 +131,10 @@ public class QuestionDB {
                 sb += data[0] + "', '";
                 // Answer STR
                 sb += data[1] + "', '";
+
                 // Answer CHAR
-                sb += data[2] + "', '";
+                //sb += data[2] + "', '";
+
                 // Choice_A VARCHAR
                 sb += data[3] + "', '";
                 // Choice_B VARCHAR
@@ -131,7 +168,7 @@ public class QuestionDB {
             while (rs.next()){
                 String question = rs.getString("QUESTION");
                 String answerStr = rs.getString("ANSWER_STR");
-                String answerChar = rs.getString("ANSWER_CHAR");
+                //String answerChar = rs.getString("ANSWER_CHAR");
                 String choiceA = rs.getString("CHOICE_A");
                 String choiceB = rs.getString("CHOICE_B");
                 String choiceC = rs.getString("CHOICE_C");
@@ -140,7 +177,7 @@ public class QuestionDB {
                 System.out.println("==========================================");
                 System.out.println("QUESTION " + question);
                 System.out.println("ANSWERSTR " + answerStr);
-                System.out.println("ANSWERCHAR " + answerChar);
+                //System.out.println("ANSWERCHAR " + answerChar);
                 System.out.print("A " + choiceA);
                 System.out.print(" | B " + choiceB);
                 System.out.print(" | C " + choiceC);
