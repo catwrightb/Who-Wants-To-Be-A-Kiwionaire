@@ -30,7 +30,7 @@ public class EndGamePanel extends JPanel {
         decimalFormat.setGroupingUsed(true);
         decimalFormat.setGroupingSize(3);
 
-        if (game.getGameRounds() >= Level.LEVEL15.getPrizeLevel()){
+        if (game.isGameWon()){
             firstLable = new JLabel("Congratulations "+game.getGameUser().getUserName()+"!");
             secondLabel = new JLabel ("You Have Won \"Who Wants to be a Kiwionaire?\"!");
             thirdLabel = new JLabel ("You have won $" +decimalFormat.format(game.getGameUser().getScore())+ ", " +

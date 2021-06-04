@@ -209,8 +209,8 @@ public class GameApplication {
     public void verifyAnswer(String playerAnswer){
 
         if (getCurrentQuestion().getCorrectAnswerStr().equalsIgnoreCase(playerAnswer)){
-            increaseGameRound();
             gameUser.upDateScore(getGameRounds());
+            increaseGameRound();
             if (!isGameWon()){
                 selectQuestion();
             }
