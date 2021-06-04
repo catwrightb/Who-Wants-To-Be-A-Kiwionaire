@@ -59,7 +59,9 @@ public class User implements Comparable<User>{
 
     }
 
-
+    /*
+    * old method used to update score in console game
+    * */
     public void updateScoreFile(){
         // Create HashMap to store user names / scores for overwriting file
         HashMap<String, Integer> users = new HashMap<>();
