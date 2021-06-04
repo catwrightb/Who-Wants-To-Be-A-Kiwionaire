@@ -8,6 +8,7 @@ public class InCorrectAnswerPanel extends JPanel {
     public String NAME = "inCorrectAnswerPanel";
     //private JButton exitButton;
     private JLabel incorrectText;
+    private JLabel correctAnswerText;
     private JButton continueButton;
     private JLabel info;
 
@@ -16,9 +17,12 @@ public class InCorrectAnswerPanel extends JPanel {
         //construct components
         //exitButton = new JButton ("Exit");
         Font incorrectFont = new Font("Serif", Font.PLAIN, 16);
-        incorrectText = new JLabel ("Incorrect :( the correct answer was "+ correctAnswer);
+        incorrectText = new JLabel ("Incorrect :( ");
         incorrectText.setForeground(Color.WHITE);
         incorrectText.setFont(incorrectFont);
+        correctAnswerText = new JLabel("The correct answer was "+ correctAnswer+ ".");
+        correctAnswerText.setForeground(Color.WHITE);
+        correctAnswerText.setFont(incorrectFont);
         info = new JLabel ("Please press the continue button to move on.");
         info.setForeground(Color.WHITE);
         continueButton = new JButton ("Continue");
@@ -35,10 +39,12 @@ public class InCorrectAnswerPanel extends JPanel {
         add (incorrectText);
         add (continueButton);
         add (info);
+        add(correctAnswerText);
 
         //set component bounds (only needed by Absolute Positioning)
         //exitButton.setBounds (350, 15, 80, 30);
-        incorrectText.setBounds (190, 150, 300, 30);
+        incorrectText.setBounds(270, 120,100,35);
+        correctAnswerText.setBounds (180, 150, 550, 30);
         info.setBounds           (180, 180, 385, 65);
         continueButton.setBounds (270, 250, 100, 25);
 
