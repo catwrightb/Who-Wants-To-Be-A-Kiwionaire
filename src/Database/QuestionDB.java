@@ -115,6 +115,9 @@ public class QuestionDB {
                 if (question.equalsIgnoreCase(rs.getString("QUESTION"))){
                     JOptionPane.showMessageDialog(null, "Question already exists.", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return false;
+                }else if (question.contains("'")){
+                    JOptionPane.showMessageDialog(null, "Question cannot contain an apostrophe, please try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    return false;
                 }
             }
         } catch (SQLException throwables) {

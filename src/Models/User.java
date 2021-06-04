@@ -56,7 +56,6 @@ public class User implements Comparable<User>{
         if (this.score > 0){
             this.setScore(0);
         }
-
     }
 
     /*
