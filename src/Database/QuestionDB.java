@@ -29,6 +29,7 @@ public class QuestionDB {
 
     public static void main(String[] args) {
         QuestionDB users = new QuestionDB();
+        users.createQuestionsTable();
         users.printTableContents();
     }
 
@@ -143,15 +144,15 @@ public class QuestionDB {
                 //sb += data[2] + "', '";
 
                 // Choice_A VARCHAR
-                sb += data[3] + "', '";
+                sb += data[2] + "', '";
                 // Choice_B VARCHAR
-                sb += data[4] + "', '";
+                sb += data[3] + "', '";
                 // Choice_C VARCHAR
-                sb += data[5] + "', '";
+                sb += data[4] + "', '";
                 // Choice_D VARCHAR
-                sb += data[6] + "', ";
+                sb += data[5] + "', ";
                 // Level INT
-                sb += data[7];
+                sb += data[6];
                 sb += ")";
 
                 // Update Database with SQL INSERT Statement
